@@ -174,33 +174,33 @@ class Community
         }
 
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare('UPDATE communities SET
-                name = :name,
-                description = :description,
-                language = :language,
-                category = :category,
-                community_type = :community_type,
-                posting_policy = :posting_policy,
-                forum_type = :forum_type,
-                allow_poll_closing = :allow_poll_closing,
-                image_path = :image_path,
-                cover_image_path = :cover_image_path,
-                updated_at = NOW()
-            WHERE id = :id');
         
-        $stmt->execute([
-            'id' => $id,
-            'name' => $data['name'] ?? '',
-            'description' => $data['description'] ?? null,
-            'language' => $data['language'] ?? null,
-            'category' => $data['category'] ?? null,
-            'community_type' => $data['community_type'] ?? 'public',
-            'posting_policy' => $data['posting_policy'] ?? 'any_member',
-            'forum_type' => $data['forum_type'] ?? 'non_anonymous',
-            'allow_poll_closing' => !empty($data['allow_poll_closing']) ? 1 : 0,
-            'image_path' => $data['image_path'] ?? null,
-            'cover_image_path' => $data['cover_image_path'] ?? null,
-        ]);
+        // Build dynamic SQL based on provided data
+        $setParts = [];
+        $params = ['id' => $id];
+        
+        $allowedFields = [
+            'name', 'description', 'language', 'category', 'community_type',
+            'posting_policy', 'forum_type', 'allow_poll_closing', 
+            'image_path', 'cover_image_path'
+        ];
+        
+        foreach ($allowedFields as $field) {
+            if (array_key_exists($field, $data)) {
+                $setParts[] = "{$field} = :{$field}";
+                $params[$field] = $data[$field];
+            }
+        }
+        
+        if (empty($setParts)) {
+            return; // Nothing to update
+        }
+        
+        $setParts[] = 'updated_at = NOW()';
+        $sql = 'UPDATE communities SET ' . implode(', ', $setParts) . ' WHERE id = :id';
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
     }
 
     private static function buildCourseCommunitySlug(array $course): string

@@ -12,6 +12,7 @@ $postingPolicy = (string)($community['posting_policy'] ?? 'any_member');
 $forumType = (string)($community['forum_type'] ?? 'non_anonymous');
 $coverImage = (string)($community['cover_image_path'] ?? '');
 $profileImage = (string)($community['image_path'] ?? '');
+
 $communityInitial = 'C';
 $tmpCommunityName = trim($communityName);
 if ($tmpCommunityName !== '') {
@@ -103,7 +104,19 @@ $canModerate = !empty($canModerate);
     <section style="background:var(--surface-card); border-radius:16px; border:1px solid var(--border-subtle); overflow:hidden;">
         <div style="width:100%; height:300px; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%);">
             <?php if ($coverImage !== ''): ?>
-                <img src="<?= htmlspecialchars($coverImage, ENT_QUOTES, 'UTF-8') ?>?v=<?= time() ?>" alt="Capa da comunidade" style="width:100%; height:100%; object-fit:contain; display:block;">
+                <?php 
+                // Improved cache busting for cover image
+                $communityId = (int)($community['id'] ?? 0);
+                $timestamp = time();
+                $cacheParam = "cid={$communityId}&t={$timestamp}";
+                
+                if (strpos($coverImage, '?') !== false) {
+                    $coverImageUrl = $coverImage . '&' . $cacheParam;
+                } else {
+                    $coverImageUrl = $coverImage . '?' . $cacheParam;
+                }
+                ?>
+                <img src="<?= htmlspecialchars($coverImageUrl, ENT_QUOTES, 'UTF-8') ?>" alt="Capa da comunidade" style="width:100%; height:100%; object-fit:cover; display:block;">
             <?php else: ?>
                 <div style="width:100%; height:100%; display:flex; align-items:flex-end; padding:14px;">
                     <div style="background:rgba(0,0,0,0.45); border:1px solid rgba(255,255,255,0.12); color:#fff; padding:8px 10px; border-radius:12px; font-size:14px; font-weight:700;">
@@ -117,7 +130,19 @@ $canModerate = !empty($canModerate);
     <section style="background:var(--surface-card); border-radius:16px; border:1px solid var(--border-subtle); padding:12px 14px; display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap;">
         <div style="width:64px; height:64px; border-radius:14px; overflow:hidden; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%); display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:800; color:#050509;">
             <?php if ($profileImage !== ''): ?>
-                <img src="<?= htmlspecialchars($profileImage, ENT_QUOTES, 'UTF-8') ?>?v=<?= time() ?>" alt="Imagem de perfil da comunidade" style="width:100%; height:100%; object-fit:cover; display:block;">
+                <?php 
+                // Improved cache busting with community ID and timestamp
+                $communityId = (int)($community['id'] ?? 0);
+                $timestamp = time();
+                $cacheParam = "cid={$communityId}&t={$timestamp}";
+                
+                if (strpos($profileImage, '?') !== false) {
+                    $imageUrl = $profileImage . '&' . $cacheParam;
+                } else {
+                    $imageUrl = $profileImage . '?' . $cacheParam;
+                }
+                ?>
+                <img src="<?= htmlspecialchars($imageUrl, ENT_QUOTES, 'UTF-8') ?>" alt="Imagem de perfil da comunidade" style="width:100%; height:100%; object-fit:cover; display:block;">
             <?php else: ?>
                 <?= htmlspecialchars($communityInitial, ENT_QUOTES, 'UTF-8') ?>
             <?php endif; ?>

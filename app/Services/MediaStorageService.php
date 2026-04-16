@@ -57,6 +57,9 @@ class MediaStorageService
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_SSL_VERIFYPEER => false, // Para desenvolvimento
             CURLOPT_USERAGENT => 'TuquinhaUploader/1.0',
+            CURLOPT_HTTPHEADER => [
+                'Accept: application/json',
+            ],
         ]);
 
         $response = curl_exec($ch);

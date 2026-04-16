@@ -79,12 +79,12 @@ $currentProfile = (string)($community['image_path'] ?? '');
                 <div style="flex:1 1 220px; min-width:0;">
                     <label for="profile_image" style="display:block; font-size:12px; color:var(--text-secondary); margin-bottom:3px;">Imagem de perfil</label>
                     <input id="profile_image" type="file" name="profile_image" accept="image/*" style="font-size:12px;">
-                    <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Opcional. Dimensões recomendadas: <strong>400×400</strong>.</div>
+                    <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Opcional. Dimensões recomendadas: <strong>400×400</strong>. JPG, PNG ou GIF até 10MB.</div>
                 </div>
                 <?php if ($currentProfile !== ''): ?>
                     <div style="flex:0 0 140px; text-align:center;">
                         <div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">Perfil atual</div>
-                        <img src="<?= htmlspecialchars($currentProfile, ENT_QUOTES, 'UTF-8') ?>" alt="Perfil atual" style="width:64px; height:64px; border-radius:14px; object-fit:cover; border:1px solid var(--border-subtle);">
+                        <img id="current-profile-img" src="<?= htmlspecialchars($currentProfile, ENT_QUOTES, 'UTF-8') ?>?t=<?= time() ?>" alt="Perfil atual" style="width:64px; height:64px; border-radius:14px; object-fit:cover; border:1px solid var(--border-subtle);">
                     </div>
                 <?php endif; ?>
             </div>
@@ -93,12 +93,12 @@ $currentProfile = (string)($community['image_path'] ?? '');
                 <div style="flex:1 1 220px; min-width:0;">
                     <label for="cover_image" style="display:block; font-size:12px; color:var(--text-secondary); margin-bottom:3px;">Imagem de capa</label>
                     <input id="cover_image" type="file" name="cover_image" accept="image/*" style="font-size:12px;">
-                    <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Opcional. Dimensões recomendadas: <strong>1200×300</strong>. Envie uma nova imagem para substituir a atual.</div>
+                    <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Opcional. Dimensões recomendadas: <strong>1200×300</strong>. JPG, PNG ou GIF até 10MB.</div>
                 </div>
                 <?php if ($currentCover !== ''): ?>
                     <div style="flex:0 0 180px; text-align:center;">
                         <div style="font-size:11px; color:var(--text-secondary); margin-bottom:4px;">Capa atual</div>
-                        <img src="<?= htmlspecialchars($currentCover, ENT_QUOTES, 'UTF-8') ?>" alt="Capa atual" style="max-width:160px; max-height:90px; border-radius:8px; object-fit:cover; border:1px solid var(--border-subtle);">
+                        <img id="current-cover-img" src="<?= htmlspecialchars($currentCover, ENT_QUOTES, 'UTF-8') ?>?t=<?= time() ?>" alt="Capa atual" style="max-width:160px; max-height:90px; border-radius:8px; object-fit:cover; border:1px solid var(--border-subtle);">
                     </div>
                 <?php endif; ?>
             </div>
@@ -155,3 +155,59 @@ $currentProfile = (string)($community['image_path'] ?? '');
         </form>
     </section>
 </div>
+
+<script>
+(function() {
+    // Image preview functionality
+    function setupImagePreview(inputId, previewId) {
+        const input = document.getElementById(inputId);
+        const preview = document.getElementById(previewId);
+        
+        if (!input || !preview) return;
+        
+        input.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
+    // Setup previews for both images
+    setupImagePreview('profile_image', 'current-profile-img');
+    setupImagePreview('cover_image', 'current-cover-img');
+    
+    // Form validation
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const profileInput = document.getElementById('profile_image');
+            const coverInput = document.getElementById('cover_image');
+            
+            // Check file sizes
+            if (profileInput.files[0] && profileInput.files[0].size > 10 * 1024 * 1024) {
+                e.preventDefault();
+                alert('A imagem de perfil deve ter no máximo 10MB.');
+                return;
+            }
+            
+            if (coverInput.files[0] && coverInput.files[0].size > 10 * 1024 * 1024) {
+                e.preventDefault();
+                alert('A imagem de capa deve ter no máximo 10MB.');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = form.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Salvando...';
+            }
+        });
+    }
+})();
+</script>

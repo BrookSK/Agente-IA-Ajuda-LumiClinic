@@ -537,6 +537,8 @@ class CommunitiesController extends Controller
 
         // Processa upload da imagem de perfil
         $profileImagePath = (string)($community['image_path'] ?? '');
+        $profileImageUpdated = false;
+        
         if (!empty($_FILES['profile_image']['name']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
             $tmp = $_FILES['profile_image']['tmp_name'];
             $originalName = $_FILES['profile_image']['name'];
@@ -551,13 +553,31 @@ class CommunitiesController extends Controller
                     $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
                     if ($url !== null && $url !== '') {
                         $profileImagePath = $url;
+                        $profileImageUpdated = true;
+                    } else {
+                        $_SESSION['communities_error'] = 'Erro ao fazer upload da imagem de perfil. Tente novamente.';
+                        $_SESSION['communities_edit_old'] = $old;
+                        header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
+                        exit;
                     }
+                } else {
+                    $_SESSION['communities_error'] = 'Arquivo de imagem de perfil inválido. Use JPG, PNG ou GIF.';
+                    $_SESSION['communities_edit_old'] = $old;
+                    header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
+                    exit;
                 }
+            } else {
+                $_SESSION['communities_error'] = 'Arquivo de imagem de perfil muito grande (máximo 10MB) ou inválido.';
+                $_SESSION['communities_edit_old'] = $old;
+                header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
+                exit;
             }
         }
 
         // Processa upload da imagem de capa
         $coverImagePath = (string)($community['cover_image_path'] ?? '');
+        $coverImageUpdated = false;
+        
         if (!empty($_FILES['cover_image']['name']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
             $tmp = $_FILES['cover_image']['tmp_name'];
             $originalName = $_FILES['cover_image']['name'];
@@ -572,12 +592,29 @@ class CommunitiesController extends Controller
                     $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
                     if ($url !== null && $url !== '') {
                         $coverImagePath = $url;
+                        $coverImageUpdated = true;
+                    } else {
+                        $_SESSION['communities_error'] = 'Erro ao fazer upload da imagem de capa. Tente novamente.';
+                        $_SESSION['communities_edit_old'] = $old;
+                        header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
+                        exit;
                     }
+                } else {
+                    $_SESSION['communities_error'] = 'Arquivo de imagem de capa inválido. Use JPG, PNG ou GIF.';
+                    $_SESSION['communities_edit_old'] = $old;
+                    header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
+                    exit;
                 }
+            } else {
+                $_SESSION['communities_error'] = 'Arquivo de imagem de capa muito grande (máximo 10MB) ou inválido.';
+                $_SESSION['communities_edit_old'] = $old;
+                header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
+                exit;
             }
         }
-
-        Community::update($communityId, [
+        
+        // Prepara os dados para atualização
+        $updateData = [
             'name' => $name,
             'description' => $description !== '' ? $description : null,
             'language' => $language !== '' ? $language : null,
@@ -586,11 +623,23 @@ class CommunitiesController extends Controller
             'posting_policy' => $postingPolicy,
             'forum_type' => $forumType,
             'allow_poll_closing' => $allowPollClosing,
-            'image_path' => $profileImagePath !== '' ? $profileImagePath : null,
-            'cover_image_path' => $coverImagePath !== '' ? $coverImagePath : null,
-        ]);
+        ];
+        
+        // Só atualiza as imagens se houve upload
+        if ($profileImageUpdated) {
+            $updateData['image_path'] = $profileImagePath;
+        }
+        if ($coverImageUpdated) {
+            $updateData['cover_image_path'] = $coverImagePath;
+        }
+        
+        Community::update($communityId, $updateData);
 
-        $_SESSION['communities_success'] = 'Comunidade atualizada com sucesso.';
+        if ($profileImageUpdated || $coverImageUpdated) {
+            $_SESSION['communities_success'] = 'Comunidade e imagens atualizadas com sucesso!';
+        } else {
+            $_SESSION['communities_success'] = 'Comunidade atualizada com sucesso!';
+        }
         header('Location: /comunidades/ver?slug=' . urlencode((string)($community['slug'] ?? '')));
         exit;
     }
