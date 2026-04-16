@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
-use App\Core\Database;
 use App\Models\Personality;
 use App\Models\Plan;
 use App\Models\Conversation;
@@ -69,35 +68,10 @@ class PersonalityController extends Controller
         }
 
         $planId = isset($currentPlan['id']) ? (int)$currentPlan['id'] : 0;
-        
-        // First, let's check if there are ANY personalities at all
-        $pdo = \App\Core\Database::getConnection();
-        $allPersonalitiesStmt = $pdo->query('SELECT id, name, active, is_default, coming_soon FROM personalities ORDER BY id');
-        $allPersonalities = $allPersonalitiesStmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        error_log("Total personalities in database: " . count($allPersonalities));
-        foreach ($allPersonalities as $p) {
-            error_log("ID: {$p['id']}, Name: {$p['name']}, Active: {$p['active']}");
-        }
-        
         if (!empty($_SESSION['is_admin']) || $planId <= 0) {
             $personalities = Personality::allVisibleForUsers();
         } else {
             $personalities = Personality::allVisibleForUsersByPlan($planId);
-        }
-
-        // Debug: Check what we're getting
-        error_log("Filtered personalities found: " . count($personalities ?: []));
-        if ($personalities) {
-            foreach ($personalities as $p) {
-                error_log("Filtered Personality: {$p['name']} - Active: " . ($p['active'] ? 'YES' : 'NO'));
-            }
-        }
-
-        // If no personalities exist at all, show all personalities (for debugging)
-        if (empty($personalities) && !empty($allPersonalities)) {
-            $personalities = $allPersonalities;
-            error_log("Using all personalities for debugging");
         }
 
         if (!$personalities) {
