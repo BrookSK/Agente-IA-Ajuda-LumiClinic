@@ -153,14 +153,19 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
         Escolha quem vai te ajudar neste próximo chat.
     </p>
 
-    <!-- Debug info -->
+    <!-- Debug info - Always show -->
     <div style="background:#111118; border-radius:8px; padding:8px 10px; border:1px solid #ff6f60; font-size:11px; color:#ffcc80; margin-bottom:12px;">
-        <strong>Debug:</strong> Total personalities: <?= count($personalities ?: []) ?>
-        <?php if ($personalities): ?>
-            <br>Personalities found:
-            <?php foreach ($personalities as $p): ?>
-                <br>- <?= htmlspecialchars($p['name'] ?? 'No name') ?> (ID: <?= $p['id'] ?? 'No ID' ?>, Active: <?= isset($p['active']) ? ($p['active'] ? 'YES' : 'NO') : 'UNDEFINED' ?>)
+        <strong>Debug Info:</strong><br>
+        - Personalities variable exists: <?= isset($personalities) ? 'YES' : 'NO' ?><br>
+        - Personalities count: <?= count($personalities ?: []) ?><br>
+        - Personalities is array: <?= is_array($personalities) ? 'YES' : 'NO' ?><br>
+        <?php if (isset($personalities) && is_array($personalities) && !empty($personalities)): ?>
+            - Personalities found:<br>
+            <?php foreach ($personalities as $index => $p): ?>
+                &nbsp;&nbsp;<?= $index + 1 ?>. <?= htmlspecialchars($p['name'] ?? 'No name') ?> (ID: <?= $p['id'] ?? 'No ID' ?>, Active: <?= isset($p['active']) ? ($p['active'] ? 'YES' : 'NO') : 'UNDEFINED' ?>)<br>
             <?php endforeach; ?>
+        <?php else: ?>
+            - No personalities data available<br>
         <?php endif; ?>
     </div>
 
