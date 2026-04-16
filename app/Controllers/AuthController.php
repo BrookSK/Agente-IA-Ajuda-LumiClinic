@@ -304,7 +304,7 @@ class AuthController extends Controller
   <div style="width:100%; padding:24px 0;">
     <div style="max-width:520px; margin:0 auto; background:#111118; border-radius:16px; border:1px solid #272727; padding:18px 20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <div style="width:32px; height:32px; line-height:32px; border-radius:50%; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%); text-align:center; font-weight:700; font-size:16px; color:#050509;">{$brandInitial}</div>
+        <div style="width:32px; height:32px; line-height:32px; border-radius:50%; background:<?= \App\Helpers\ThemeHelper::getGradient() ?>; text-align:center; font-weight:700; font-size:16px; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;">{$brandInitial}</div>
         <div>
           <div style="font-weight:700; font-size:15px;">{$brandPlatform}</div>
           <div style="font-size:11px; color:#b0b0b0;">{$brandSlogan}</div>
@@ -316,7 +316,7 @@ class AuthController extends Controller
       <p style="font-size:14px; margin:0 0 10px 0;">Use o código abaixo na tela de confirmação para ativar sua conta:</p>
 
       <div style="text-align:center; margin:12px 0 16px 0;">
-        <div style="display:inline-block; padding:10px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:700; font-size:18px; letter-spacing:0.35em;">
+        <div style="display:inline-block; padding:10px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:700; font-size:18px; letter-spacing:0.35em;">
           {$safeCode}
         </div>
       </div>
@@ -415,7 +415,7 @@ HTML;
   <div style="width:100%; padding:24px 0;">
     <div style="max-width:520px; margin:0 auto; background:#111118; border-radius:16px; border:1px solid #272727; padding:18px 20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <div style="width:32px; height:32px; border-radius:50%; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#050509;">' . htmlspecialchars(\App\Models\Branding::mascotInitials(), ENT_QUOTES, 'UTF-8') . '</div>
+        <div style="width:32px; height:32px; border-radius:50%; background:<?= \App\Helpers\ThemeHelper::getGradient() ?>; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;">' . htmlspecialchars(\App\Models\Branding::mascotInitials(), ENT_QUOTES, 'UTF-8') . '</div>
         <div>
           <div style="font-weight:700; font-size:15px;">' . htmlspecialchars(\App\Models\Branding::platformName(), ENT_QUOTES, 'UTF-8') . '</div>
           <div style="font-size:11px; color:#b0b0b0;">' . htmlspecialchars(\App\Models\Branding::slogan(), ENT_QUOTES, 'UTF-8') . '</div>
@@ -706,7 +706,7 @@ HTML;
   <div style="width:100%; padding:24px 0;">
     <div style="max-width:520px; margin:0 auto; background:#111118; border-radius:16px; border:1px solid #272727; padding:18px 20px;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-        <div style="width:32px; height:32px; border-radius:50%; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:#050509;">{$brandInitial}</div>
+        <div style="width:32px; height:32px; border-radius:50%; background:<?= \App\Helpers\ThemeHelper::getGradient() ?>; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;">{$brandInitial}</div>
         <div>
           <div style="font-weight:700; font-size:15px;">{$brandPlatform}</div>
           <div style="font-size:11px; color:#b0b0b0;">{$brandSlogan}</div>

@@ -190,7 +190,7 @@ $profileId = (int)($profileUser['id'] ?? 0);
                 <?php else: ?>
                     <form action="/amigos/solicitar" method="post">
                         <input type="hidden" name="user_id" value="<?= (int)$profileId ?>">
-                        <button type="submit" style="width:100%; border:none; border-radius:999px; padding:7px 10px; font-size:13px; font-weight:600; cursor:pointer; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; margin-bottom:4px;">
+                        <button type="submit" style="width:100%; border:none; border-radius:999px; padding:7px 10px; font-size:13px; font-weight:600; cursor:pointer; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; margin-bottom:4px;">
                             Adicionar como amigo
                         </button>
                     </form>
@@ -618,7 +618,7 @@ $profileId = (int)($profileUser['id'] ?? 0);
                     </div>
 
                     <div style="display:flex; justify-content:flex-end;">
-                        <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; cursor:pointer;">Salvar perfil</button>
+                        <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; cursor:pointer;">Salvar perfil</button>
                     </div>
                 </form>
             </section>

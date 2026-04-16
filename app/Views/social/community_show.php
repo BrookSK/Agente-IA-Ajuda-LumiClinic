@@ -186,7 +186,7 @@ $canModerate = !empty($canModerate);
                 <?php else: ?>
                     <form action="/comunidades/entrar" method="post" style="margin:0;">
                         <input type="hidden" name="community_id" value="<?= (int)($community['id'] ?? 0) ?>">
-                        <button type="submit" style="border:none; border-radius:999px; padding:5px 10px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; cursor:pointer;">Participar da comunidade</button>
+                        <button type="submit" style="border:none; border-radius:999px; padding:5px 10px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; cursor:pointer;">Participar da comunidade</button>
                     </form>
                 <?php endif; ?>
                 <a href="#topics-section" style="font-size:12px; padding:4px 9px; border-radius:999px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); text-decoration:none;">Ver fóruns/tópicos</a>
@@ -298,7 +298,7 @@ $canModerate = !empty($canModerate);
                                 <button type="button" id="cancelCreateTopicBtn" style="padding:10px 20px; border-radius:8px; border:1px solid var(--border-subtle); background:transparent; color:var(--text-primary); font-size:14px; font-weight:600; cursor:pointer;">
                                     Cancelar
                                 </button>
-                                <button type="submit" style="padding:10px 24px; border-radius:8px; border:none; background:linear-gradient(135deg,#e53935,#ff6f60); color:#fff; font-size:14px; font-weight:600; cursor:pointer;">
+                                <button type="submit" style="padding:10px 24px; border-radius:8px; border:none; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:14px; font-weight:600; cursor:pointer;">
                                     Publicar Tópico
                                 </button>
                             </div>

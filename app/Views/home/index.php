@@ -190,7 +190,7 @@
         ?>
 
         <div style="text-align:center; font-size: 15px; font-weight: 800; margin-bottom: 14px;">
-            Quem é o <span style="color:#ff6f60;"><?= htmlspecialchars(\App\Models\Branding::mascotName()) ?></span>?
+            Quem é o <span style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>;"><?= htmlspecialchars(\App\Models\Branding::mascotName()) ?></span>?
         </div>
 
         <div style="max-width: 520px; margin: 0 auto;">

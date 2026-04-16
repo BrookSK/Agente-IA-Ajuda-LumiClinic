@@ -34,7 +34,7 @@
                 <a href="/senha/esqueci" style="color:#ff6f60; text-decoration:none; font-size:12px; font-weight:700;">Esqueci minha senha</a>
             </div>
 
-            <button type="submit" style="margin-top:4px; width:100%; border:none; border-radius:10px; padding:10px 14px; background:#e50914; color:#fff; font-weight:800; cursor:pointer;">
+            <button type="submit" style="margin-top:4px; width:100%; border:none; border-radius:10px; padding:10px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:800; cursor:pointer;">
                 Entrar
             </button>
         </form>

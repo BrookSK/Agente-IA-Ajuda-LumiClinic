@@ -310,7 +310,7 @@ if (!empty($_SESSION['user_id'])) {
         }
 
         body[data-theme="light"] #tuq-about-video-card {
-            background: linear-gradient(135deg, rgba(229,57,53,0.10), rgba(255,255,255,0.92)) !important;
+            background: linear-gradient(135deg, <?= \App\Helpers\ThemeHelper::getPrimary() ?>19, rgba(255,255,255,0.92)) !important;
         }
         .brand-text-title {
             font-weight: 700;
@@ -744,14 +744,14 @@ if (!empty($_SESSION['user_id'])) {
 
             .mobile-quick-nav a.is-primary {
                 border: none;
-                background: #e50914;
-                color: #ffffff;
+                background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
+                color: <?= \App\Helpers\ThemeHelper::getBackground() ?>;
                 font-weight: 800;
             }
 
             body[data-theme="light"] .mobile-quick-nav a.is-primary {
-                background: #e50914;
-                color: #ffffff;
+                background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
+                color: <?= \App\Helpers\ThemeHelper::getBackground() ?>;
             }
 
             .sidebar-close {

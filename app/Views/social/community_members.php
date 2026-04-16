@@ -122,7 +122,7 @@ $slug = (string)($community['slug'] ?? '');
                                     <form action="/comunidades/membros/bloquear" method="post" style="margin:0;">
                                         <input type="hidden" name="community_id" value="<?= (int)($community['id'] ?? 0) ?>">
                                         <input type="hidden" name="user_id" value="<?= $memberId ?>">
-                                        <button type="submit" style="border:none; border-radius:999px; padding:3px 7px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:11px; cursor:pointer;">Bloquear</button>
+                                        <button type="submit" style="border:none; border-radius:999px; padding:3px 7px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:11px; cursor:pointer;">Bloquear</button>
                                     </form>
                                 <?php endif; ?>
                             </div>

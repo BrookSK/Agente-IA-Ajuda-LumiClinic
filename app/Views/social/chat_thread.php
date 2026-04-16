@@ -279,7 +279,7 @@ if (!empty($messages)) {
         <form action="/social/chat/enviar" method="post" style="margin-top:8px; display:flex; gap:6px; align-items:flex-end;" id="social-chat-form">
             <input type="hidden" name="conversation_id" value="<?= $conversationId ?>">
             <textarea name="body" rows="2" style="flex:1; resize:vertical; min-height:40px; max-height:120px; padding:6px 8px; border-radius:10px; border:1px solid #272727; background:#050509; color:#f5f5f5; font-size:13px;"></textarea>
-            <button type="submit" style="border:none; border-radius:999px; padding:8px 14px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap;">
+            <button type="submit" style="border:none; border-radius:999px; padding:8px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap;">
                 Enviar
             </button>
         </form>

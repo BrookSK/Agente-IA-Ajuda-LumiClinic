@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <button type="submit" style="margin-top:4px; width:100%; border:none; border-radius:10px; padding:10px 14px; background:#e50914; color:#fff; font-weight:800; cursor:pointer;">
+            <button type="submit" style="margin-top:4px; width:100%; border:none; border-radius:10px; padding:10px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:800; cursor:pointer;">
                 Criar conta
             </button>
         </form>

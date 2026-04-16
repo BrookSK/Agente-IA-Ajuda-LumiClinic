@@ -1221,7 +1221,7 @@ if (!empty($breadcrumb)) {
             <div style="display:flex; gap:8px; align-items:center; justify-content:flex-end;">
                 <button type="button" class="notion-btn notion-toggle-sidebar" id="notion-toggle-sidebar" title="Minimizar painel">❮</button>
                 <div style="position:relative;">
-                <button type="button" id="btn-new-page" style="border:none; border-radius:10px; padding:6px 10px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:700; font-size:12px; cursor:pointer;">+ Nova</button>
+                <button type="button" id="btn-new-page" style="border:none; border-radius:10px; padding:6px 10px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:700; font-size:12px; cursor:pointer;">+ Nova</button>
                 <div id="new-page-menu" style="
                     position:absolute;
                     right:0;
@@ -1383,7 +1383,7 @@ if (!empty($breadcrumb)) {
                     </div>
                     <button type="button" id="btn-share-add" style="
                         border:none; border-radius:10px; padding:9px 14px;
-                        background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:700; font-size:12px; cursor:pointer;">Adicionar</button>
+                        background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:700; font-size:12px; cursor:pointer;">Adicionar</button>
                 </div>
 
                 <div style="margin-top:10px;">

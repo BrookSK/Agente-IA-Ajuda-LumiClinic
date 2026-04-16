@@ -79,7 +79,7 @@ $editStatus = $isEditing ? (string)($editItem['status'] ?? 'draft') : 'draft';
                     <option value="read">Leitura</option>
                     <option value="edit">Edição</option>
                 </select>
-                <button type="button" id="sendPortfolioInviteBtn" style="border:none; border-radius:999px; padding:10px 14px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:750; cursor:pointer;">Convidar</button>
+                <button type="button" id="sendPortfolioInviteBtn" style="border:none; border-radius:999px; padding:10px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:750; cursor:pointer;">Convidar</button>
             </div>
             <div id="portfolioInviteFeedback" style="display:none; margin-top:8px; font-size:12px;"></div>
 
@@ -320,7 +320,7 @@ $editStatus = $isEditing ? (string)($editItem['status'] ?? 'draft') : 'draft';
                         </form>
                     <?php endif; ?>
                 <?php endif; ?>
-                <button type="submit" style="border:none; border-radius:999px; padding:7px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:650; cursor:pointer;"><?= $isEditing ? 'Salvar' : 'Criar' ?></button>
+                <button type="submit" style="border:none; border-radius:999px; padding:7px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:650; cursor:pointer;"><?= $isEditing ? 'Salvar' : 'Criar' ?></button>
             </div>
         </form>
     </section>

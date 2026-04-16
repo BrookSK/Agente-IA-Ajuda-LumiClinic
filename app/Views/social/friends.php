@@ -34,7 +34,7 @@ $onlyFavorites = !empty($onlyFavorites);
                 <input type="checkbox" name="fav" value="1" <?= $onlyFavorites ? 'checked' : '' ?> onchange="this.form.submit()">
                 Somente favoritos
             </label>
-            <button type="submit" style="border:none; border-radius:999px; padding:8px 14px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:650; cursor:pointer;">Filtrar</button>
+            <button type="submit" style="border:none; border-radius:999px; padding:8px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:650; cursor:pointer;">Filtrar</button>
             <?php if ($q !== '' || $onlyFavorites): ?>
                 <a href="/amigos" style="font-size:12px; color:#ff6f60; text-decoration:none;">Limpar</a>
             <?php endif; ?>
