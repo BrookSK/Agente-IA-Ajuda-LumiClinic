@@ -28,17 +28,19 @@ class MediaStorageService
         $defaultEndpoint = defined('MEDIA_UPLOAD_ENDPOINT') ? MEDIA_UPLOAD_ENDPOINT : '';
         $base = trim(Setting::get('media_upload_endpoint', $defaultEndpoint));
         $configured = $endpoint !== '' ? $endpoint : $base;
+        
         if ($configured === '') {
             return null;
         }
-
-        $url = $configured;
 
         // Garante que exista algum MIME simples
         $mime = $mimeType !== '' ? $mimeType : 'application/octet-stream';
         $name = $originalName !== '' ? $originalName : basename($localPath);
 
         $ch = curl_init();
+        if ($ch === false) {
+            return null;
+        }
 
         $file = new \CURLFile($localPath, $mime, $name);
         $postFields = [
@@ -46,14 +48,19 @@ class MediaStorageService
         ];
 
         curl_setopt_array($ch, [
-            CURLOPT_URL => $url,
+            CURLOPT_URL => $configured,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $postFields,
             CURLOPT_TIMEOUT => 60,
+            CURLOPT_CONNECTTIMEOUT => 30,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_SSL_VERIFYPEER => false, // Para desenvolvimento
+            CURLOPT_USERAGENT => 'TuquinhaUploader/1.0',
         ]);
 
         $response = curl_exec($ch);
+        
         if ($response === false) {
             curl_close($ch);
             return null;

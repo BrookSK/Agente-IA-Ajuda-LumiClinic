@@ -535,32 +535,42 @@ class CommunitiesController extends Controller
             exit;
         }
 
+        // Processa upload da imagem de perfil
         $profileImagePath = (string)($community['image_path'] ?? '');
-        if (!empty($_FILES['profile_image']) && is_array($_FILES['profile_image'])) {
-            $uploadError = (int)($_FILES['profile_image']['error'] ?? UPLOAD_ERR_NO_FILE);
-            if ($uploadError === UPLOAD_ERR_OK) {
-                $tmp = (string)($_FILES['profile_image']['tmp_name'] ?? '');
-                $originalName = (string)($_FILES['profile_image']['name'] ?? '');
-                $type = (string)($_FILES['profile_image']['type'] ?? '');
-                if ($tmp !== '' && is_uploaded_file($tmp)) {
+        if (!empty($_FILES['profile_image']['name']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
+            $tmp = $_FILES['profile_image']['tmp_name'];
+            $originalName = $_FILES['profile_image']['name'];
+            $type = $_FILES['profile_image']['type'];
+            $size = $_FILES['profile_image']['size'];
+            
+            // Validações básicas
+            if (is_uploaded_file($tmp) && $size > 0 && $size <= 10 * 1024 * 1024) { // Max 10MB
+                // Verifica se é uma imagem válida
+                $imageInfo = @getimagesize($tmp);
+                if ($imageInfo !== false) {
                     $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
-                    if ($url !== null) {
+                    if ($url !== null && $url !== '') {
                         $profileImagePath = $url;
                     }
                 }
             }
         }
 
+        // Processa upload da imagem de capa
         $coverImagePath = (string)($community['cover_image_path'] ?? '');
-        if (!empty($_FILES['cover_image']) && is_array($_FILES['cover_image'])) {
-            $uploadError = (int)($_FILES['cover_image']['error'] ?? UPLOAD_ERR_NO_FILE);
-            if ($uploadError === UPLOAD_ERR_OK) {
-                $tmp = (string)($_FILES['cover_image']['tmp_name'] ?? '');
-                $originalName = (string)($_FILES['cover_image']['name'] ?? '');
-                $type = (string)($_FILES['cover_image']['type'] ?? '');
-                if ($tmp !== '' && is_uploaded_file($tmp)) {
+        if (!empty($_FILES['cover_image']['name']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
+            $tmp = $_FILES['cover_image']['tmp_name'];
+            $originalName = $_FILES['cover_image']['name'];
+            $type = $_FILES['cover_image']['type'];
+            $size = $_FILES['cover_image']['size'];
+            
+            // Validações básicas
+            if (is_uploaded_file($tmp) && $size > 0 && $size <= 10 * 1024 * 1024) { // Max 10MB
+                // Verifica se é uma imagem válida
+                $imageInfo = @getimagesize($tmp);
+                if ($imageInfo !== false) {
                     $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
-                    if ($url !== null) {
+                    if ($url !== null && $url !== '') {
                         $coverImagePath = $url;
                     }
                 }
