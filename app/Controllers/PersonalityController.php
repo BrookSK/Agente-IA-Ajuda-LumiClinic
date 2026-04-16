@@ -74,14 +74,19 @@ class PersonalityController extends Controller
             $personalities = Personality::allVisibleForUsersByPlan($planId);
         }
 
-        if (!$personalities) {
+        // Filter out inactive personalities and check if any are left
+        $activePersonalities = array_filter($personalities ?: [], function($persona) {
+            return !empty($persona['active']);
+        });
+
+        if (empty($activePersonalities)) {
             header('Location: /chat?new=1');
             exit;
         }
 
         $this->view('personalities/index', [
             'pageTitle' => 'Escolha a personalidade do ' . \App\Models\Branding::mascotName(),
-            'personalities' => $personalities,
+            'personalities' => $activePersonalities,
             'conversationId' => $conversationId,
         ]);
     }

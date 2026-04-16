@@ -158,11 +158,27 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
             Ainda não há personalidades ativas cadastradas pelo administrador.
             <br><br>
             <a href="/chat?new=1" style="display:inline-flex; align-items:center; gap:6px; margin-top:4px; border-radius:999px; padding:7px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:13px; font-weight:600; text-decoration:none;">
-                <span>Ir direto para o chat padrão</span>
+                <span>Ir para o chat</span>
                 <span>➤</span>
             </a>
         </div>
     <?php else: ?>
+        <?php
+        // Filter out inactive personalities
+        $activePersonalities = array_filter($personalities, function($persona) {
+            return !empty($persona['active']);
+        });
+        ?>
+        <?php if (empty($activePersonalities)): ?>
+            <div style="background:#111118; border-radius:12px; padding:12px 14px; border:1px solid #272727; font-size:14px; color:#b0b0b0; margin-top:12px;">
+                Ainda não há personalidades ativas cadastradas pelo administrador.
+                <br><br>
+                <a href="/chat?new=1" style="display:inline-flex; align-items:center; gap:6px; margin-top:4px; border-radius:999px; padding:7px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:13px; font-weight:600; text-decoration:none;">
+                    <span>Ir para o chat</span>
+                    <span>➤</span>
+                </a>
+            </div>
+        <?php else: ?>
         <?php
         $hasMb = function_exists('mb_substr') && function_exists('mb_strlen');
         ?>
@@ -173,30 +189,6 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
             <div id="persona-carousel" style="
                 display:flex;
             ">
-                <?php 
-                // Only show default option for new conversations AND if enabled in settings
-                $showDefaultOption = ($conversationId <= 0) && (Setting::get('show_default_personality_option', '1') === '1');
-                ?>
-                <?php if ($showDefaultOption): ?>
-                    <!-- Only show default option for new conversations, not when selecting personality for existing conversation -->
-                    <a href="/chat?new=1" class="persona-card" style="
-                        cursor:pointer;
-                    ">
-                        <div class="persona-card-image">
-                            <img src="/public/perso_padrao.png" alt="Padrão do <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?>" onerror="this.onerror=null;this.src='/public/favicon.png';" style="width:100%; height:100%; object-fit:cover; display:block;">
-                        </div>
-                        <div style="padding:10px 12px 12px 12px;">
-                            <div style="display:flex; align-items:center; justify-content:space-between; gap:6px; margin-bottom:4px;">
-                                <div style="font-size:18px; font-weight:650; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-                                    Padrão do <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?>
-                                </div>
-                            </div>
-                            <div class="persona-card-desc">
-                                <?= nl2br(htmlspecialchars((string)\App\Models\Setting::get('default_tuquinha_description', 'Deixa o sistema escolher a melhor personalidade global para você.'))) ?>
-                            </div>
-                        </div>
-                    </a>
-                <?php endif; ?>
                 <?php foreach ($personalities as $persona): ?>
                     <?php
                         // Only show active personalities
@@ -420,3 +412,6 @@ document.addEventListener('DOMContentLoaded', function () {
     selectIndex(currentIndex);
 });
 </script>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>
