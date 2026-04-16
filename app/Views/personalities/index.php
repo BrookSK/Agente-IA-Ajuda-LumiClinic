@@ -171,6 +171,7 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
                 display:flex;
             ">
                 <?php if ($conversationId <= 0): ?>
+                    <!-- Only show default option for new conversations, not when selecting personality for existing conversation -->
                     <a href="/chat?new=1" class="persona-card" style="
                         cursor:pointer;
                     ">
@@ -191,6 +192,9 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
                 <?php endif; ?>
                 <?php foreach ($personalities as $persona): ?>
                     <?php
+                        // Only show active personalities
+                        if (empty($persona['active'])) continue;
+                        
                         $id = (int)($persona['id'] ?? 0);
                         $name = trim((string)($persona['name'] ?? ''));
                         $area = trim((string)($persona['area'] ?? ''));

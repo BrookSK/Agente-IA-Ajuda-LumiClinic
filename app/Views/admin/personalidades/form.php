@@ -77,6 +77,46 @@ $isEdit = !empty($persona);
         </div>
 
         <div>
+            <label style="font-size:13px; color:var(--text-primary); display:block; margin-bottom:4px;">Documentos de Referência</label>
+            <div style="margin-bottom:8px;">
+                <input type="file" name="reference_files[]" multiple accept=".pdf,.doc,.docx,.txt,.md" style="
+                    width:100%; padding:6px 0; border-radius:8px; border:1px dashed var(--border-subtle);
+                    background:transparent; color:var(--text-primary); font-size:13px;">
+                <div style="font-size:11px; color:#777; margin-top:3px;">
+                    Opcional. Envie documentos que a personalidade deve usar como referência (PDF, DOC, DOCX, TXT, MD). Máximo 5MB por arquivo.
+                </div>
+            </div>
+            
+            <?php 
+            $referenceDocuments = [];
+            if (!empty($persona['reference_documents'])) {
+                $decoded = json_decode($persona['reference_documents'], true);
+                if (is_array($decoded)) {
+                    $referenceDocuments = $decoded;
+                }
+            }
+            ?>
+            
+            <?php if (!empty($referenceDocuments)): ?>
+                <div style="margin-top:8px; padding:8px 10px; border-radius:8px; border:1px solid var(--border-subtle); background:var(--surface-subtle);">
+                    <div style="font-size:12px; font-weight:600; margin-bottom:6px; color:var(--text-primary);">Documentos atuais:</div>
+                    <?php foreach ($referenceDocuments as $index => $doc): ?>
+                        <div style="display:flex; align-items:center; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--border-subtle);">
+                            <div style="flex:1;">
+                                <div style="font-size:12px; color:var(--text-primary);"><?= htmlspecialchars($doc['name'] ?? 'Documento') ?></div>
+                                <div style="font-size:10px; color:var(--text-secondary);"><?= htmlspecialchars($doc['type'] ?? 'unknown') ?> • <?= isset($doc['size']) ? number_format($doc['size'] / 1024, 1) . ' KB' : 'Tamanho desconhecido' ?></div>
+                            </div>
+                            <label style="display:flex; align-items:center; gap:4px; font-size:11px; color:var(--text-secondary);">
+                                <input type="checkbox" name="remove_documents[]" value="<?= $index ?>" style="margin:0;">
+                                Remover
+                            </label>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <div>
             <label style="font-size:13px; color:var(--text-primary); display:block; margin-bottom:4px;">Descrição do card "Padrão do <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?>"</label>
             <textarea name="default_tuquinha_description" rows="3" style="
                 width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--border-subtle);

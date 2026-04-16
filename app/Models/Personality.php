@@ -245,12 +245,13 @@ class Personality
     public static function create(array $data): int
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare('INSERT INTO personalities (name, area, slug, prompt, image_path, is_default, active, coming_soon) VALUES (:name, :area, :slug, :prompt, :image_path, :is_default, :active, :coming_soon)');
+        $stmt = $pdo->prepare('INSERT INTO personalities (name, area, slug, prompt, reference_documents, image_path, is_default, active, coming_soon) VALUES (:name, :area, :slug, :prompt, :reference_documents, :image_path, :is_default, :active, :coming_soon)');
         $stmt->execute([
             'name' => $data['name'],
             'area' => $data['area'],
             'slug' => $data['slug'],
             'prompt' => $data['prompt'],
+            'reference_documents' => $data['reference_documents'] ?? null,
             'image_path' => $data['image_path'] ?? null,
             'is_default' => !empty($data['is_default']) ? 1 : 0,
             'active' => !empty($data['active']) ? 1 : 0,
@@ -262,13 +263,14 @@ class Personality
     public static function update(int $id, array $data): void
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare('UPDATE personalities SET name = :name, area = :area, slug = :slug, prompt = :prompt, image_path = :image_path, is_default = :is_default, active = :active, coming_soon = :coming_soon WHERE id = :id');
+        $stmt = $pdo->prepare('UPDATE personalities SET name = :name, area = :area, slug = :slug, prompt = :prompt, reference_documents = :reference_documents, image_path = :image_path, is_default = :is_default, active = :active, coming_soon = :coming_soon WHERE id = :id');
         $stmt->execute([
             'id' => $id,
             'name' => $data['name'],
             'area' => $data['area'],
             'slug' => $data['slug'],
             'prompt' => $data['prompt'],
+            'reference_documents' => $data['reference_documents'] ?? null,
             'image_path' => $data['image_path'] ?? null,
             'is_default' => !empty($data['is_default']) ? 1 : 0,
             'active' => !empty($data['active']) ? 1 : 0,

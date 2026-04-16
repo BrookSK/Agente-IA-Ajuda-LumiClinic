@@ -6,6 +6,7 @@ use App\Core\Controller;
 use App\Models\Personality;
 use App\Models\Plan;
 use App\Models\Setting;
+use App\Models\Setting;
 
 class AdminPersonalityController extends Controller
 {
@@ -73,6 +74,7 @@ class AdminPersonalityController extends Controller
         $comingSoon = !empty($_POST['coming_soon']) ? 1 : 0;
         $defaultTuquinhaDesc = trim((string)($_POST['default_tuquinha_description'] ?? ''));
         $planIds = isset($_POST['plan_ids']) && is_array($_POST['plan_ids']) ? $_POST['plan_ids'] : [];
+        $removeDocuments = isset($_POST['remove_documents']) && is_array($_POST['remove_documents']) ? $_POST['remove_documents'] : [];
 
         $target = '/admin/personalidades/novo';
         if ($id > 0) {
@@ -169,6 +171,98 @@ class AdminPersonalityController extends Controller
             }
         }
 
+        // Process reference documents
+        $referenceDocuments = [];
+        
+        // Get existing documents if editing
+        if ($id > 0) {
+            $existingPersona = Personality::findById($id);
+            if ($existingPersona && !empty($existingPersona['reference_documents'])) {
+                $decoded = json_decode($existingPersona['reference_documents'], true);
+                if (is_array($decoded)) {
+                    $referenceDocuments = $decoded;
+                }
+            }
+        }
+        
+        // Remove selected documents
+        if (!empty($removeDocuments)) {
+            foreach ($removeDocuments as $indexToRemove) {
+                $index = (int)$indexToRemove;
+                if (isset($referenceDocuments[$index])) {
+                    // Delete file from disk if it exists
+                    $docPath = $referenceDocuments[$index]['path'] ?? '';
+                    if ($docPath && file_exists(__DIR__ . '/../../public' . $docPath)) {
+                        @unlink(__DIR__ . '/../../public' . $docPath);
+                    }
+                    unset($referenceDocuments[$index]);
+                }
+            }
+            // Reindex array
+            $referenceDocuments = array_values($referenceDocuments);
+        }
+        
+        // Handle new document uploads
+        if (!empty($_FILES['reference_files']) && is_array($_FILES['reference_files']['name'])) {
+            $uploadDir = __DIR__ . '/../../public/uploads/personalities/documents';
+            if (!is_dir($uploadDir)) {
+                @mkdir($uploadDir, 0775, true);
+            }
+            
+            $fileCount = count($_FILES['reference_files']['name']);
+            for ($i = 0; $i < $fileCount; $i++) {
+                $uploadError = (int)($_FILES['reference_files']['error'][$i] ?? UPLOAD_ERR_NO_FILE);
+                if ($uploadError === UPLOAD_ERR_NO_FILE) continue;
+                
+                if ($uploadError !== UPLOAD_ERR_OK) {
+                    $_SESSION['admin_persona_error'] = 'Erro ao enviar um dos documentos de referência.';
+                    header('Location: ' . $target);
+                    exit;
+                }
+                
+                $tmp = $_FILES['reference_files']['tmp_name'][$i] ?? '';
+                $originalName = (string)($_FILES['reference_files']['name'][$i] ?? '');
+                $type = (string)($_FILES['reference_files']['type'][$i] ?? '');
+                $size = (int)($_FILES['reference_files']['size'][$i] ?? 0);
+                
+                $maxSize = 5 * 1024 * 1024; // 5MB
+                if ($size <= 0 || $size > $maxSize) {
+                    $_SESSION['admin_persona_error'] = 'Cada documento de referência deve ter até 5 MB.';
+                    header('Location: ' . $target);
+                    exit;
+                }
+                
+                // Validate file type
+                $ext = strtolower((string)pathinfo($originalName, PATHINFO_EXTENSION));
+                $allowedExts = ['pdf', 'doc', 'docx', 'txt', 'md'];
+                if (!in_array($ext, $allowedExts)) {
+                    $_SESSION['admin_persona_error'] = 'Apenas arquivos PDF, DOC, DOCX, TXT e MD são permitidos como documentos de referência.';
+                    header('Location: ' . $target);
+                    exit;
+                }
+                
+                $fileName = uniqid('ref_doc_', true) . '.' . $ext;
+                $targetPath = $uploadDir . '/' . $fileName;
+                
+                if (!@move_uploaded_file($tmp, $targetPath)) {
+                    $_SESSION['admin_persona_error'] = 'Não foi possível salvar um dos documentos de referência. Tente novamente.';
+                    header('Location: ' . $target);
+                    exit;
+                }
+                
+                // Add to reference documents array
+                $referenceDocuments[] = [
+                    'name' => $originalName,
+                    'path' => '/public/uploads/personalities/documents/' . $fileName,
+                    'type' => $ext,
+                    'size' => $size,
+                    'uploaded_at' => date('Y-m-d H:i:s')
+                ];
+            }
+        }
+        
+        $referenceDocumentsJson = !empty($referenceDocuments) ? json_encode($referenceDocuments, JSON_UNESCAPED_UNICODE) : null;
+
         if ($isDefault) {
             $pdo = \App\Core\Database::getConnection();
             $pdo->exec('UPDATE personalities SET is_default = 0');
@@ -183,6 +277,7 @@ class AdminPersonalityController extends Controller
             'area' => $area,
             'slug' => $slug,
             'prompt' => $prompt,
+            'reference_documents' => $referenceDocumentsJson,
             'image_path' => $imagePath !== '' ? $imagePath : null,
             'is_default' => $isDefault,
             'active' => $active,
