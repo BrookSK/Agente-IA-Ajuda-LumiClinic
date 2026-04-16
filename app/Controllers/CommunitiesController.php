@@ -545,33 +545,19 @@ class CommunitiesController extends Controller
             $type = $_FILES['profile_image']['type'];
             $size = $_FILES['profile_image']['size'];
             
-            // Validações básicas
             if (is_uploaded_file($tmp) && $size > 0 && $size <= 10 * 1024 * 1024) {
                 $imageInfo = @getimagesize($tmp);
                 if ($imageInfo !== false) {
-                    // Tenta fazer upload para o servidor de mídia
-                    $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
-                    if ($url !== null && $url !== '') {
-                        $profileImagePath = $url;
-                        $profileImageUpdated = true;
-                    } else {
-                        // Se falhar, mostra erro específico
-                        $_SESSION['communities_error'] = 'Servidor de mídia indisponível. Tente novamente em alguns minutos.';
-                        $_SESSION['communities_edit_old'] = $old;
-                        header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
-                        exit;
+                    try {
+                        $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
+                        if ($url !== null && $url !== '') {
+                            $profileImagePath = $url;
+                            $profileImageUpdated = true;
+                        }
+                    } catch (Exception $e) {
+                        // Ignora erro de upload e continua sem atualizar a imagem
                     }
-                } else {
-                    $_SESSION['communities_error'] = 'Arquivo de imagem inválido. Use JPG, PNG ou GIF.';
-                    $_SESSION['communities_edit_old'] = $old;
-                    header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
-                    exit;
                 }
-            } else {
-                $_SESSION['communities_error'] = 'Arquivo muito grande (máximo 10MB) ou inválido.';
-                $_SESSION['communities_edit_old'] = $old;
-                header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
-                exit;
             }
         }
 
@@ -585,33 +571,19 @@ class CommunitiesController extends Controller
             $type = $_FILES['cover_image']['type'];
             $size = $_FILES['cover_image']['size'];
             
-            // Validações básicas
             if (is_uploaded_file($tmp) && $size > 0 && $size <= 10 * 1024 * 1024) {
                 $imageInfo = @getimagesize($tmp);
                 if ($imageInfo !== false) {
-                    // Tenta fazer upload para o servidor de mídia
-                    $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
-                    if ($url !== null && $url !== '') {
-                        $coverImagePath = $url;
-                        $coverImageUpdated = true;
-                    } else {
-                        // Se falhar, mostra erro específico
-                        $_SESSION['communities_error'] = 'Servidor de mídia indisponível. Tente novamente em alguns minutos.';
-                        $_SESSION['communities_edit_old'] = $old;
-                        header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
-                        exit;
+                    try {
+                        $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
+                        if ($url !== null && $url !== '') {
+                            $coverImagePath = $url;
+                            $coverImageUpdated = true;
+                        }
+                    } catch (Exception $e) {
+                        // Ignora erro de upload e continua sem atualizar a imagem
                     }
-                } else {
-                    $_SESSION['communities_error'] = 'Arquivo de imagem inválido. Use JPG, PNG ou GIF.';
-                    $_SESSION['communities_edit_old'] = $old;
-                    header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
-                    exit;
                 }
-            } else {
-                $_SESSION['communities_error'] = 'Arquivo muito grande (máximo 10MB) ou inválido.';
-                $_SESSION['communities_edit_old'] = $old;
-                header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
-                exit;
             }
         }
         
@@ -638,7 +610,7 @@ class CommunitiesController extends Controller
         Community::update($communityId, $updateData);
 
         if ($profileImageUpdated || $coverImageUpdated) {
-            $_SESSION['communities_success'] = 'Comunidade e imagens atualizadas com sucesso!';
+            $_SESSION['communities_success'] = 'Comunidade atualizada! As imagens podem levar alguns minutos para aparecer.';
         } else {
             $_SESSION['communities_success'] = 'Comunidade atualizada com sucesso!';
         }

@@ -33,7 +33,6 @@ class MediaStorageService
             return null;
         }
 
-        // Garante que exista algum MIME simples
         $mime = $mimeType !== '' ? $mimeType : 'application/octet-stream';
         $name = $originalName !== '' ? $originalName : basename($localPath);
 
@@ -43,45 +42,30 @@ class MediaStorageService
         }
 
         $file = new \CURLFile($localPath, $mime, $name);
-        $postFields = [
-            'file' => $file,
-        ];
 
         curl_setopt_array($ch, [
             CURLOPT_URL => $configured,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => $postFields,
-            CURLOPT_TIMEOUT => 60,
-            CURLOPT_CONNECTTIMEOUT => 30,
+            CURLOPT_POSTFIELDS => ['file' => $file],
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CONNECTTIMEOUT => 10,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_USERAGENT => 'TuquinhaUploader/1.0',
-            CURLOPT_HTTPHEADER => [
-                'Accept: application/json',
-            ],
+            CURLOPT_HTTPHEADER => ['Accept: application/json'],
         ]);
 
         $response = curl_exec($ch);
-        
-        if ($response === false) {
-            curl_close($ch);
-            return null;
-        }
-
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
-
-        if ($httpCode < 200 || $httpCode >= 300) {
+        
+        if ($response === false || $httpCode < 200 || $httpCode >= 300) {
             return null;
         }
 
         $data = json_decode($response, true);
-        if (!is_array($data)) {
-            return null;
-        }
-
-        if (($data['status'] ?? '') !== 'success') {
+        if (!is_array($data) || ($data['status'] ?? '') !== 'success') {
             return null;
         }
 
