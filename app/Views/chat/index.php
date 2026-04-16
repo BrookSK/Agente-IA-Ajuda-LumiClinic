@@ -1297,7 +1297,7 @@ if (!empty($conversationId) && !empty($personaOptions) && is_array($personaOptio
                     <div style="font-size:11px; color:#8d8d8d; max-width:70%;">
                         Essas regras valem só para este histórico. Para algo permanente em toda a conta, configure em "Minha conta".
                     </div>
-                    <button type="submit" style="border:none; border-radius:999px; padding:5px 10px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:11px; cursor:pointer;">
+                    <button type="submit" style="border:none; border-radius:999px; padding:5px 10px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:11px; cursor:pointer;">
                         Salvar regras do chat
                     </button>
                 </div>
@@ -1310,7 +1310,7 @@ if (!empty($conversationId) && !empty($personaOptions) && is_array($personaOptio
             <?php if ($canShowBuyTokensCta): ?>
                 <a href="/tokens/comprar" style="
                     border:none; border-radius:999px; padding:6px 12px;
-                    background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                    background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                     font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap;">
                     Comprar mais tokens
                 </a>
@@ -1556,7 +1556,7 @@ if (!empty($conversationId) && !empty($personaOptions) && is_array($personaOptio
     <?php if (!empty($audioError)): ?>
         <div style="margin-top:8px; background:#311; border:1px solid #a33; color:#ffbaba; padding:8px 10px; border-radius:8px; font-size:13px; display:flex; justify-content:space-between; align-items:center; gap:8px;">
             <span><?= htmlspecialchars($audioError) ?></span>
-            <button type="button" onclick="window.location.reload();" style="border:none; border-radius:999px; padding:6px 10px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; cursor:pointer;">
+            <button type="button" onclick="window.location.reload();" style="border:none; border-radius:999px; padding:6px 10px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; cursor:pointer;">
                 Recarregar chat
             </button>
         </div>
@@ -1578,7 +1578,7 @@ if (!empty($conversationId) && !empty($personaOptions) && is_array($personaOptio
                 <button type="button" id="btn-cancel-error-report" style="border:none; border-radius:999px; padding:5px 10px; background:transparent; color:#ffbaba; font-size:12px; cursor:pointer;">
                     Cancelar
                 </button>
-                <button type="button" id="btn-send-error-report" style="border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; cursor:pointer;">
+                <button type="button" id="btn-send-error-report" style="border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; cursor:pointer;">
                     Enviar relato
                 </button>
             </div>

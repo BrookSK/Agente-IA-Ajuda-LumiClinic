@@ -10,21 +10,13 @@ $pageTitle = $pageTitle ?? Branding::platformName();
 
 // Carregar cores do tema das configurações (com fallback seguro)
 try {
-    if (class_exists('App\\Helpers\\ThemeHelper')) {
-        require_once __DIR__ . '/../Helpers/ThemeHelper.php';
-        $themeColorPrimary = \App\Helpers\ThemeHelper::getColor('primary');
-        $themeColorSecondary = \App\Helpers\ThemeHelper::getColor('secondary');
-        $themeColorAccent = \App\Helpers\ThemeHelper::getColor('accent');
-        $themeColorBackground = \App\Helpers\ThemeHelper::getColor('background');
-    } else {
-        // Fallback para valores padrão se ThemeHelper não estiver disponível
-        $themeColorPrimary = '#e53935';
-        $themeColorSecondary = '#ff6f60';
-        $themeColorAccent = '#2ecc71';
-        $themeColorBackground = '#050509';
-    }
+    // Tentar carregar as cores das configurações
+    $themeColorPrimary = Setting::get('theme_color_primary', '#e53935');
+    $themeColorSecondary = Setting::get('theme_color_secondary', '#ff6f60');
+    $themeColorAccent = Setting::get('theme_color_accent', '#2ecc71');
+    $themeColorBackground = Setting::get('theme_color_background', '#050509');
 } catch (Exception $e) {
-    // Fallback em caso de erro
+    // Fallback em caso de erro (tabela não existe, etc.)
     $themeColorPrimary = '#e53935';
     $themeColorSecondary = '#ff6f60';
     $themeColorAccent = '#2ecc71';

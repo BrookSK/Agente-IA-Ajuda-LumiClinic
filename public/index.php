@@ -128,16 +128,31 @@ if ($isPartnerHost) {
         if ($companyName === '') {
             $companyName = 'Parceiro';
         }
-        $primary = trim((string)($partnerBranding['primary_color'] ?? '#e53935'));
-        $secondary = trim((string)($partnerBranding['secondary_color'] ?? '#ff6f60'));
+        // Usar cores dinâmicas do tema como fallback
+        try {
+            $defaultPrimary = \App\Helpers\ThemeHelper::getPrimary();
+            $defaultSecondary = \App\Helpers\ThemeHelper::getSecondary();
+            $defaultBackground = \App\Helpers\ThemeHelper::getBackground();
+            $defaultSurface = \App\Helpers\ThemeHelper::getSurface();
+            $defaultTextSecondary = \App\Helpers\ThemeHelper::getTextSecondary();
+        } catch (\Exception $e) {
+            $defaultPrimary = '#e53935';
+            $defaultSecondary = '#ff6f60';
+            $defaultBackground = '#050509';
+            $defaultSurface = '#111118';
+            $defaultTextSecondary = '#b0b0b0';
+        }
+        
+        $primary = trim((string)($partnerBranding['primary_color'] ?? $defaultPrimary));
+        $secondary = trim((string)($partnerBranding['secondary_color'] ?? $defaultSecondary));
         $safeCompany = htmlspecialchars($companyName, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         $safeSub = htmlspecialchars($partnerSubdomain, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         $safeBase = htmlspecialchars($baseDomain, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-        $safePrimary = htmlspecialchars($primary !== '' ? $primary : '#e53935', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-        $safeSecondary = htmlspecialchars($secondary !== '' ? $secondary : '#ff6f60', ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        $safePrimary = htmlspecialchars($primary !== '' ? $primary : $defaultPrimary, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        $safeSecondary = htmlspecialchars($secondary !== '' ? $secondary : $defaultSecondary, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
         echo '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Aguardando aprovação</title>'
             . '<meta name="theme-color" content="' . $safePrimary . '">' 
-            . '<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#050509;color:#f5f5f5;font-family:system-ui,-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;padding:18px} .card{max-width:560px;width:100%;border:1px solid #272727;border-radius:18px;background:#111118;padding:22px 20px;text-align:center} .badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid #272727;font-weight:700;font-size:13px} .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,' . $safePrimary . ',' . $safeSecondary . ')} h1{font-size:22px;margin:14px 0 6px 0} p{margin:0;color:#b0b0b0;font-size:14px;line-height:1.6} .host{margin-top:12px;font-size:13px;color:#b0b0b0}</style></head><body>'
+            . '<style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:' . $defaultBackground . ';color:#f5f5f5;font-family:system-ui,-apple-system,BlinkMacSystemFont,\'Segoe UI\',sans-serif;padding:18px} .card{max-width:560px;width:100%;border:1px solid #272727;border-radius:18px;background:' . $defaultSurface . ';padding:22px 20px;text-align:center} .badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid #272727;font-weight:700;font-size:13px} .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,' . $safePrimary . ',' . $safeSecondary . ')} h1{font-size:22px;margin:14px 0 6px 0} p{margin:0;color:' . $defaultTextSecondary . ';font-size:14px;line-height:1.6} .host{margin-top:12px;font-size:13px;color:' . $defaultTextSecondary . '}</style></head><body>'
             . '<div class="card">'
             . '<div class="badge"><span class="dot"></span>' . $safeCompany . '</div>'
             . '<h1>Subdomínio aguardando aprovação</h1>'

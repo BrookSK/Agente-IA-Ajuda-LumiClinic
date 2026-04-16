@@ -4,7 +4,7 @@
 </div>
 
 <?php
-$primaryColor = !empty($branding['primary_color']) ? $branding['primary_color'] : '#e53935';
+$primaryColor = !empty($branding['primary_color']) ? $branding['primary_color'] : \App\Helpers\ThemeHelper::getPrimary();
 ?>
 <!-- Statistics Cards -->
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px;">

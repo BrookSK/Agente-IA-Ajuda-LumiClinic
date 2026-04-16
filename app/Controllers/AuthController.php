@@ -427,12 +427,12 @@ HTML;
       <p style="font-size:14px; margin:0 0 14px 0;">Clique no botão abaixo para criar uma nova senha. Esse link vale por <strong>1 hora</strong>:</p>
 
       <div style="text-align:center; margin-bottom:14px;">
-        <a href="' . htmlspecialchars($link) . '" style="display:inline-block; padding:9px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:13px; text-decoration:none;">Redefinir minha senha</a>
+        <a href="' . htmlspecialchars($link) . '" style="display:inline-block; padding:9px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:13px; text-decoration:none;">Redefinir minha senha</a>
       </div>
 
       <p style="font-size:12px; color:#b0b0b0; margin:0 0 8px 0;">Se o botão não funcionar, copie e cole este link no navegador:</p>
       <p style="font-size:11px; word-break:break-all; margin:0 0 14px 0;">
-        <a href="' . htmlspecialchars($link) . '" style="color:#ff6f60; text-decoration:none;">' . htmlspecialchars($link) . '</a>
+        <a href="' . htmlspecialchars($link) . '" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">' . htmlspecialchars($link) . '</a>
       </p>
 
       <p style="font-size:12px; color:#777; margin:0;">Se você não fez esse pedido, pode ignorar este e-mail com segurança.</p>

@@ -130,7 +130,7 @@ if ($embedUrl !== '' && strpos($embedUrl, 'drive.google.com') !== false) {
                     <div style="margin-top:4px; display:flex; justify-content:flex-end;">
                         <button type="submit" style="
                             border:none; border-radius:999px; padding:5px 12px;
-                            background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                            background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                             font-weight:600; font-size:11px; cursor:pointer;">
                             Enviar comentário
                         </button>

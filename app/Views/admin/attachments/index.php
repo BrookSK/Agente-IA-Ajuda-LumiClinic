@@ -45,7 +45,7 @@ $quick90 = date('Y-m-d', $nowTs - 90 * 86400);
         <div>
             <button type="submit" style="
                 border:none; border-radius:999px; padding:7px 14px;
-                background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                 font-weight:600; font-size:13px; cursor:pointer;">
                 Filtrar
             </button>

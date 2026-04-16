@@ -237,7 +237,7 @@ $backgroundImageUrl = trim((string)($branding['background_image_url'] ?? ''));
         </div>
 
         <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
-            <button type="submit" style="border:none; border-radius:999px; padding:9px 14px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:800; cursor:pointer;">Salvar branding</button>
+            <button type="submit" style="border:none; border-radius:999px; padding:9px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:800; cursor:pointer;">Salvar branding</button>
             <a href="/admin/branding-parceiros" style="display:inline-flex; align-items:center; padding:9px 14px; border-radius:999px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); text-decoration:none; font-weight:700; font-size:13px;">Cancelar</a>
         </div>
     </form>

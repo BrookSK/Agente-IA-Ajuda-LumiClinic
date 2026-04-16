@@ -192,8 +192,8 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                 <?php if (!$user): ?>
                     <a href="/login" style="
                         display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
-                        border-radius:999px; border:1px solid #ff6f60;
-                        background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                        border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
+                        background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                         font-size:13px; font-weight:600; text-decoration:none;">
                         Entrar para se inscrever
                     </a>
@@ -233,8 +233,8 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                         <?php if (!empty($canAccessContent) && !empty($startLessonId)): ?>
                             <a href="/cursos/aulas/ver?lesson_id=<?= (int)$startLessonId ?>" style="
                                 display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
-                                border-radius:999px; border:1px solid #ff6f60;
-                                background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
+                                background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                 font-size:13px; font-weight:600; text-decoration:none;">
                                 <?= htmlspecialchars($startLessonLabel) ?>
                             </a>

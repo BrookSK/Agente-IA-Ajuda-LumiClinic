@@ -67,7 +67,7 @@ $hasCertificate = !empty($badge['certificate_code']);
                     <a href="/certificados/ver?course_id=<?= (int)$courseId ?>" style="display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; background:linear-gradient(135deg,#ffcc80,#ff8a65); border:1px solid rgba(255,255,255,0.18); color:#050509; text-decoration:none; font-weight:900; font-size:13px; flex:1 1 220px;">
                         Ver certificado
                     </a>
-                    <a href="/certificados/ver?course_id=<?= (int)$courseId ?>&print=1" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); border:1px solid rgba(255,255,255,0.18); color:#050509; text-decoration:none; font-weight:900; font-size:13px; flex:1 1 220px;">
+                    <a href="/certificados/ver?course_id=<?= (int)$courseId ?>&print=1" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; justify-content:center; padding:10px 14px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; border:1px solid rgba(255,255,255,0.18); color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; text-decoration:none; font-weight:900; font-size:13px; flex:1 1 220px;">
                         Baixar / Imprimir certificado
                     </a>
                 <?php else: ?>

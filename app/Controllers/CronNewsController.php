@@ -321,7 +321,7 @@ class CronNewsController extends Controller
 
                 $content .= '<div style="padding:10px 12px; border-radius:12px; border:1px solid #272727; background:#0a0a10;">'
                     . '<div style="font-size:14px; font-weight:700; margin-bottom:6px;">'
-                    . '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '" style="color:#ff6f60; text-decoration:none;">'
+                    . '<a href="' . htmlspecialchars($url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '" style="color:' . \App\Helpers\ThemeHelper::getSecondary() . '; text-decoration:none;">'
                     . htmlspecialchars($title, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8')
                     . '</a>'
                     . '</div>';

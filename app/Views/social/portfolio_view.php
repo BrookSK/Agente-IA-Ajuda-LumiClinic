@@ -135,7 +135,7 @@ foreach ($media as $m) {
                     <span id="portfolioLikeCount" style="margin-left:4px;"><?= (int)$likesCount ?></span>
                 </button>
                 <?php if ($externalUrl !== ''): ?>
-                    <a href="<?= htmlspecialchars($externalUrl, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" style="border-radius:999px; padding:6px 10px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:650; text-decoration:none;">Abrir link</a>
+                    <a href="<?= htmlspecialchars($externalUrl, ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" style="border-radius:999px; padding:6px 10px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:650; text-decoration:none;">Abrir link</a>
                 <?php endif; ?>
                 <?php if ($projectId > 0): ?>
                     <a href="/projetos/ver?id=<?= $projectId ?>" style="border-radius:999px; padding:6px 10px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:12px; text-decoration:none;">Ver projeto</a>
@@ -252,7 +252,7 @@ foreach ($media as $m) {
             <div style="font-size:12px; color:var(--text-secondary); margin-bottom:10px;">Edite os detalhes no gerenciar ou abra o editor para mexer nos blocos.</div>
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
                 <a href="/perfil/portfolio/gerenciar?owner_user_id=<?= (int)$ownerId ?>&edit_id=<?= (int)($item['id'] ?? 0) ?>" style="border-radius:999px; padding:7px 12px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:12px; text-decoration:none;">Editar detalhes</a>
-                <a href="/perfil/portfolio/editor?id=<?= (int)($item['id'] ?? 0) ?>" style="border-radius:999px; padding:7px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:800; text-decoration:none;">Editar blocos</a>
+                <a href="/perfil/portfolio/editor?id=<?= (int)($item['id'] ?? 0) ?>" style="border-radius:999px; padding:7px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:800; text-decoration:none;">Editar blocos</a>
             </div>
         </section>
     <?php endif; ?>

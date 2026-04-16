@@ -74,8 +74,8 @@ $currentBoardTitle = $currentBoard ? (string)($currentBoard['title'] ?? 'Sem tí
     }
     .kb-btn--primary {
         border: none;
-        background: linear-gradient(135deg,#e53935,#ff6f60);
-        color: #050509;
+        background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
+        color: <?= \App\Helpers\ThemeHelper::getBackground() ?>;
         font-weight: 700;
     }
     .kb-btn--danger {

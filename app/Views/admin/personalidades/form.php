@@ -138,7 +138,7 @@ $isEdit = !empty($persona);
         <div style="margin-top:12px; display:flex; gap:8px;">
             <button type="submit" style="
                 border:none; border-radius:999px; padding:8px 16px;
-                background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                 font-weight:600; font-size:13px; cursor:pointer;">
                 Salvar personalidade
             </button>

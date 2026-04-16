@@ -32,7 +32,7 @@ $autoPrint = isset($_GET['print']) && (string)$_GET['print'] === '1';
         </div>
         <div style="display:flex; gap:8px;">
             <a href="/certificados" style="display:inline-flex; align-items:center; padding:8px 12px; border-radius:999px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:12px; text-decoration:none;">Voltar</a>
-            <button type="button" onclick="window.print()" style="border:none; border-radius:999px; padding:8px 14px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:700; font-size:12px; cursor:pointer;">Imprimir / Salvar PDF</button>
+            <button type="button" onclick="window.print()" style="border:none; border-radius:999px; padding:8px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:700; font-size:12px; cursor:pointer;">Imprimir / Salvar PDF</button>
         </div>
     </div>
 

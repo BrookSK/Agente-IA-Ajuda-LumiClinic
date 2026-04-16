@@ -206,7 +206,7 @@ $canCommentLesson = $user && ($isEnrolled || $isOwner || $isAdmin);
                                 <a href="<?= htmlspecialchars($nextUrl) ?>" style="
                                     display:inline-flex; align-items:center; gap:6px; padding:6px 14px;
                                     border-radius:999px; border:1px solid #ff6f60;
-                                    background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                    background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                     font-weight:600; font-size:12px; text-decoration:none;">
                                     <?php if (!empty($nextIsExam)): ?>
                                         Ir para a prova do módulo
@@ -276,7 +276,7 @@ $canCommentLesson = $user && ($isEnrolled || $isOwner || $isAdmin);
                         <div style="margin-top:4px; display:flex; justify-content:flex-end;">
                             <button type="submit" style="
                                 border:none; border-radius:999px; padding:5px 12px;
-                                background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                 font-weight:600; font-size:11px; cursor:pointer;">
                                 Enviar comentário
                             </button>

@@ -1365,7 +1365,7 @@ class CourseController extends Controller
       <p style="font-size:14px; margin:0 0 10px 0;">À medida que novas aulas forem liberadas ou lives forem agendadas para este curso, você receberá avisos por e-mail.</p>
 
       <div style="text-align:center; margin:14px 0 8px 0;">
-        <a href="{$safeCourseUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:13px; text-decoration:none;">Acessar curso</a>
+        <a href="{$safeCourseUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:13px; text-decoration:none;">Acessar curso</a>
       </div>
 
       <p style="font-size:12px; color:#777; margin:8px 0 0 0;">Se o botão não funcionar, copie e cole este link no navegador:<br>
@@ -1541,7 +1541,7 @@ HTML;
 
         $meetParagraph = '';
         if ($meetLink !== '') {
-            $meetParagraph = '<p style="font-size:14px; margin:0 0 10px 0;">No dia e horário da live, você poderá entrar pelo link abaixo:<br><a href="' . $safeMeetLink . '" style="color:#ff6f60; text-decoration:none;">' . $safeMeetLink . '</a></p>';
+            $meetParagraph = '<p style="font-size:14px; margin:0 0 10px 0;">No dia e horário da live, você poderá entrar pelo link abaixo:<br><a href="' . $safeMeetLink . '" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">' . $safeMeetLink . '</a></p>';
         }
 
         $whenParagraph = '';
@@ -1564,11 +1564,11 @@ HTML;
       {$meetParagraph}
 
       <div style="text-align:center; margin:14px 0 8px 0;">
-        <a href="{$safeCourseUrl}#lives" style="display:inline-block; padding:9px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:13px; text-decoration:none;">Ver detalhes da live</a>
+        <a href="{$safeCourseUrl}#lives" style="display:inline-block; padding:9px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:13px; text-decoration:none;">Ver detalhes da live</a>
       </div>
 
       <p style="font-size:12px; color:#777; margin:8px 0 0 0;">Se o botão não funcionar, copie e cole este link no navegador:<br>
-        <a href="{$safeCourseUrl}#lives" style="color:#ff6f60; text-decoration:none;">{$safeCourseUrl}#lives</a>
+        <a href="{$safeCourseUrl}#lives" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">{$safeCourseUrl}#lives</a>
       </p>
     </div>
   </div>

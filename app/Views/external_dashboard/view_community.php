@@ -45,7 +45,7 @@ $coverImage = trim((string)($community['cover_image_path'] ?? ''));
                    onmouseout="this.style.background='var(--surface-card)'">
                     
                     <!-- User Avatar -->
-                    <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #ff6f60 0%, #e53935 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: <?= \App\Helpers\ThemeHelper::getGradient() ?>; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                         <?php if ($authorAvatar !== ''): ?>
                             <img src="<?= htmlspecialchars($authorAvatar, ENT_QUOTES, 'UTF-8') ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
                         <?php else: ?>

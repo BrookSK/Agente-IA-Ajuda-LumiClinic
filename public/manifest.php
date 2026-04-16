@@ -20,13 +20,17 @@ header('Cache-Control: public, max-age=3600');
 $name = \App\Models\Branding::platformName();
 $shortName = \App\Models\Branding::mascotName() . ' IA';
 
+// Usar cores dinâmicas do tema
+$backgroundColor = \App\Helpers\ThemeHelper::getBackground();
+$themeColor = \App\Helpers\ThemeHelper::getPrimary();
+
 echo json_encode([
     'name' => $name,
     'short_name' => $shortName,
     'start_url' => '/chat',
     'display' => 'standalone',
-    'background_color' => '#050509',
-    'theme_color' => '#e53935',
+    'background_color' => $backgroundColor,
+    'theme_color' => $themeColor,
     'lang' => 'pt-BR',
     'orientation' => 'portrait-primary',
     'icons' => [

@@ -608,7 +608,7 @@ HTML;
       <p style="font-size:14px; margin:0 0 10px 0;"><strong>{$safeAuthor}</strong> te mencionou em um post na {$brandCommunity}.</p>
       <p style="font-size:13px; margin:0 0 10px 0; color:#b0b0b0;">Trecho do post:</p>
       <div style="font-size:13px; margin:0 0 12px 0; padding:8px 10px; border-radius:10px; border:1px solid #272727; background:#050509;">{$safeSnippet}</div>
-      <p style="margin:0; font-size:13px;"><a href="{$link}" style="color:#ff6f60; text-decoration:none;">👉 Ver post completo na comunidade</a></p>
+      <p style="margin:0; font-size:13px;"><a href="{$link}" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">👉 Ver post completo na comunidade</a></p>
     </div>
   </div>
 </body>

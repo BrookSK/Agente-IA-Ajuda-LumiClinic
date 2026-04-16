@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
-                <a href="/admin/erros" style="display:inline-block; padding:7px 12px; border-radius:999px; border:1px solid #ff6f60; color:#050509; background:linear-gradient(135deg,#e53935,#ff6f60); font-size:12px; text-decoration:none; font-weight:600;">
+                <a href="/admin/erros" style="display:inline-block; padding:7px 12px; border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; font-size:12px; text-decoration:none; font-weight:600;">
                     Ver relatos de erro
                 </a>
                 <a href="/admin/anexos" style="display:inline-block; padding:7px 12px; border-radius:999px; border:1px solid var(--border-subtle); color:var(--text-primary); font-size:12px; text-decoration:none; background:var(--surface-subtle);">

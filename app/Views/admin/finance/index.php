@@ -68,7 +68,7 @@ if ($mode === 'year') {
                     <option value="2" <?= (int)$semester === 2 ? 'selected' : '' ?>>2º semestre</option>
                 </select>
             </div>
-            <button type="submit" style="border:none; border-radius:999px; padding:8px 14px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:900; cursor:pointer;">Aplicar</button>
+            <button type="submit" style="border:none; border-radius:999px; padding:8px 14px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:900; cursor:pointer;">Aplicar</button>
         </form>
     </div>
 

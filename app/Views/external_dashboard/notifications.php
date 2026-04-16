@@ -3,8 +3,8 @@
 /** @var array $branding */
 /** @var array $notifications */
 
-$primaryColor = !empty($branding['primary_color']) ? $branding['primary_color'] : '#e53935';
-$secondaryColor = !empty($branding['secondary_color']) ? $branding['secondary_color'] : '#ff6f60';
+$primaryColor = !empty($branding['primary_color']) ? $branding['primary_color'] : \App\Helpers\ThemeHelper::getPrimary();
+$secondaryColor = !empty($branding['secondary_color']) ? $branding['secondary_color'] : \App\Helpers\ThemeHelper::getSecondary();
 $accentColor = !empty($branding['accent_color']) ? $branding['accent_color'] : '#4caf50';
 ?>
 

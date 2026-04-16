@@ -740,7 +740,7 @@ class AdminCourseController extends Controller
       <p style="font-size:14px; margin:0 0 10px 0;"><strong>{$safeLessonTitle}</strong></p>
 
       <div style="text-align:center; margin:14px 0 8px 0;">
-        <a href="{$safeCourseUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:13px; text-decoration:none;">Acessar curso</a>
+        <a href="{$safeCourseUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:13px; text-decoration:none;">Acessar curso</a>
       </div>
 
       <p style="font-size:12px; color:#777; margin:8px 0 0 0;">Se o botão não funcionar, copie e cole este link no navegador:<br>
@@ -957,7 +957,7 @@ HTML;
       {$whenParagraph}
 
       <div style="text-align:center; margin:14px 0 8px 0;">
-        <a href="{$safeCourseUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:13px; text-decoration:none;">Ver live e se inscrever</a>
+        <a href="{$safeCourseUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:13px; text-decoration:none;">Ver live e se inscrever</a>
       </div>
 
       <p style="font-size:12px; color:#777; margin:8px 0 0 0;">Se o botão não funcionar, copie e cole este link no navegador:<br>
@@ -1055,7 +1055,7 @@ HTML;
       <p style="font-size:14px; margin:0 0 10px 0;">Oi, {$safeName} 👋</p>
       <p style="font-size:14px; margin:0 0 10px 0;">A gravação da live <strong>{$safeLiveTitle}</strong> do curso <strong>{$safeCourseTitle}</strong> já está disponível.</p>
       {$whenParagraph}
-      <p style="font-size:14px; margin:0 0 10px 0;">Você pode assistir pelo link abaixo:<br><a href="{$safeRecordingLink}" style="color:#ff6f60; text-decoration:none;">{$safeRecordingLink}</a></p>
+      <p style="font-size:14px; margin:0 0 10px 0;">Você pode assistir pelo link abaixo:<br><a href="{$safeRecordingLink}" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">{$safeRecordingLink}</a></p>
     </div>
   </div>
 </body>
@@ -1207,7 +1207,7 @@ HTML;
 
             $meetParagraph = '';
             if (!empty($live['meet_link'])) {
-                $meetParagraph = '<p style="font-size:14px; margin:0 0 10px 0;">No horário da live, você poderá entrar pelo link abaixo:<br><a href="' . $safeMeetLink . '" style="color:#ff6f60; text-decoration:none;">' . $safeMeetLink . '</a></p>';
+                $meetParagraph = '<p style="font-size:14px; margin:0 0 10px 0;">No horário da live, você poderá entrar pelo link abaixo:<br><a href="' . $safeMeetLink . '" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">' . $safeMeetLink . '</a></p>';
             }
 
             $brandHeader = \App\Models\Branding::emailHeaderHtml($logoUrl);
