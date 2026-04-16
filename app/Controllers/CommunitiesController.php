@@ -539,34 +539,44 @@ class CommunitiesController extends Controller
         $profileImagePath = (string)($community['image_path'] ?? '');
         $profileImageUpdated = false;
         
+        error_log("UPLOAD DEBUG - Profile image files: " . print_r($_FILES['profile_image'] ?? 'none', true));
+        
         if (!empty($_FILES['profile_image']['name']) && $_FILES['profile_image']['error'] === UPLOAD_ERR_OK) {
             $tmp = $_FILES['profile_image']['tmp_name'];
             $originalName = $_FILES['profile_image']['name'];
             $type = $_FILES['profile_image']['type'];
             $size = $_FILES['profile_image']['size'];
             
+            error_log("UPLOAD DEBUG - Profile image: $originalName, size: $size, type: $type");
+            
             // Validações básicas
             if (is_uploaded_file($tmp) && $size > 0 && $size <= 10 * 1024 * 1024) { // Max 10MB
                 // Verifica se é uma imagem válida
                 $imageInfo = @getimagesize($tmp);
                 if ($imageInfo !== false) {
+                    error_log("UPLOAD DEBUG - Image validation passed, uploading...");
                     $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
+                    error_log("UPLOAD DEBUG - Upload result: " . ($url ?? 'null'));
                     if ($url !== null && $url !== '') {
                         $profileImagePath = $url;
                         $profileImageUpdated = true;
+                        error_log("UPLOAD DEBUG - Profile image updated successfully: $url");
                     } else {
-                        $_SESSION['communities_error'] = 'Erro ao fazer upload da imagem de perfil. Tente novamente.';
+                        error_log("UPLOAD DEBUG - Upload failed - MediaStorageService returned null");
+                        $_SESSION['communities_error'] = 'Erro ao fazer upload da imagem de perfil. Verifique a configuração do servidor de mídia.';
                         $_SESSION['communities_edit_old'] = $old;
                         header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
                         exit;
                     }
                 } else {
+                    error_log("UPLOAD DEBUG - Image validation failed");
                     $_SESSION['communities_error'] = 'Arquivo de imagem de perfil inválido. Use JPG, PNG ou GIF.';
                     $_SESSION['communities_edit_old'] = $old;
                     header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
                     exit;
                 }
             } else {
+                error_log("UPLOAD DEBUG - File validation failed - size: $size, is_uploaded: " . (is_uploaded_file($tmp) ? 'yes' : 'no'));
                 $_SESSION['communities_error'] = 'Arquivo de imagem de perfil muito grande (máximo 10MB) ou inválido.';
                 $_SESSION['communities_edit_old'] = $old;
                 header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
@@ -578,34 +588,44 @@ class CommunitiesController extends Controller
         $coverImagePath = (string)($community['cover_image_path'] ?? '');
         $coverImageUpdated = false;
         
+        error_log("UPLOAD DEBUG - Cover image files: " . print_r($_FILES['cover_image'] ?? 'none', true));
+        
         if (!empty($_FILES['cover_image']['name']) && $_FILES['cover_image']['error'] === UPLOAD_ERR_OK) {
             $tmp = $_FILES['cover_image']['tmp_name'];
             $originalName = $_FILES['cover_image']['name'];
             $type = $_FILES['cover_image']['type'];
             $size = $_FILES['cover_image']['size'];
             
+            error_log("UPLOAD DEBUG - Cover image: $originalName, size: $size, type: $type");
+            
             // Validações básicas
             if (is_uploaded_file($tmp) && $size > 0 && $size <= 10 * 1024 * 1024) { // Max 10MB
                 // Verifica se é uma imagem válida
                 $imageInfo = @getimagesize($tmp);
                 if ($imageInfo !== false) {
+                    error_log("UPLOAD DEBUG - Cover image validation passed, uploading...");
                     $url = MediaStorageService::uploadFile($tmp, $originalName, $type);
+                    error_log("UPLOAD DEBUG - Cover upload result: " . ($url ?? 'null'));
                     if ($url !== null && $url !== '') {
                         $coverImagePath = $url;
                         $coverImageUpdated = true;
+                        error_log("UPLOAD DEBUG - Cover image updated successfully: $url");
                     } else {
-                        $_SESSION['communities_error'] = 'Erro ao fazer upload da imagem de capa. Tente novamente.';
+                        error_log("UPLOAD DEBUG - Cover upload failed - MediaStorageService returned null");
+                        $_SESSION['communities_error'] = 'Erro ao fazer upload da imagem de capa. Verifique a configuração do servidor de mídia.';
                         $_SESSION['communities_edit_old'] = $old;
                         header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
                         exit;
                     }
                 } else {
+                    error_log("UPLOAD DEBUG - Cover image validation failed");
                     $_SESSION['communities_error'] = 'Arquivo de imagem de capa inválido. Use JPG, PNG ou GIF.';
                     $_SESSION['communities_edit_old'] = $old;
                     header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
                     exit;
                 }
             } else {
+                error_log("UPLOAD DEBUG - Cover file validation failed - size: $size, is_uploaded: " . (is_uploaded_file($tmp) ? 'yes' : 'no'));
                 $_SESSION['communities_error'] = 'Arquivo de imagem de capa muito grande (máximo 10MB) ou inválido.';
                 $_SESSION['communities_edit_old'] = $old;
                 header('Location: /comunidades/editar?slug=' . urlencode((string)($community['slug'] ?? '')));
@@ -633,7 +653,17 @@ class CommunitiesController extends Controller
             $updateData['cover_image_path'] = $coverImagePath;
         }
         
+        error_log("UPLOAD DEBUG - Update data: " . print_r($updateData, true));
+        error_log("UPLOAD DEBUG - Profile updated: " . ($profileImageUpdated ? 'yes' : 'no'));
+        error_log("UPLOAD DEBUG - Cover updated: " . ($coverImageUpdated ? 'yes' : 'no'));
+        
         Community::update($communityId, $updateData);
+        
+        // Verifica se foi salvo no banco
+        $updatedCommunity = Community::findById($communityId);
+        if ($updatedCommunity) {
+            error_log("UPLOAD DEBUG - DB after update - Profile: " . ($updatedCommunity['image_path'] ?? 'null') . ", Cover: " . ($updatedCommunity['cover_image_path'] ?? 'null'));
+        }
 
         if ($profileImageUpdated || $coverImageUpdated) {
             $_SESSION['communities_success'] = 'Comunidade e imagens atualizadas com sucesso!';
