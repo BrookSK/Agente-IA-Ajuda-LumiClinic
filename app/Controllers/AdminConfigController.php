@@ -110,6 +110,7 @@ class AdminConfigController extends Controller
         $themeButtonText = Setting::get('theme_button_text', '#ffffff');
         $themeButtonBorder = Setting::get('theme_button_border', 'transparent');
         $themeHeadlineColor = Setting::get('theme_headline_color', '#ffffff');
+        $themeFontFamily = Setting::get('theme_font_family', 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif');
 
         // URLs do Perplexity
         $perplexitySearchUrls = Setting::get('perplexity_search_urls', '');
@@ -179,6 +180,7 @@ class AdminConfigController extends Controller
             'themeButtonText' => $themeButtonText,
             'themeButtonBorder' => $themeButtonBorder,
             'themeHeadlineColor' => $themeHeadlineColor,
+            'themeFontFamily' => $themeFontFamily,
             'perplexitySearchUrls' => $perplexitySearchUrls,
             'saved' => false,
             'testEmailStatus' => null,
@@ -294,6 +296,7 @@ class AdminConfigController extends Controller
         $themeButtonText = trim((string)($_POST['theme_button_text_text'] ?? $_POST['theme_button_text'] ?? '#ffffff'));
         $themeButtonBorder = trim((string)($_POST['theme_button_border_text'] ?? $_POST['theme_button_border'] ?? 'transparent'));
         $themeHeadlineColor = trim((string)($_POST['theme_headline_color_text'] ?? $_POST['theme_headline_color'] ?? '#ffffff'));
+        $themeFontFamily = trim((string)($_POST['theme_font_family'] ?? 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'));
 
         // URLs do Perplexity
         $perplexitySearchUrls = trim((string)($_POST['perplexity_search_urls'] ?? ''));
@@ -418,6 +421,7 @@ class AdminConfigController extends Controller
             'theme_button_text' => $themeButtonText,
             'theme_button_border' => $themeButtonBorder,
             'theme_headline_color' => $themeHeadlineColor,
+            'theme_font_family' => $themeFontFamily,
             'perplexity_search_urls' => $perplexitySearchUrls,
             'certificate_issuer_name' => $certificateIssuerName,
             'certificate_signature_image_path' => $certificateSignatureImagePath,
@@ -516,6 +520,7 @@ class AdminConfigController extends Controller
             'themeButtonText' => $themeButtonText,
             'themeButtonBorder' => $themeButtonBorder,
             'themeHeadlineColor' => $themeHeadlineColor,
+            'themeFontFamily' => $themeFontFamily,
             'perplexitySearchUrls' => $perplexitySearchUrls,
             'saved' => true,
             'testEmailStatus' => null,

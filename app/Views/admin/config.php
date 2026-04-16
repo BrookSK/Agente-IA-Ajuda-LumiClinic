@@ -63,6 +63,7 @@
 /** @var string $themeButtonText */
 /** @var string $themeButtonBorder */
 /** @var string $themeHeadlineColor */
+/** @var string $themeFontFamily */
 /** @var string $perplexitySearchUrls */
 
 $knownModels = [
@@ -404,6 +405,37 @@ $knownModels = [
                             " placeholder="transparent">
                         </div>
                         <small style="color:#777; font-size:11px;">Cor da borda dos botões (use "transparent" para sem borda)</small>
+                    </div>
+                </div>
+                
+                <hr style="border:none; border-top:1px solid #272727; margin: 8px 0;">
+                
+                <div style="margin-top:8px;">
+                    <strong style="font-size:13px; color:#f5f5f5;">Tipografia</strong>
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <div style="flex:1 1 400px; min-width:300px;">
+                        <label style="font-size: 12px; color: #b0b0b0;">Família de fonte</label>
+                        <select name="theme_font_family" style="
+                            width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #272727;
+                            background: #050509; color: #f5f5f5; font-size: 13px;
+                        ">
+                            <option value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" <?= ($themeFontFamily ?? '') === 'system-ui, -apple-system, BlinkMacSystemFont, \'Segoe UI\', sans-serif' ? 'selected' : '' ?>>Sistema (Padrão)</option>
+                            <option value="'Inter', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Inter\', system-ui, sans-serif' ? 'selected' : '' ?>>Inter</option>
+                            <option value="'Roboto', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Roboto\', system-ui, sans-serif' ? 'selected' : '' ?>>Roboto</option>
+                            <option value="'Open Sans', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Open Sans\', system-ui, sans-serif' ? 'selected' : '' ?>>Open Sans</option>
+                            <option value="'Poppins', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Poppins\', system-ui, sans-serif' ? 'selected' : '' ?>>Poppins</option>
+                            <option value="'Montserrat', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Montserrat\', system-ui, sans-serif' ? 'selected' : '' ?>>Montserrat</option>
+                            <option value="'Nunito', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Nunito\', system-ui, sans-serif' ? 'selected' : '' ?>>Nunito</option>
+                            <option value="'Source Sans Pro', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Source Sans Pro\', system-ui, sans-serif' ? 'selected' : '' ?>>Source Sans Pro</option>
+                            <option value="'Lato', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Lato\', system-ui, sans-serif' ? 'selected' : '' ?>>Lato</option>
+                            <option value="'Raleway', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Raleway\', system-ui, sans-serif' ? 'selected' : '' ?>>Raleway</option>
+                            <option value="'Fira Sans', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Fira Sans\', system-ui, sans-serif' ? 'selected' : '' ?>>Fira Sans</option>
+                            <option value="Georgia, 'Times New Roman', serif" <?= ($themeFontFamily ?? '') === 'Georgia, \'Times New Roman\', serif' ? 'selected' : '' ?>>Georgia (Serif)</option>
+                            <option value="'Playfair Display', Georgia, serif" <?= ($themeFontFamily ?? '') === '\'Playfair Display\', Georgia, serif' ? 'selected' : '' ?>>Playfair Display (Serif)</option>
+                            <option value="'JetBrains Mono', 'Fira Code', monospace" <?= ($themeFontFamily ?? '') === '\'JetBrains Mono\', \'Fira Code\', monospace' ? 'selected' : '' ?>>JetBrains Mono (Monospace)</option>
+                        </select>
+                        <small style="color:#777; font-size:11px;">Escolha a fonte principal do sistema. Fontes do Google Fonts são carregadas automaticamente.</small>
                     </div>
                 </div>
             </div>

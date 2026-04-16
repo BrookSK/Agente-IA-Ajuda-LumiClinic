@@ -56,6 +56,7 @@ try {
         'brand_user_agent' => 'TuquinhaApp',
         'brand_community_name' => 'Comunidade do Tuquinha',
         'brand_logo_url' => '',
+        'theme_font_family' => 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
     ];
     
     foreach ($defaultSettings as $key => $value) {

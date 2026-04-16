@@ -131,6 +131,33 @@ if (!empty($_SESSION['user_id'])) {
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="icon" type="image/png" href="/public/favicon.png">
     <link rel="manifest" href="/public/manifest.php">
+    <?php
+    // Carregar fontes do Google Fonts automaticamente
+    $fontFamily = \App\Helpers\ThemeHelper::getFontFamily();
+    $googleFonts = [
+        'Inter' => 'Inter:wght@300;400;500;600;700;800',
+        'Roboto' => 'Roboto:wght@300;400;500;700',
+        'Open Sans' => 'Open+Sans:wght@300;400;600;700',
+        'Poppins' => 'Poppins:wght@300;400;500;600;700',
+        'Montserrat' => 'Montserrat:wght@300;400;500;600;700',
+        'Nunito' => 'Nunito:wght@300;400;600;700',
+        'Source Sans Pro' => 'Source+Sans+Pro:wght@300;400;600;700',
+        'Lato' => 'Lato:wght@300;400;700',
+        'Raleway' => 'Raleway:wght@300;400;500;600;700',
+        'Fira Sans' => 'Fira+Sans:wght@300;400;500;600',
+        'Playfair Display' => 'Playfair+Display:wght@400;500;600;700',
+        'JetBrains Mono' => 'JetBrains+Mono:wght@300;400;500;600'
+    ];
+    
+    foreach ($googleFonts as $fontName => $fontQuery) {
+        if (strpos($fontFamily, $fontName) !== false) {
+            echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+            echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+            echo '<link href="https://fonts.googleapis.com/css2?family=' . $fontQuery . '&display=swap" rel="stylesheet">' . "\n";
+            break;
+        }
+    }
+    ?>
     <style>
         :root {
             --bg-main: <?= htmlspecialchars($themeColorBackground, ENT_QUOTES, 'UTF-8') ?>;
@@ -176,7 +203,7 @@ if (!empty($_SESSION['user_id'])) {
             box-sizing: border-box;
         }
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: <?= \App\Helpers\ThemeHelper::getFontFamily() ?>;
             background-color: var(--bg-main);
             color: var(--text-primary);
             min-height: 100vh;

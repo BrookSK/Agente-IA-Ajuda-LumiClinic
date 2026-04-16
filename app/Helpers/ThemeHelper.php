@@ -27,6 +27,7 @@ class ThemeHelper
                     'button_text' => Setting::get('theme_button_text', '#ffffff'),
                     'button_border' => Setting::get('theme_button_border', 'transparent'),
                     'headline' => Setting::get('theme_headline_color', '#ffffff'),
+                    'font_family' => Setting::get('theme_font_family', 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'),
                 ];
             } catch (\Exception $e) {
                 // Fallback para valores padrão em caso de erro
@@ -42,6 +43,7 @@ class ThemeHelper
                     'button_text' => '#ffffff',
                     'button_border' => 'transparent',
                     'headline' => '#ffffff',
+                    'font_family' => 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
                 ];
             }
         }
@@ -125,6 +127,11 @@ class ThemeHelper
     public static function getTextSecondary(): string
     {
         return self::getColor('text_secondary');
+    }
+
+    public static function getFontFamily(): string
+    {
+        return self::getColor('font_family');
     }
 
     /**
