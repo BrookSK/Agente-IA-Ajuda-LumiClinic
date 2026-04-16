@@ -11,14 +11,14 @@ $pageTitle = $pageTitle ?? Branding::platformName();
 // Carregar cores do tema das configurações (com fallback seguro)
 try {
     // Tentar carregar as cores das configurações
-    $themeColorPrimary = Setting::get('theme_color_primary', '#e53935');
-    $themeColorSecondary = Setting::get('theme_color_secondary', '#ff6f60');
+    $themeColorPrimary = Setting::get('theme_color_primary', '#2196F3');
+    $themeColorSecondary = Setting::get('theme_color_secondary', '#FF9800');
     $themeColorAccent = Setting::get('theme_color_accent', '#2ecc71');
     $themeColorBackground = Setting::get('theme_color_background', '#050509');
 } catch (Exception $e) {
     // Fallback em caso de erro (tabela não existe, etc.)
-    $themeColorPrimary = '#e53935';
-    $themeColorSecondary = '#ff6f60';
+    $themeColorPrimary = '#2196F3';
+    $themeColorSecondary = '#FF9800';
     $themeColorAccent = '#2ecc71';
     $themeColorBackground = '#050509';
 }
@@ -257,8 +257,8 @@ if (!empty($_SESSION['user_id'])) {
         body[data-theme="light"] textarea::placeholder {
             color: rgba(75, 85, 99, 0.8);
         }
-        body[data-theme="light"] #social-chat-messages [style*="linear-gradient(135deg,#e53935,#ff6f60)"],
-        body[data-theme="light"] #social-chat-messages [style*="linear-gradient(135deg, #e53935,#ff6f60)"] {
+        body[data-theme="light"] #social-chat-messages [style*="linear-gradient(135deg,<?= \App\Helpers\ThemeHelper::getPrimary() ?>,<?= \App\Helpers\ThemeHelper::getSecondary() ?>)"],
+        body[data-theme="light"] #social-chat-messages [style*="linear-gradient(135deg, <?= \App\Helpers\ThemeHelper::getPrimary() ?>,<?= \App\Helpers\ThemeHelper::getSecondary() ?>)"] {
             color: #ffffff !important;
         }
 
@@ -303,7 +303,7 @@ if (!empty($_SESSION['user_id'])) {
             overflow: hidden;
             flex: 0 0 auto;
             background: #050509;
-            box-shadow: 0 0 18px rgba(229, 57, 53, 0.8);
+            box-shadow: 0 0 18px rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.8);
         }
         body[data-theme="light"] .brand-logo {
             box-shadow: none;
@@ -344,19 +344,19 @@ if (!empty($_SESSION['user_id'])) {
             transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
         }
         .sidebar-button.sidebar-button--active {
-            border-color: rgba(229, 57, 53, 0.35);
-            background: rgba(229, 57, 53, 0.12);
-            box-shadow: 0 0 0 1px rgba(229, 57, 53, 0.16);
+            border-color: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.35);
+            background: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.12);
+            box-shadow: 0 0 0 1px rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.16);
         }
         body[data-theme="light"] .sidebar-button.sidebar-button--active {
-            border-color: rgba(229, 57, 53, 0.35);
-            background: rgba(229, 57, 53, 0.08);
+            border-color: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.35);
+            background: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.08);
         }
         .sidebar-button span.icon {
             width: 18px;
             height: 18px;
             border-radius: 999px;
-            background: rgba(229, 57, 53, 0.15);
+            background: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -415,7 +415,7 @@ if (!empty($_SESSION['user_id'])) {
             margin-left: 260px;
             display: flex;
             flex-direction: column;
-            background: radial-gradient(circle at top, rgba(229, 57, 53, 0.1) 0, var(--bg-main) 50%);
+            background: radial-gradient(circle at top, rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.1) 0, var(--bg-main) 50%);
             min-height: 100vh;
             overflow-x: hidden;
         }
@@ -488,7 +488,7 @@ if (!empty($_SESSION['user_id'])) {
             height: 18px;
             border-radius: 50%;
             overflow: hidden;
-            background: radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%);
+            background: radial-gradient(circle at 30% 20%, #fff 0, <?= \App\Helpers\ThemeHelper::getSecondary() ?> 25%, <?= \App\Helpers\ThemeHelper::getPrimary() ?> 65%, #050509 100%);
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -731,9 +731,9 @@ if (!empty($_SESSION['user_id'])) {
             }
 
             .mobile-quick-nav a.is-active {
-                border-color: rgba(229,57,53,0.45);
-                background: rgba(229,57,53,0.18);
-                color: #ff6f60;
+                border-color: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.45);
+                background: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.18);
+                color: <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
             }
 
             body[data-theme="light"] .mobile-quick-nav a.is-active {
@@ -805,7 +805,23 @@ if (!empty($_SESSION['user_id'])) {
         <div>
             <button type="button" class="sidebar-close" id="sidebar-close" aria-label="Fechar menu">×</button>
             <div class="brand">
-                <div class="brand-logo"><img src="/public/favicon.png" alt="<?= htmlspecialchars(Branding::mascotName()) ?>" style="width:100%; height:100%; display:block; object-fit:cover;"></div>
+                <div class="brand-logo">
+                    <?php
+                    // Usar logo personalizado se configurado, senão usar favicon padrão
+                    $brandLogoUrl = '';
+                    try {
+                        $brandLogoUrl = Setting::get('brand_logo_url', '');
+                    } catch (Exception $e) {
+                        $brandLogoUrl = '';
+                    }
+                    
+                    if (!empty($brandLogoUrl)) {
+                        echo '<img src="' . htmlspecialchars($brandLogoUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars(Branding::mascotName()) . '" style="width:100%; height:100%; display:block; object-fit:cover;">';
+                    } else {
+                        echo '<img src="/public/favicon.png" alt="' . htmlspecialchars(Branding::mascotName()) . '" style="width:100%; height:100%; display:block; object-fit:cover;">';
+                    }
+                    ?>
+                </div>
                 <div>
                     <div class="brand-text-title"><?= htmlspecialchars(Branding::platformName()) ?></div>
                     <div class="brand-text-sub"><?= htmlspecialchars(Branding::slogan()) ?></div>

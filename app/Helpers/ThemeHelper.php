@@ -16,14 +16,14 @@ class ThemeHelper
         if (self::$colors === null) {
             try {
                 self::$colors = [
-                    'primary' => Setting::get('theme_color_primary', '#e53935'),
-                    'secondary' => Setting::get('theme_color_secondary', '#ff6f60'),
+                    'primary' => Setting::get('theme_color_primary', '#2196F3'),
+                    'secondary' => Setting::get('theme_color_secondary', '#FF9800'),
                     'accent' => Setting::get('theme_color_accent', '#2ecc71'),
                     'background' => Setting::get('theme_color_background', '#050509'),
                     'surface' => Setting::get('theme_color_surface', '#111118'),
                     'text' => Setting::get('theme_color_text', '#f5f5f5'),
                     'text_secondary' => Setting::get('theme_color_text_secondary', '#b0b0b0'),
-                    'button_background' => Setting::get('theme_button_background', '#e53935'),
+                    'button_background' => Setting::get('theme_button_background', '#2196F3'),
                     'button_text' => Setting::get('theme_button_text', '#ffffff'),
                     'button_border' => Setting::get('theme_button_border', 'transparent'),
                     'headline' => Setting::get('theme_headline_color', '#ffffff'),
@@ -31,14 +31,14 @@ class ThemeHelper
             } catch (\Exception $e) {
                 // Fallback para valores padrão em caso de erro
                 self::$colors = [
-                    'primary' => '#e53935',
-                    'secondary' => '#ff6f60',
+                    'primary' => '#2196F3',
+                    'secondary' => '#FF9800',
                     'accent' => '#2ecc71',
                     'background' => '#050509',
                     'surface' => '#111118',
                     'text' => '#f5f5f5',
                     'text_secondary' => '#b0b0b0',
-                    'button_background' => '#e53935',
+                    'button_background' => '#2196F3',
                     'button_text' => '#ffffff',
                     'button_border' => 'transparent',
                     'headline' => '#ffffff',
@@ -53,7 +53,7 @@ class ThemeHelper
     public static function getColor(string $key): string
     {
         self::loadColors();
-        return self::$colors[$key] ?? '#e53935';
+        return self::$colors[$key] ?? '#2196F3';
     }
 
     /**

@@ -671,12 +671,12 @@
       setStyleImportant(btn, 'border', '1px solid rgba(255,255,255,0.14)');
       if (variant === 'primary') {
         btn.style.border = 'none';
-        btn.style.background = 'linear-gradient(135deg, #e53935, #ff6f60)';
+        btn.style.background = 'linear-gradient(135deg, #2196F3, #FF9800)';
         btn.style.color = '#050509';
         btn.style.fontWeight = '750';
 
         setStyleImportant(btn, 'border', 'none');
-        setStyleImportant(btn, 'background', 'linear-gradient(135deg, #e53935, #ff6f60)');
+        setStyleImportant(btn, 'background', 'linear-gradient(135deg, #2196F3, #FF9800)');
         setStyleImportant(btn, 'color', '#050509');
       }
       if (variant === 'danger') {

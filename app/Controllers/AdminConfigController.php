@@ -98,14 +98,14 @@ class AdminConfigController extends Controller
         $brandingAll = Branding::all();
 
         // Configurações de tema/cores
-        $themeColorPrimary = Setting::get('theme_color_primary', '#e53935');
-        $themeColorSecondary = Setting::get('theme_color_secondary', '#ff6f60');
+        $themeColorPrimary = Setting::get('theme_color_primary', '#2196F3');
+        $themeColorSecondary = Setting::get('theme_color_secondary', '#FF9800');
         $themeColorAccent = Setting::get('theme_color_accent', '#2ecc71');
         $themeColorBackground = Setting::get('theme_color_background', '#050509');
         $themeColorSurface = Setting::get('theme_color_surface', '#0a0a10');
         $themeColorText = Setting::get('theme_color_text', '#f5f5f5');
         $themeColorTextSecondary = Setting::get('theme_color_text_secondary', '#b0b0b0');
-        $themeButtonBackground = Setting::get('theme_button_background', '#e53935');
+        $themeButtonBackground = Setting::get('theme_button_background', '#2196F3');
         $themeButtonBackgroundType = Setting::get('theme_button_background_type', 'gradient');
         $themeButtonText = Setting::get('theme_button_text', '#ffffff');
         $themeButtonBorder = Setting::get('theme_button_border', 'transparent');
@@ -272,9 +272,9 @@ class AdminConfigController extends Controller
                     try {
                         $mediaEndpoint = Setting::get('media_endpoint', '');
                         if ($mediaEndpoint !== '') {
-                            $uploadResult = $this->uploadToMediaEndpoint($logoTmp, $logoOriginalName, $logoMime, $mediaEndpoint);
-                            if ($uploadResult && !empty($uploadResult['url'])) {
-                                $brandLogoUrl = $uploadResult['url'];
+                            $uploadResult = MediaStorageService::uploadFile($logoTmp, $logoOriginalName, $logoMime);
+                            if ($uploadResult !== null) {
+                                $brandLogoUrl = $uploadResult;
                             }
                         }
                     } catch (\Throwable $e) {
@@ -285,14 +285,14 @@ class AdminConfigController extends Controller
         }
 
         // Configurações de tema/cores
-        $themeColorPrimary = trim((string)($_POST['theme_color_primary_text'] ?? $_POST['theme_color_primary'] ?? '#e53935'));
-        $themeColorSecondary = trim((string)($_POST['theme_color_secondary_text'] ?? $_POST['theme_color_secondary'] ?? '#ff6f60'));
+        $themeColorPrimary = trim((string)($_POST['theme_color_primary_text'] ?? $_POST['theme_color_primary'] ?? '#2196F3'));
+        $themeColorSecondary = trim((string)($_POST['theme_color_secondary_text'] ?? $_POST['theme_color_secondary'] ?? '#FF9800'));
         $themeColorAccent = trim((string)($_POST['theme_color_accent_text'] ?? $_POST['theme_color_accent'] ?? '#2ecc71'));
         $themeColorBackground = trim((string)($_POST['theme_color_background_text'] ?? $_POST['theme_color_background'] ?? '#050509'));
         $themeColorSurface = trim((string)($_POST['theme_color_surface_text'] ?? $_POST['theme_color_surface'] ?? '#0a0a10'));
         $themeColorText = trim((string)($_POST['theme_color_text_text'] ?? $_POST['theme_color_text'] ?? '#f5f5f5'));
         $themeColorTextSecondary = trim((string)($_POST['theme_color_text_secondary_text'] ?? $_POST['theme_color_text_secondary'] ?? '#b0b0b0'));
-        $themeButtonBackground = trim((string)($_POST['theme_button_background_text'] ?? $_POST['theme_button_background'] ?? '#e53935'));
+        $themeButtonBackground = trim((string)($_POST['theme_button_background_text'] ?? $_POST['theme_button_background'] ?? '#2196F3'));
         $themeButtonBackgroundType = trim((string)($_POST['theme_button_background_type'] ?? 'gradient'));
         $themeButtonText = trim((string)($_POST['theme_button_text_text'] ?? $_POST['theme_button_text'] ?? '#ffffff'));
         $themeButtonBorder = trim((string)($_POST['theme_button_border_text'] ?? $_POST['theme_button_border'] ?? 'transparent'));
@@ -503,6 +503,7 @@ class AdminConfigController extends Controller
             'brandCompanyName' => $brandCompanyName !== '' ? $brandCompanyName : Branding::defaults()['brand_company_name'],
             'brandUserAgent' => $brandUserAgent !== '' ? $brandUserAgent : Branding::defaults()['brand_user_agent'],
             'brandCommunityName' => $brandCommunityName !== '' ? $brandCommunityName : Branding::defaults()['brand_community_name'],
+            'brandLogoUrl' => $brandLogoUrl,
             'themeColorPrimary' => $themeColorPrimary,
             'themeColorSecondary' => $themeColorSecondary,
             'themeColorAccent' => $themeColorAccent,

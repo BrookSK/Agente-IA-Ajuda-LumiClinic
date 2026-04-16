@@ -198,7 +198,7 @@ $accentColor = !empty($branding['accent_color']) ? $branding['accent_color'] : '
             <?php if ($avatarPath !== ''): ?>
                 <img src="<?= htmlspecialchars($avatarPath, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8') ?>"/>
             <?php else: ?>
-                <div style="width:100%; height:100%; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%); display:flex; align-items:center; justify-content:center; font-size:40px; font-weight:700; color:#050509;">
+                <div style="width:100%; height:100%; background:radial-gradient(circle at 30% 20%, #fff 0, #64B5F6 25%, #2196F3 65%, #050509 100%); display:flex; align-items:center; justify-content:center; font-size:40px; font-weight:700; color:#050509;">
                     <?= htmlspecialchars($initial, ENT_QUOTES, 'UTF-8') ?>
                 </div>
             <?php endif; ?>

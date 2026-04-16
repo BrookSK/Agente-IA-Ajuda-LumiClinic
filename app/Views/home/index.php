@@ -1,6 +1,6 @@
 <div data-tour="home-root" style="max-width: 880px; margin: 0 auto; padding: 22px 14px 34px 14px;">
     <div style="display:flex; flex-direction:column; align-items:center; text-align:center; gap: 12px; margin-bottom: 22px;">
-        <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; border:1px solid rgba(229,57,53,0.25); background: rgba(229,57,53,0.10); color: var(--accent-soft); font-size: 12px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px; border:1px solid rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.25); background: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.10); color: var(--accent-soft); font-size: 12px;">
             <span style="opacity:0.9;">✦</span>
             <span>Nova versão disponível</span>
         </div>
@@ -127,9 +127,9 @@
         <?php foreach ($menuTiles as $tile): ?>
             <?php
                 $hot = !empty($tile['hot']);
-                $bg = $hot ? 'rgba(229,57,53,0.12)' : 'var(--surface-card)';
-                $border = $hot ? 'rgba(229,57,53,0.26)' : 'var(--border-subtle)';
-                $iconBg = $hot ? 'rgba(229,57,53,0.92)' : 'rgba(255,255,255,0.06)';
+                $bg = $hot ? 'rgba(' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) . ',' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) . ',' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) . ',0.12)' : 'var(--surface-card)';
+                $border = $hot ? 'rgba(' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) . ',' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) . ',' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) . ',0.26)' : 'var(--border-subtle)';
+                $iconBg = $hot ? 'rgba(' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) . ',' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) . ',' . hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) . ',0.92)' : 'rgba(255,255,255,0.06)';
                 $iconColor = $hot ? '#050509' : 'var(--text-primary)';
                 $labelColor = $hot ? 'var(--accent)' : 'var(--text-primary)';
             ?>
@@ -177,7 +177,7 @@
     <div data-tour="home-about" style="
         margin: 0 -14px 0 -14px;
         padding: 34px 14px;
-        background: radial-gradient(720px 320px at 50% 0%, rgba(229,57,53,0.10), transparent 55%),
+        background: radial-gradient(720px 320px at 50% 0%, rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.10), transparent 55%),
             linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
         border-top: 1px solid var(--border-subtle);
         border-bottom: 1px solid var(--border-subtle);
@@ -199,7 +199,7 @@
                 border-radius: 16px;
                 border: 1px solid var(--border-subtle);
                 overflow: hidden;
-                background: linear-gradient(135deg, rgba(229,57,53,0.22), rgba(0,0,0,0.35));
+                background: linear-gradient(135deg, rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.22), rgba(0,0,0,0.35));
                 min-height: 220px;
                 box-shadow: var(--shadow-card-strong);
                 display:flex;
@@ -213,7 +213,7 @@
                         border-radius: 999px;
                         border: none;
                         cursor: pointer;
-                        background: rgba(229,57,53,0.95);
+                        background: rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.95);
                         box-shadow: var(--shadow-accent);
                         display:flex;
                         align-items:center;
@@ -234,7 +234,7 @@
                 O <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?> é seu parceiro de jornada. Ele entende <strong style="color: var(--text-primary);">branding, vendas, gestão, redes sociais</strong> e tudo mais que você precisa para tocar seu negócio.
                 <br>
                 É como ter uma equipe inteira de especialistas, só que mais gente boa!
-                <span style="display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background:rgba(229,57,53,0.14); border:1px solid rgba(229,57,53,0.22); color: var(--accent-soft); font-size:11px; margin-top:10px;">
+                <span style="display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border-radius:999px; background:rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.14); border:1px solid rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.22); color: var(--accent-soft); font-size:11px; margin-top:10px;">
                     (e com um bico colorido)
                 </span>
             </div>
@@ -312,7 +312,7 @@
                     padding: 10px 14px;
                     border-radius: 999px;
                     border: none;
-                    background: linear-gradient(135deg, #e53935, #ff6f60);
+                    background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
                     color: #050509;
                     font-weight: 650;
                     font-size: 13px;
@@ -337,7 +337,7 @@
                     padding: 10px 14px;
                     border-radius: 999px;
                     border: none;
-                    background: linear-gradient(135deg, #e53935, #ff6f60);
+                    background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
                     color: #050509;
                     font-weight: 650;
                     font-size: 13px;
@@ -360,7 +360,7 @@
                 <div style="font-size:13px; font-weight:600; margin-bottom:2px;">Leve o <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?> pro seu celular</div>
                 <div style="font-size:12px; color:var(--text-secondary);">Instale o app na tela inicial e volte pro chat em 1 toque.</div>
             </div>
-            <button id="pwa-install-button" type="button" style="border:none; border-radius:999px; padding:8px 12px; font-size:12px; font-weight:600; cursor:pointer; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;">
+            <button id="pwa-install-button" type="button" style="border:none; border-radius:999px; padding:8px 12px; font-size:12px; font-weight:600; cursor:pointer; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:#050509;">
                 Instalar app
             </button>
         </div>
@@ -369,7 +369,7 @@
     <div style="
         margin: 0 -14px;
         padding: 34px 14px;
-        background: radial-gradient(720px 340px at 50% 0%, rgba(229,57,53,0.10), transparent 60%);
+        background: radial-gradient(720px 340px at 50% 0%, rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.10), transparent 60%);
         border-top: 1px solid rgba(255,255,255,0.06);
     ">
         <div style="text-align:center; font-size: 14px; font-weight: 800; margin-bottom: 8px;">Pronto para começar?</div>
@@ -389,12 +389,12 @@
                 padding: 10px 18px;
                 border-radius: 999px;
                 border: none;
-                background: linear-gradient(135deg, #e53935, #ff6f60);
+                background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
                 color: #050509;
                 font-weight: 650;
                 font-size: 13px;
                 cursor: pointer;
-                box-shadow: 0 10px 26px rgba(229, 57, 53, 0.35);
+                box-shadow: 0 10px 26px rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.35);
                 text-decoration: none;
             ">
                 <span>Começar um papo com o <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?></span>

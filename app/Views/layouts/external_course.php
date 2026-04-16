@@ -47,8 +47,8 @@ function esc_attr(string $s): string {
             --text-primary: #f5f5f5;
             --text-secondary: #b0b0b0;
             --border: #272727;
-            --accent: <?= $primary !== '' ? esc_attr($primary) : '#e53935' ?>;
-            --accent2: <?= $secondary !== '' ? esc_attr($secondary) : '#ff6f60' ?>;
+            --accent: <?= $primary !== '' ? esc_attr($primary) : '#2196F3' ?>;
+            --accent2: <?= $secondary !== '' ? esc_attr($secondary) : '#FF9800' ?>;
         }
         * { box-sizing: border-box; }
         body {

@@ -331,7 +331,7 @@ $createdAt = $topic['created_at'] ?? '';
             <div style="padding: 6px 12px; font-size: 11px; color: #b0b0b0; border-bottom: 1px solid #272727; display: flex; justify-content: space-between;">
                 <span>Selecione o usuário:</span>
                 <button onclick="event.stopPropagation(); this.closest('#unifiedMentionDropdown').style.display='none';" 
-                        style="background: none; border: none; color: #ff6f60; cursor: pointer; font-size: 11px;">← Voltar</button>
+                        style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 11px;">← Voltar</button>
             </div>
             ${users.map((user, idx) => 
                 `<div class="user-item" data-user-id="${user.id}" data-user-name="${user.name}" data-index="${idx}" 
@@ -389,7 +389,7 @@ $createdAt = $topic['created_at'] ?? '';
             <div style="padding: 6px 12px; font-size: 11px; color: #b0b0b0; border-bottom: 1px solid #272727; display: flex; justify-content: space-between;">
                 <span>Selecione o curso:</span>
                 <button onclick="event.stopPropagation(); this.closest('#unifiedMentionDropdown').style.display='none';" 
-                        style="background: none; border: none; color: #ff6f60; cursor: pointer; font-size: 11px;">← Voltar</button>
+                        style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 11px;">← Voltar</button>
             </div>
             ${courses.map((course, idx) => 
                 `<div class="course-item" data-course-id="${course.id}" data-index="${idx}" 
@@ -440,7 +440,7 @@ $createdAt = $topic['created_at'] ?? '';
             <div style="padding: 6px 12px; font-size: 11px; color: #b0b0b0; border-bottom: 1px solid #272727; display: flex; justify-content: space-between;">
                 <span>Selecione a aula:</span>
                 <button onclick="event.stopPropagation(); this.closest('#unifiedMentionDropdown').style.display='none';" 
-                        style="background: none; border: none; color: #ff6f60; cursor: pointer; font-size: 11px;">← Voltar</button>
+                        style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 11px;">← Voltar</button>
             </div>
             ${lessons.map((lesson, idx) => 
                 `<div class="lesson-item" data-lesson='${JSON.stringify(lesson)}' data-index="${idx}" 

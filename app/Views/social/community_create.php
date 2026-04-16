@@ -28,7 +28,7 @@ $moderatorsEmails = (string)($old['moderators_emails'] ?? '');
                 <h1 style="font-size:18px; margin-bottom:2px; color:var(--text-primary);">Criar nova comunidade</h1>
                 <p style="font-size:12px; color:var(--text-secondary); margin:0;">Monte um espaço para pessoas com os mesmos interesses, no estilo Orkut.</p>
             </div>
-            <a href="/comunidades" style="font-size:12px; color:#ff6f60; text-decoration:none;">Voltar para lista</a>
+            <a href="/comunidades" style="font-size:12px; color:#2196F3; text-decoration:none;">Voltar para lista</a>
         </div>
 
         <form action="/comunidades/criar" method="post" enctype="multipart/form-data" style="display:flex; flex-direction:column; gap:10px; font-size:13px; color:var(--text-primary);">
@@ -84,29 +84,29 @@ $moderatorsEmails = (string)($old['moderators_emails'] ?? '');
                 <div style="flex:1 1 200px; min-width:0;">
                     <div style="font-size:12px; color:var(--text-secondary); margin-bottom:3px;">Tipo de comunidade</div>
                     <label style="font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text-secondary); margin-bottom:2px;">
-                        <input type="radio" name="community_type" value="public" <?= $communityType !== 'private' ? 'checked' : '' ?> style="accent-color:#e53935;">
+                        <input type="radio" name="community_type" value="public" <?= $communityType !== 'private' ? 'checked' : '' ?> style="accent-color:#2196F3;">
                         <span>Pública (qualquer um pode solicitar participar)</span>
                     </label>
                     <label style="font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text-secondary);">
-                        <input type="radio" name="community_type" value="private" <?= $communityType === 'private' ? 'checked' : '' ?> style="accent-color:#e53935;">
+                        <input type="radio" name="community_type" value="private" <?= $communityType === 'private' ? 'checked' : '' ?> style="accent-color:#2196F3;">
                         <span>Privada (apenas com convite)</span>
                     </label>
                 </div>
                 <div style="flex:1 1 220px; min-width:0;">
                     <div style="font-size:12px; color:var(--text-secondary); margin-bottom:3px;">Privacidade do conteúdo</div>
                     <label style="font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text-secondary); margin-bottom:2px;">
-                        <input type="radio" name="posting_policy" value="any_member" <?= $postingPolicy !== 'owner_moderators' ? 'checked' : '' ?> style="accent-color:#e53935;">
+                        <input type="radio" name="posting_policy" value="any_member" <?= $postingPolicy !== 'owner_moderators' ? 'checked' : '' ?> style="accent-color:#2196F3;">
                         <span>Qualquer membro pode postar</span>
                     </label>
                     <label style="font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text-secondary);">
-                        <input type="radio" name="posting_policy" value="owner_moderators" <?= $postingPolicy === 'owner_moderators' ? 'checked' : '' ?> style="accent-color:#e53935;">
+                        <input type="radio" name="posting_policy" value="owner_moderators" <?= $postingPolicy === 'owner_moderators' ? 'checked' : '' ?> style="accent-color:#2196F3;">
                         <span>Apenas dono e moderadores postam</span>
                     </label>
                 </div>
                 <div style="flex:1 1 200px; min-width:0;">
                     <div style="font-size:12px; color:var(--text-secondary); margin-bottom:3px;">Fórum</div>
                     <label style="font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text-secondary); margin-bottom:2px;">
-                        <input type="radio" name="forum_type" value="non_anonymous" <?= $forumType !== 'anonymous' ? 'checked' : '' ?> style="accent-color:#e53935;">
+                        <input type="radio" name="forum_type" value="non_anonymous" <?= $forumType !== 'anonymous' ? 'checked' : '' ?> style="accent-color:#2196F3;">
                         <span>Não-anônimo (mostra o nome)</span>
                     </label>
                     <label style="font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text-secondary);">

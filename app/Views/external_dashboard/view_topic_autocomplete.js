@@ -104,7 +104,7 @@
         selectedIndex = 0;
         dropdown.innerHTML = `<div style="padding: 6px 12px; font-size: 11px; color: #b0b0b0; border-bottom: 1px solid #272727; display: flex; justify-content: space-between; align-items: center;">
                 <span>Selecione a aula:</span>
-                <button onclick="event.stopPropagation(); document.getElementById('lessonMentionDropdown').style.display='none';" style="background: none; border: none; color: #ff6f60; cursor: pointer; font-size: 11px;">← Voltar</button>
+                <button onclick="event.stopPropagation(); document.getElementById('lessonMentionDropdown').style.display='none';" style="background: none; border: none; color: #2196F3; cursor: pointer; font-size: 11px;">← Voltar</button>
             </div>` +
             lessons.map((lesson, idx) => 
                 `<div class="lesson-mention-item" data-lesson='${JSON.stringify(lesson)}' data-index="${idx}" style="padding: 8px 12px; cursor: pointer; font-size: 13px; color: #f5f5f5; ${idx === 0 ? 'background: #1a1a24;' : ''}">

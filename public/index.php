@@ -136,8 +136,8 @@ if ($isPartnerHost) {
             $defaultSurface = \App\Helpers\ThemeHelper::getSurface();
             $defaultTextSecondary = \App\Helpers\ThemeHelper::getTextSecondary();
         } catch (\Exception $e) {
-            $defaultPrimary = '#e53935';
-            $defaultSecondary = '#ff6f60';
+            $defaultPrimary = '#2196F3';
+            $defaultSecondary = '#FF9800';
             $defaultBackground = '#050509';
             $defaultSurface = '#111118';
             $defaultTextSecondary = '#b0b0b0';
