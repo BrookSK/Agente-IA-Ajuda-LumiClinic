@@ -153,6 +153,17 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
         Escolha quem vai te ajudar neste próximo chat.
     </p>
 
+    <!-- Debug info -->
+    <div style="background:#111118; border-radius:8px; padding:8px 10px; border:1px solid #ff6f60; font-size:11px; color:#ffcc80; margin-bottom:12px;">
+        <strong>Debug:</strong> Total personalities: <?= count($personalities ?: []) ?>
+        <?php if ($personalities): ?>
+            <br>Personalities found:
+            <?php foreach ($personalities as $p): ?>
+                <br>- <?= htmlspecialchars($p['name'] ?? 'No name') ?> (ID: <?= $p['id'] ?? 'No ID' ?>, Active: <?= isset($p['active']) ? ($p['active'] ? 'YES' : 'NO') : 'UNDEFINED' ?>)
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+
     <?php if (empty($personalities)): ?>
         <div style="background:#111118; border-radius:12px; padding:12px 14px; border:1px solid #272727; font-size:14px; color:#b0b0b0; margin-top:12px;">
             Ainda não há personalidades ativas cadastradas pelo administrador.
