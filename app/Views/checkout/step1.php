@@ -114,8 +114,8 @@ $prefillState = $savedCustomer['state'] ?? ($currentUser['billing_state'] ?? '')
                 border: none;
                 border-radius: 999px;
                 padding: 10px 20px;
-                background: linear-gradient(135deg, #e53935, #ff6f60);
-                color: #050509;
+                background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
+                color: <?= \App\Helpers\ThemeHelper::getBackground() ?>;
                 font-weight: 600;
                 font-size: 14px;
                 cursor: pointer;

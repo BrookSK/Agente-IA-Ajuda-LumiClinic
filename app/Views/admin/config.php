@@ -227,28 +227,28 @@ $knownModels = [
                     <div style="flex:1 1 200px; min-width:180px;">
                         <label style="font-size: 12px; color: #b0b0b0;">Cor primária</label>
                         <div style="display:flex; gap:6px; align-items:center;">
-                            <input name="theme_color_primary" type="color" value="<?= htmlspecialchars($themeColorPrimary ?? '#e53935') ?>" style="
+                            <input name="theme_color_primary" type="color" value="<?= htmlspecialchars($themeColorPrimary ?? '#2196F3') ?>" style="
                                 width: 40px; height: 32px; border-radius: 6px; border: 1px solid #272727;
                                 background: transparent; cursor: pointer;
                             ">
-                            <input name="theme_color_primary_text" value="<?= htmlspecialchars($themeColorPrimary ?? '#e53935') ?>" style="
+                            <input name="theme_color_primary_text" value="<?= htmlspecialchars($themeColorPrimary ?? '#2196F3') ?>" style="
                                 flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #272727;
                                 background: #050509; color: #f5f5f5; font-size: 12px;
-                            " placeholder="#e53935">
+                            " placeholder="#2196F3">
                         </div>
                         <small style="color:#777; font-size:11px;">Cor principal da marca (gradientes, destaques)</small>
                     </div>
                     <div style="flex:1 1 200px; min-width:180px;">
                         <label style="font-size: 12px; color: #b0b0b0;">Cor secundária</label>
                         <div style="display:flex; gap:6px; align-items:center;">
-                            <input name="theme_color_secondary" type="color" value="<?= htmlspecialchars($themeColorSecondary ?? '#ff6f60') ?>" style="
+                            <input name="theme_color_secondary" type="color" value="<?= htmlspecialchars($themeColorSecondary ?? '#FF9800') ?>" style="
                                 width: 40px; height: 32px; border-radius: 6px; border: 1px solid #272727;
                                 background: transparent; cursor: pointer;
                             ">
-                            <input name="theme_color_secondary_text" value="<?= htmlspecialchars($themeColorSecondary ?? '#ff6f60') ?>" style="
+                            <input name="theme_color_secondary_text" value="<?= htmlspecialchars($themeColorSecondary ?? '#FF9800') ?>" style="
                                 flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #272727;
                                 background: #050509; color: #f5f5f5; font-size: 12px;
-                            " placeholder="#ff6f60">
+                            " placeholder="#FF9800">
                         </div>
                         <small style="color:#777; font-size:11px;">Segunda cor da marca (gradientes, complementos)</small>
                     </div>
@@ -364,14 +364,14 @@ $knownModels = [
                     <div style="flex:1 1 200px; min-width:180px;">
                         <label style="font-size: 12px; color: #b0b0b0;">Cor de fundo do botão</label>
                         <div style="display:flex; gap:6px; align-items:center;">
-                            <input name="theme_button_background" type="color" value="<?= htmlspecialchars($themeButtonBackground ?? '#e53935') ?>" style="
+                            <input name="theme_button_background" type="color" value="<?= htmlspecialchars($themeButtonBackground ?? '#2196F3') ?>" style="
                                 width: 40px; height: 32px; border-radius: 6px; border: 1px solid #272727;
                                 background: transparent; cursor: pointer;
                             ">
-                            <input name="theme_button_background_text" value="<?= htmlspecialchars($themeButtonBackground ?? '#e53935') ?>" style="
+                            <input name="theme_button_background_text" value="<?= htmlspecialchars($themeButtonBackground ?? '#2196F3') ?>" style="
                                 flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #272727;
                                 background: #050509; color: #f5f5f5; font-size: 12px;
-                            " placeholder="#e53935">
+                            " placeholder="#2196F3">
                         </div>
                         <small style="color:#777; font-size:11px;">Cor principal do botão (ou primeira cor do gradiente)</small>
                     </div>

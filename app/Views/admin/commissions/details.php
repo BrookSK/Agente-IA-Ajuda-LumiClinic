@@ -81,7 +81,7 @@ $minPayout = $minPayoutCents / 100;
                 >
                 <div style="font-size:11px; color:var(--text-secondary);">Máximo disponível: <strong>R$ <?= number_format(((int)$owedCents)/100, 2, ',', '.') ?></strong></div>
             </div>
-            <button type="submit" <?= $eligible ? '' : 'disabled' ?> style="border:none; border-radius:999px; padding:9px 14px; font-weight:800; cursor:pointer; background:<?= $eligible ? 'linear-gradient(135deg,#e53935,#ff6f60)' : 'var(--surface-subtle)' ?>; color:#050509; opacity:<?= $eligible ? '1' : '0.55' ?>;">
+            <button type="submit" <?= $eligible ? '' : 'disabled' ?> style="border:none; border-radius:999px; padding:9px 14px; font-weight:800; cursor:pointer; background:<?= $eligible ? \App\Helpers\ThemeHelper::getButtonGradient() : 'var(--surface-subtle)' ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; opacity:<?= $eligible ? '1' : '0.55' ?>;">
                 Marcar como pago (<?= sprintf('%02d/%04d', (int)$month, (int)$year) ?>)
             </button>
             <?php if (!$eligible): ?>

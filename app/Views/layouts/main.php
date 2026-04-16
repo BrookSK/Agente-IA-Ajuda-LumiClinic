@@ -25,8 +25,7 @@ try {
 
 // Função helper para gerar gradiente com as cores do tema
 function getThemeGradient(): string {
-    global $themeColorPrimary, $themeColorSecondary;
-    return "linear-gradient(135deg, {$themeColorPrimary}, {$themeColorSecondary})";
+    return \App\Helpers\ThemeHelper::getButtonGradient();
 }
 
 $menuIconMap = [];
@@ -808,12 +807,7 @@ if (!empty($_SESSION['user_id'])) {
                 <div class="brand-logo">
                     <?php
                     // Usar logo personalizado se configurado, senão usar favicon padrão
-                    $brandLogoUrl = '';
-                    try {
-                        $brandLogoUrl = Setting::get('brand_logo_url', '');
-                    } catch (Exception $e) {
-                        $brandLogoUrl = '';
-                    }
+                    $brandLogoUrl = \App\Models\Branding::logoUrl();
                     
                     if (!empty($brandLogoUrl)) {
                         echo '<img src="' . htmlspecialchars($brandLogoUrl, ENT_QUOTES, 'UTF-8') . '" alt="' . htmlspecialchars(Branding::mascotName()) . '" style="width:100%; height:100%; display:block; object-fit:cover;">';

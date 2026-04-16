@@ -40,21 +40,21 @@ $publicUrl = $publicToken ? (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !=
 .mc-header h1 { font-size:22px; font-weight:700; }
 .mc-nav { display:flex; align-items:center; gap:8px; }
 .mc-nav a { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:999px; border:1px solid var(--border-subtle); background:var(--surface-card); color:var(--text-primary); font-size:16px; text-decoration:none; transition:background .15s; }
-.mc-nav a:hover { background:rgba(229,57,53,0.12); }
+.mc-nav a:hover { background:rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.12); }
 .mc-nav span { font-size:16px; font-weight:600; min-width:180px; text-align:center; }
 .mc-actions { display:flex; gap:8px; flex-wrap:wrap; }
 .mc-btn { border:none; border-radius:999px; padding:8px 16px; font-size:13px; font-weight:600; cursor:pointer; transition:filter .15s; display:inline-flex; align-items:center; gap:6px; }
-.mc-btn-primary { background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; }
+.mc-btn-primary { background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; }
 .mc-btn-secondary { background:var(--surface-card); border:1px solid var(--border-subtle); color:var(--text-primary); }
 .mc-btn:hover { filter:brightness(1.1); }
 
 .mc-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:1px; background:var(--border-subtle); border-radius:14px; overflow:hidden; border:1px solid var(--border-subtle); }
 .mc-day-header { background:var(--surface-card); padding:8px 4px; text-align:center; font-size:12px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.08em; }
 .mc-day { background:var(--bg-secondary); min-height:100px; padding:6px; position:relative; cursor:default; transition:background .12s; }
-.mc-day:hover { background:rgba(229,57,53,0.04); }
+.mc-day:hover { background:rgba(<?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 1, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 3, 2)) ?>, <?= hexdec(substr(\App\Helpers\ThemeHelper::getPrimary(), 5, 2)) ?>, 0.04); }
 .mc-day.mc-empty { background:var(--bg-main); opacity:.4; }
 .mc-day-num { font-size:13px; font-weight:600; margin-bottom:4px; color:var(--text-secondary); }
-.mc-day.mc-today .mc-day-num { background:linear-gradient(135deg,#e53935,#ff6f60); color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; }
+.mc-day.mc-today .mc-day-num { background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; }
 .mc-event { font-size:11px; padding:3px 6px; border-radius:6px; margin-bottom:3px; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#fff; font-weight:500; transition:filter .12s; }
 .mc-event:hover { filter:brightness(1.2); }
 
@@ -74,7 +74,7 @@ $publicUrl = $publicToken ? (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !=
 .mc-links-list { display:flex; flex-direction:column; gap:6px; }
 .mc-link-row { display:flex; gap:6px; align-items:center; }
 .mc-link-row input { flex:1; }
-.mc-link-remove { background:none; border:none; color:#e53935; font-size:18px; cursor:pointer; padding:0 4px; }
+.mc-link-remove { background:none; border:none; color:<?= \App\Helpers\ThemeHelper::getPrimary() ?>; font-size:18px; cursor:pointer; padding:0 4px; }
 
 /* Share panel */
 .mc-share-panel { margin-top:18px; padding:16px; border-radius:14px; border:1px solid var(--border-subtle); background:var(--surface-card); }
@@ -131,7 +131,7 @@ $publicUrl = $publicToken ? (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !=
             <div class="mc-day<?= $isToday ? ' mc-today' : '' ?>">
                 <div class="mc-day-num"><?= $d ?></div>
                 <?php foreach ($dayEvents as $ev): ?>
-                    <div class="mc-event" style="background:<?= htmlspecialchars($ev['color'] ?? '#e53935') ?>" onclick="mcShowEvent(<?= (int)$ev['id'] ?>)" title="<?= htmlspecialchars($ev['title']) ?>">
+                    <div class="mc-event" style="background:<?= htmlspecialchars($ev['color'] ?? \App\Helpers\ThemeHelper::getPrimary()) ?>" onclick="mcShowEvent(<?= (int)$ev['id'] ?>)" title="<?= htmlspecialchars($ev['title']) ?>">
                         <?= htmlspecialchars($ev['title']) ?>
                     </div>
                 <?php endforeach; ?>

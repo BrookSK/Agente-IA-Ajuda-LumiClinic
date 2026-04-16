@@ -139,7 +139,7 @@ class MarketingCalendarController extends Controller
         $eventType = trim($_POST['event_type'] ?? 'post');
         $status = trim($_POST['status'] ?? 'planejado');
         $responsible = trim($_POST['responsible'] ?? '');
-        $color = trim($_POST['color'] ?? '#e53935');
+        $color = trim($_POST['color'] ?? \App\Helpers\ThemeHelper::getPrimary());
         $notes = trim($_POST['notes'] ?? '');
         $links = $_POST['reference_links'] ?? [];
         if (is_array($links)) {
@@ -193,7 +193,7 @@ class MarketingCalendarController extends Controller
         $eventType = trim($_POST['event_type'] ?? 'post');
         $status = trim($_POST['status'] ?? 'planejado');
         $responsible = trim($_POST['responsible'] ?? '');
-        $color = trim($_POST['color'] ?? '#e53935');
+        $color = trim($_POST['color'] ?? \App\Helpers\ThemeHelper::getPrimary());
         $notes = trim($_POST['notes'] ?? '');
         $links = $_POST['reference_links'] ?? [];
         if (is_array($links)) {

@@ -744,7 +744,7 @@ class AdminCourseController extends Controller
       </div>
 
       <p style="font-size:12px; color:#777; margin:8px 0 0 0;">Se o botão não funcionar, copie e cole este link no navegador:<br>
-        <a href="{$safeCourseUrl}" style="color:#ff6f60; text-decoration:none;">{$safeCourseUrl}</a>
+        <a href="{$safeCourseUrl}" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">{$safeCourseUrl}</a>
       </p>
     </div>
   </div>
@@ -961,7 +961,7 @@ HTML;
       </div>
 
       <p style="font-size:12px; color:#777; margin:8px 0 0 0;">Se o botão não funcionar, copie e cole este link no navegador:<br>
-        <a href="{$safeCourseUrl}" style="color:#ff6f60; text-decoration:none;">{$safeCourseUrl}</a>
+        <a href="{$safeCourseUrl}" style="color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">{$safeCourseUrl}</a>
       </p>
     </div>
   </div>

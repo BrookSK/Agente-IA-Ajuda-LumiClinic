@@ -40,7 +40,7 @@
                             <?= htmlspecialchars($label, ENT_QUOTES, 'UTF-8') ?>
                             <span style="font-weight:400; font-size:12px; color:var(--text-secondary);">(<?= htmlspecialchars($key, ENT_QUOTES, 'UTF-8') ?>)</span>
                         </div>
-                        <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:650; font-size:12px; cursor:pointer;">Salvar</button>
+                        <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:650; font-size:12px; cursor:pointer;">Salvar</button>
                     </div>
 
                     <div style="display:flex; gap:12px; flex-wrap:wrap;">
@@ -52,7 +52,7 @@
                                     <div style="font-size:11px; color:var(--text-secondary); word-break:break-all;"><?= htmlspecialchars((string)$dark, ENT_QUOTES, 'UTF-8') ?></div>
                                 </div>
                                 <label style="font-size:11px; color:var(--text-secondary); display:flex; align-items:center; gap:6px;">
-                                    <input type="checkbox" name="clear_dark" value="1" style="accent-color:#e53935;"> Remover ícone escuro
+                                    <input type="checkbox" name="clear_dark" value="1" style="accent-color:<?= \App\Helpers\ThemeHelper::getPrimary() ?>;"> Remover ícone escuro
                                 </label>
                             <?php endif; ?>
                             <input type="file" name="dark_file" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="width:100%; font-size:12px; color:var(--text-secondary);">
@@ -66,7 +66,7 @@
                                     <div style="font-size:11px; color:var(--text-secondary); word-break:break-all;"><?= htmlspecialchars((string)$light, ENT_QUOTES, 'UTF-8') ?></div>
                                 </div>
                                 <label style="font-size:11px; color:var(--text-secondary); display:flex; align-items:center; gap:6px;">
-                                    <input type="checkbox" name="clear_light" value="1" style="accent-color:#e53935;"> Remover ícone claro
+                                    <input type="checkbox" name="clear_light" value="1" style="accent-color:<?= \App\Helpers\ThemeHelper::getPrimary() ?>;"> Remover ícone claro
                                 </label>
                             <?php endif; ?>
                             <input type="file" name="light_file" accept="image/png,image/jpeg,image/webp,image/svg+xml" style="width:100%; font-size:12px; color:var(--text-secondary);">

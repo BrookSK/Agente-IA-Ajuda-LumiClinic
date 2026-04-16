@@ -11,8 +11,8 @@
         <a href="/admin/personalidades/novo" style="
             display:inline-flex; align-items:center; gap:6px;
             border-radius:999px; padding:7px 12px;
-            background:linear-gradient(135deg,#e53935,#ff6f60);
-            color:#050509; font-size:13px; font-weight:600; text-decoration:none;">
+            background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
+            color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:13px; font-weight:600; text-decoration:none;">
             <span>+ Nova personalidade</span>
         </a>
 
@@ -97,9 +97,9 @@
                         </td>
                         <td style="padding:8px 10px;">
                             <?php if ($isDefault): ?>
-                                <span style="display:inline-flex; align-items:center; gap:4px; border-radius:999px; padding:2px 8px; font-size:11px; background:#201216; color:#ffcc80; border:1px solid #ff6f60;">Padrão</span>
+                                <span style="display:inline-flex; align-items:center; gap:4px; border-radius:999px; padding:2px 8px; font-size:11px; background:#201216; color:#ffcc80; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;">Padrão</span>
                             <?php else: ?>
-                                <a href="/admin/personalidades/padrao?id=<?= (int)$p['id'] ?>" style="font-size:11px; color:#ff6f60; text-decoration:none;">Definir como padrão</a>
+                                <a href="/admin/personalidades/padrao?id=<?= (int)$p['id'] ?>" style="font-size:11px; color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">Definir como padrão</a>
                             <?php endif; ?>
                         </td>
                         <td style="padding:8px 10px;">
@@ -115,14 +115,14 @@
                                 <span style="
                                     display:inline-flex; align-items:center; gap:4px;
                                     border-radius:999px; padding:2px 8px; font-size:11px;
-                                    background:#201216; color:#ffcc80; border:1px solid #ff6f60;
+                                    background:#201216; color:#ffcc80; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
                                     margin-left:6px;">
                                     Em breve
                                 </span>
                             <?php endif; ?>
                         </td>
                         <td style="padding:8px 10px; text-align:right; white-space:nowrap;">
-                            <a href="/admin/personalidades/editar?id=<?= (int)$p['id'] ?>" style="margin-right:6px; color:#ff6f60; text-decoration:none;">Editar</a>
+                            <a href="/admin/personalidades/editar?id=<?= (int)$p['id'] ?>" style="margin-right:6px; color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">Editar</a>
                             <a href="/admin/personalidades/ativar?id=<?= (int)$p['id'] ?>&v=<?= $active ? '0' : '1' ?>" style="color:#b0b0b0; text-decoration:none; font-size:12px;">
                                 <?= $active ? 'Desativar' : 'Ativar' ?>
                             </a>

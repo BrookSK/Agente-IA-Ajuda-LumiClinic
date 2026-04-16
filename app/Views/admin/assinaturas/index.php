@@ -14,7 +14,7 @@
             <option value="expired" <?= $status === 'expired' ? 'selected' : '' ?>>Expirada</option>
             <option value="error" <?= $status === 'error' ? 'selected' : '' ?>>Erro</option>
         </select>
-        <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:13px; font-weight:600; cursor:pointer;">Aplicar</button>
+        <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:13px; font-weight:600; cursor:pointer;">Aplicar</button>
     </form>
 
     <table style="width:100%; border-collapse:collapse; font-size:13px; background:var(--surface-card); border-radius:12px; overflow:hidden; border:1px solid var(--border-subtle);">

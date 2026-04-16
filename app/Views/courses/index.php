@@ -71,8 +71,8 @@
         line-height: 1;
     }
     .course-filter-tab.is-active {
-        background: linear-gradient(135deg, #e53935, #ff6f60);
-        color: #050509;
+        background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
+        color: <?= \App\Helpers\ThemeHelper::getBackground() ?>;
     }
 </style>
 <?php $filter = isset($filter) ? (string)$filter : 'all'; ?>

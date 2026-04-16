@@ -94,11 +94,11 @@ $backgroundImageUrl = trim((string)($branding['background_image_url'] ?? ''));
         <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:12px;">
             <div style="flex:1 1 200px;">
                 <label style="font-size:13px; color:var(--text-primary); display:block; margin-bottom:4px;">Cor base (HEX)</label>
-                <input type="text" name="primary_color" value="<?= htmlspecialchars($primary, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="#e53935" style="width:100%; padding:9px 10px; border-radius:10px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:13px;">
+                <input type="text" name="primary_color" value="<?= htmlspecialchars($primary, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="#2196F3" style="width:100%; padding:9px 10px; border-radius:10px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:13px;">
             </div>
             <div style="flex:1 1 200px;">
                 <label style="font-size:13px; color:var(--text-primary); display:block; margin-bottom:4px;">Cor secundária (HEX)</label>
-                <input type="text" name="secondary_color" value="<?= htmlspecialchars($secondary, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="#ff6f60" style="width:100%; padding:9px 10px; border-radius:10px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:13px;">
+                <input type="text" name="secondary_color" value="<?= htmlspecialchars($secondary, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" placeholder="#FF9800" style="width:100%; padding:9px 10px; border-radius:10px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:13px;">
             </div>
         </div>
 

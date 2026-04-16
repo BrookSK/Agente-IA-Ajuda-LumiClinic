@@ -4,7 +4,7 @@
 <div style="max-width: 800px; margin: 0 auto;">
     <h1 style="font-size: 22px; margin-bottom: 10px;">Detalhes do relato de erro</h1>
 
-    <a href="/admin/erros" style="font-size:12px; color:#ff6f60; text-decoration:none;">⟵ Voltar para lista</a>
+    <a href="/admin/erros" style="font-size:12px; color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">⟵ Voltar para lista</a>
 
     <div style="margin-top:14px; padding:14px 16px; border-radius:12px; background:#111118; border:1px solid #272727;">
         <p style="font-size:13px; margin-bottom:4px;"><strong>ID do relato:</strong> #<?= (int)$report['id'] ?></p>

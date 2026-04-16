@@ -14,7 +14,7 @@
 <div style="max-width: 800px; margin: 0 auto;">
     <h1 style="font-size: 22px; margin-bottom: 16px;">Detalhes do usuário</h1>
 
-    <a href="/admin/usuarios" style="font-size:12px; color:#ff6f60; text-decoration:none;">⟵ Voltar para lista</a>
+    <a href="/admin/usuarios" style="font-size:12px; color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">⟵ Voltar para lista</a>
 
     <?php if (!empty($error)): ?>
         <div style="margin-top:12px; background:#311; border:1px solid #a33; color:#ffbaba; padding:8px 10px; border-radius:10px; font-size:13px;">
@@ -239,7 +239,7 @@
                     <div style="position:relative;">
                         <?php
                             $dot = '#64b5f6';
-                            if ($type === 'subscription') { $dot = '#ff6f60'; }
+                            if ($type === 'subscription') { $dot = \App\Helpers\ThemeHelper::getSecondary(); }
                             elseif ($type === 'token_tx') { $dot = '#ffcc80'; }
                             elseif ($type === 'referral') { $dot = '#ba68c8'; }
                             elseif ($type === 'trial_end') { $dot = '#8bc34a'; }

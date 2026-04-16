@@ -17,6 +17,7 @@ class Branding
         'brand_company_name'     => 'Nuvem Labs',
         'brand_user_agent'       => 'TuquinhaApp',
         'brand_community_name'   => 'Comunidade do Tuquinha',
+        'brand_logo_url'         => '',
     ];
 
     private static function load(): void
@@ -81,6 +82,11 @@ class Branding
     public static function communityName(): string
     {
         return self::get('brand_community_name');
+    }
+
+    public static function logoUrl(): string
+    {
+        return self::get('brand_logo_url');
     }
 
     public static function mascotInitials(): string

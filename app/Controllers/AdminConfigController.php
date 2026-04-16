@@ -270,12 +270,9 @@ class AdminConfigController extends Controller
                 $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'];
                 if (in_array($logoMime, $allowedMimes, true)) {
                     try {
-                        $mediaEndpoint = Setting::get('media_endpoint', '');
-                        if ($mediaEndpoint !== '') {
-                            $uploadResult = MediaStorageService::uploadFile($logoTmp, $logoOriginalName, $logoMime);
-                            if ($uploadResult !== null) {
-                                $brandLogoUrl = $uploadResult;
-                            }
+                        $uploadResult = MediaStorageService::uploadFile($logoTmp, $logoOriginalName, $logoMime);
+                        if ($uploadResult !== null) {
+                            $brandLogoUrl = $uploadResult;
                         }
                     } catch (\Throwable $e) {
                         // Se falhar o upload, mantém a URL atual
@@ -438,6 +435,9 @@ class AdminConfigController extends Controller
         if (class_exists('App\\Helpers\\ThemeHelper')) {
             \App\Helpers\ThemeHelper::clearCache();
         }
+
+        // Limpar cache do branding
+        \App\Models\Branding::clearCache();
 
         // Salva configuração Asaas (linha única)
         $pdo->exec("INSERT INTO asaas_configs (id, environment, sandbox_api_key, production_api_key)

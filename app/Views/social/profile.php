@@ -166,7 +166,7 @@ $profileId = (int)($profileUser['id'] ?? 0);
                         </button>
                     </form>
                     <a href="/social/chat?user_id=<?= (int)$profileId ?>" style="display:block; text-align:center; font-size:12px; color:#050509; text-decoration:none; margin-top:4px;">
-                        <span style="display:inline-block; padding:6px 12px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); font-weight:600;">Abrir chat privado</span>
+                        <span style="display:inline-block; padding:6px 12px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; font-weight:600;">Abrir chat privado</span>
                     </a>
                 <?php elseif ($friendStatus === 'pending' && $requestedById === $currentId): ?>
                     <div style="font-size:12px; color:#ffb74d; background:var(--surface-subtle); border-radius:10px; border:1px solid var(--border-subtle); padding:6px 8px; text-align:center;">
@@ -251,7 +251,7 @@ $profileId = (int)($profileUser['id'] ?? 0);
             </a>
 
             <a href="/perfil/portfolio?user_id=<?= (int)$profileId ?>" style="display:block; text-align:center; font-size:12px; color:#050509; text-decoration:none; margin-top:8px;">
-                <span style="display:inline-block; width:100%; padding:8px 12px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); font-weight:650;">Ver portfólio</span>
+                <span style="display:inline-block; width:100%; padding:8px 12px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; font-weight:650;">Ver portfólio</span>
             </a>
         </section>
 
@@ -668,7 +668,7 @@ $profileId = (int)($profileUser['id'] ?? 0);
                 <form action="/perfil/scrap" method="post" style="margin-bottom:10px; display:flex; flex-direction:column; gap:6px;">
                     <input type="hidden" name="to_user_id" value="<?= (int)$profileId ?>">
                     <textarea name="body" rows="3" placeholder="Escreva um scrap carinhoso, uma dúvida ou um oi nostálgico..." style="width:100%; padding:8px 10px; border-radius:10px; border:1px solid var(--border-subtle); background:var(--surface-subtle); color:var(--text-primary); font-size:13px; resize:vertical;"></textarea>
-                    <button type="submit" style="align-self:flex-end; border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:12px; cursor:pointer;">Enviar scrap</button>
+                    <button type="submit" style="align-self:flex-end; border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:12px; cursor:pointer;">Enviar scrap</button>
                 </form>
             <?php endif; ?>
 

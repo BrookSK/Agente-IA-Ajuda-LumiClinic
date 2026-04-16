@@ -174,7 +174,7 @@ class ApiMarketingCalendarController
         $eventType = trim((string)($input['event_type'] ?? 'post'));
         $status = trim((string)($input['status'] ?? 'planejado'));
         $responsible = trim((string)($input['responsible'] ?? ''));
-        $color = trim((string)($input['color'] ?? '#e53935'));
+        $color = trim((string)($input['color'] ?? \App\Helpers\ThemeHelper::getPrimary()));
         $notes = trim((string)($input['notes'] ?? ''));
         $links = isset($input['reference_links']) && is_array($input['reference_links'])
             ? array_values(array_filter(array_map('trim', $input['reference_links'])))

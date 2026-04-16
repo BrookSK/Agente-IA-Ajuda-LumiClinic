@@ -4,14 +4,14 @@
 <div style="max-width: 900px; margin: 0 auto;">
     <h1 style="font-size: 22px; margin-bottom: 10px;">Relatos de erros de análise</h1>
 
-    <a href="/admin" style="font-size:12px; color:#ff6f60; text-decoration:none;">⟵ Voltar para o painel</a>
+    <a href="/admin" style="font-size:12px; color:<?= \App\Helpers\ThemeHelper::getSecondary() ?>; text-decoration:none;">⟵ Voltar para o painel</a>
 
     <div style="margin-top:12px; margin-bottom:10px; display:flex; gap:8px; align-items:center; font-size:13px; color:#b0b0b0;">
         <span>Filtrar por status:</span>
-        <a href="/admin/erros" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === '' ? '#ff6f60' : '#272727' ?>; color:<?= $statusFilter === '' ? '#ffcc80' : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Todos</a>
-        <a href="/admin/erros?status=open" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === 'open' ? '#ff6f60' : '#272727' ?>; color:<?= $statusFilter === 'open' ? '#ffcc80' : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Abertos</a>
-        <a href="/admin/erros?status=resolved" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === 'resolved' ? '#ff6f60' : '#272727' ?>; color:<?= $statusFilter === 'resolved' ? '#ffcc80' : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Resolvidos</a>
-        <a href="/admin/erros?status=dismissed" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === 'dismissed' ? '#ff6f60' : '#272727' ?>; color:<?= $statusFilter === 'dismissed' ? '#ffcc80' : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Descartados</a>
+        <a href="/admin/erros" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === '' ? \App\Helpers\ThemeHelper::getSecondary() : '#272727' ?>; color:<?= $statusFilter === '' ? \App\Helpers\ThemeHelper::getSecondary() : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Todos</a>
+        <a href="/admin/erros?status=open" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === 'open' ? \App\Helpers\ThemeHelper::getSecondary() : '#272727' ?>; color:<?= $statusFilter === 'open' ? \App\Helpers\ThemeHelper::getSecondary() : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Abertos</a>
+        <a href="/admin/erros?status=resolved" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === 'resolved' ? \App\Helpers\ThemeHelper::getSecondary() : '#272727' ?>; color:<?= $statusFilter === 'resolved' ? \App\Helpers\ThemeHelper::getSecondary() : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Resolvidos</a>
+        <a href="/admin/erros?status=dismissed" style="padding:3px 8px; border-radius:999px; border:1px solid <?= $statusFilter === 'dismissed' ? \App\Helpers\ThemeHelper::getSecondary() : '#272727' ?>; color:<?= $statusFilter === 'dismissed' ? \App\Helpers\ThemeHelper::getSecondary() : '#b0b0b0' ?>; text-decoration:none; font-size:12px;">Descartados</a>
     </div>
 
     <?php if (empty($reports)): ?>
