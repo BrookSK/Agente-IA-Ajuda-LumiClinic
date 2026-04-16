@@ -587,6 +587,10 @@ class AdminConfigController extends Controller
 
         $tuquinhaAboutVideoUrl = Setting::get('tuquinha_about_video_url', '');
 
+        $nanoBananaProApiKey = Setting::get('nano_banana_pro_api_key', '');
+        $nanoBananaProEndpoint = Setting::get('nano_banana_pro_endpoint', '');
+        $nanoBananaProModel = Setting::get('nano_banana_pro_model', 'nano-banana-pro');
+
         $certificateIssuerName = Setting::get('certificate_issuer_name', 'Thiago Marques');
         $certificateSignatureImagePath = Setting::get('certificate_signature_image_path', '');
 
@@ -601,6 +605,33 @@ class AdminConfigController extends Controller
         $asaas = AsaasConfig::getActive();
 
         $brandingAll = Branding::all();
+
+        // Configurações de tema/cores
+        $themeColorPrimary = Setting::get('theme_color_primary', '#2196F3');
+        $themeColorSecondary = Setting::get('theme_color_secondary', '#FF9800');
+        $themeColorAccent = Setting::get('theme_color_accent', '#2ecc71');
+        $themeColorBackground = Setting::get('theme_color_background', '#050509');
+        $themeColorSurface = Setting::get('theme_color_surface', '#0a0a10');
+        $themeColorText = Setting::get('theme_color_text', '#f5f5f5');
+        $themeColorTextSecondary = Setting::get('theme_color_text_secondary', '#b0b0b0');
+        $themeButtonBackground = Setting::get('theme_button_background', '#2196F3');
+        $themeButtonBackgroundType = Setting::get('theme_button_background_type', 'gradient');
+        $themeButtonText = Setting::get('theme_button_text', '#ffffff');
+        $themeButtonBorder = Setting::get('theme_button_border', 'transparent');
+        $themeHeadlineColor = Setting::get('theme_headline_color', '#ffffff');
+        $themeFontFamily = Setting::get('theme_font_family', 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif');
+
+        // URLs do Perplexity
+        $perplexitySearchUrls = Setting::get('perplexity_search_urls', '');
+
+        // Variáveis adicionais necessárias para a view
+        $newsFetchTimesPerDay = (int)Setting::get('news_fetch_times_per_day', '2');
+        if ($newsFetchTimesPerDay < 1) {
+            $newsFetchTimesPerDay = 1;
+        }
+        if ($newsFetchTimesPerDay > 48) {
+            $newsFetchTimesPerDay = 48;
+        }
 
         $status = null;
         $error = null;
@@ -627,6 +658,7 @@ class AdminConfigController extends Controller
             'perplexityModel' => $perplexityModel,
             'newsCronToken' => $newsCronToken,
             'appPublicUrl' => $appPublicUrl,
+            'newsFetchTimesPerDay' => $newsFetchTimesPerDay,
             'transcriptionModel' => $transcriptionModel,
             'systemPrompt' => $systemPrompt,
             'systemPromptExtra' => $systemPromptExtra,
@@ -650,6 +682,9 @@ class AdminConfigController extends Controller
             'mediaVideoEndpoint' => $mediaVideoEndpoint,
             'textExtractionEndpoint' => $textExtractionEndpoint,
             'tuquinhaAboutVideoUrl' => $tuquinhaAboutVideoUrl,
+            'nanoBananaProApiKey' => $nanoBananaProApiKey,
+            'nanoBananaProEndpoint' => $nanoBananaProEndpoint,
+            'nanoBananaProModel' => $nanoBananaProModel,
             'certificateIssuerName' => $certificateIssuerName,
             'certificateSignatureImagePath' => $certificateSignatureImagePath,
             'coursePartnerMinPayoutCents' => $coursePartnerMinPayoutCents,
@@ -666,6 +701,21 @@ class AdminConfigController extends Controller
             'brandCompanyName' => $brandingAll['brand_company_name'],
             'brandUserAgent' => $brandingAll['brand_user_agent'],
             'brandCommunityName' => $brandingAll['brand_community_name'],
+            'brandLogoUrl' => $brandingAll['brand_logo_url'] ?? '',
+            'themeColorPrimary' => $themeColorPrimary,
+            'themeColorSecondary' => $themeColorSecondary,
+            'themeColorAccent' => $themeColorAccent,
+            'themeColorBackground' => $themeColorBackground,
+            'themeColorSurface' => $themeColorSurface,
+            'themeColorText' => $themeColorText,
+            'themeColorTextSecondary' => $themeColorTextSecondary,
+            'themeButtonBackground' => $themeButtonBackground,
+            'themeButtonBackgroundType' => $themeButtonBackgroundType,
+            'themeButtonText' => $themeButtonText,
+            'themeButtonBorder' => $themeButtonBorder,
+            'themeHeadlineColor' => $themeHeadlineColor,
+            'themeFontFamily' => $themeFontFamily,
+            'perplexitySearchUrls' => $perplexitySearchUrls,
             'saved' => false,
             'testEmailStatus' => $status,
             'testEmailError' => $error,

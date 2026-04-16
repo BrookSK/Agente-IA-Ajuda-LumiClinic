@@ -30,6 +30,7 @@
 /** @var string $googleRefreshToken */
 /** @var string $googleCalendarId */
 /** @var string $mediaEndpoint */
+/** @var string $mediaVideoEndpoint */
 /** @var string $textExtractionEndpoint */
 /** @var string $tuquinhaAboutVideoUrl */
 /** @var string $nanoBananaProApiKey */
@@ -51,6 +52,7 @@
 /** @var string $brandCompanyName */
 /** @var string $brandUserAgent */
 /** @var string $brandCommunityName */
+/** @var string $brandLogoUrl */
 /** @var string $themeColorPrimary */
 /** @var string $themeColorSecondary */
 /** @var string $themeColorAccent */
