@@ -164,22 +164,6 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
         </div>
     <?php else: ?>
         <?php
-        // Filter out inactive personalities
-        $activePersonalities = array_filter($personalities, function($persona) {
-            return !empty($persona['active']);
-        });
-        ?>
-        <?php if (empty($activePersonalities)): ?>
-            <div style="background:#111118; border-radius:12px; padding:12px 14px; border:1px solid #272727; font-size:14px; color:#b0b0b0; margin-top:12px;">
-                Ainda não há personalidades ativas cadastradas pelo administrador.
-                <br><br>
-                <a href="/chat?new=1" style="display:inline-flex; align-items:center; gap:6px; margin-top:4px; border-radius:999px; padding:7px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:13px; font-weight:600; text-decoration:none;">
-                    <span>Ir para o chat</span>
-                    <span>➤</span>
-                </a>
-            </div>
-        <?php else: ?>
-        <?php
         $hasMb = function_exists('mb_substr') && function_exists('mb_strlen');
         ?>
         <div class="persona-stage">
@@ -412,6 +396,5 @@ document.addEventListener('DOMContentLoaded', function () {
     selectIndex(currentIndex);
 });
 </script>
-        <?php endif; ?>
     <?php endif; ?>
 </div>
