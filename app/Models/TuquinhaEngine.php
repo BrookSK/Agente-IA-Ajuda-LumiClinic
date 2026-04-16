@@ -1005,6 +1005,9 @@ class TuquinhaEngine
                 $personaLines[] = 'SEU NOME NESTE CHAT É "' . $personaName . '". Quando o usuário perguntar "qual o seu nome?", responda apenas com esse nome. Não diga que seu nome é "Tuquinha" (a menos que a personalidade se chame exatamente "Tuquinha").';
             }
 
+            // Process reference documents - now handled in ChatController via message injection
+            // This ensures consistency with how project files are processed
+
             // Handoff por área: quando a pergunta não for do seu domínio, oriente o usuário a abrir um chat com a personalidade correta.
             $otherPersonas = [];
             try {

@@ -14,6 +14,7 @@ use App\Models\ConversationSetting;
 use App\Models\Personality;
 use App\Services\MediaStorageService;
 use App\Services\NanoBananaProService;
+use App\Services\TextExtractionService;
 use App\Models\ProjectMember;
 use App\Models\ProjectFile;
 use App\Models\ProjectFileVersion;
@@ -1899,9 +1900,149 @@ class ChatController extends Controller
                 // O conteúdo dos arquivos vai direto na mensagem do usuário abaixo
             }
 
+            // === PROCESSAMENTO DOS DOCUMENTOS DE REFERÊNCIA DA PERSONALIDADE ===
+            $personalityReferenceTexts = [];
+            if (!empty($conversation->persona_id)) {
+                $currentPersona = Personality::findById((int)$conversation->persona_id);
+                if ($currentPersona && !empty($currentPersona['reference_documents'])) {
+                    $referenceDocumentsJson = $currentPersona['reference_documents'];
+                    $referenceDocuments = json_decode($referenceDocumentsJson, true);
+                    
+                    if (is_array($referenceDocuments) && !empty($referenceDocuments)) {
+                        $maxTotalChars = 40000; // Limite para documentos de referência
+                        $currentChars = 0;
+                        
+                        foreach ($referenceDocuments as $doc) {
+                            if (!is_array($doc)) {
+                                continue;
+                            }
+                            
+                            $docName = $doc['name'] ?? 'Documento';
+                            $docPath = $doc['path'] ?? '';
+                            $docType = $doc['type'] ?? '';
+                            
+                            if ($docPath === '') {
+                                continue;
+                            }
+                            
+                            // Converte caminho relativo para absoluto
+                            $fullPath = __DIR__ . '/../../public' . $docPath;
+                            if (!file_exists($fullPath) || !is_readable($fullPath)) {
+                                continue;
+                            }
+                            
+                            $extractedText = '';
+                            
+                            try {
+                                // Processa diferentes tipos de arquivo
+                                switch (strtolower($docType)) {
+                                    case 'txt':
+                                    case 'md':
+                                        $extractedText = @file_get_contents($fullPath);
+                                        if ($extractedText !== false) {
+                                            $extractedText = trim($extractedText);
+                                        }
+                                        break;
+                                        
+                                    case 'pdf':
+                                        // Tenta usar TextExtractionService primeiro
+                                        $extractedText = TextExtractionService::extractFromFile($fullPath, $docName, 'application/pdf');
+                                        
+                                        // Fallback para pdftotext se TextExtractionService falhar
+                                        if ($extractedText === null || trim($extractedText) === '') {
+                                            $tempTxt = tempnam(sys_get_temp_dir(), 'pdf_extract_');
+                                            $command = 'pdftotext -layout ' . escapeshellarg($fullPath) . ' ' . escapeshellarg($tempTxt) . ' 2>/dev/null';
+                                            @shell_exec($command);
+                                            
+                                            if (file_exists($tempTxt) && filesize($tempTxt) > 0) {
+                                                $extractedText = @file_get_contents($tempTxt);
+                                                @unlink($tempTxt);
+                                            }
+                                        }
+                                        break;
+                                        
+                                    case 'doc':
+                                    case 'docx':
+                                        // Usa TextExtractionService para documentos Office
+                                        $mimeType = $docType === 'docx' 
+                                            ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+                                            : 'application/msword';
+                                        $extractedText = TextExtractionService::extractFromFile($fullPath, $docName, $mimeType);
+                                        break;
+                                        
+                                    default:
+                                        // Para tipos desconhecidos, tenta TextExtractionService
+                                        $extractedText = TextExtractionService::extractFromFile($fullPath, $docName);
+                                        break;
+                                }
+                            } catch (\Throwable $e) {
+                                // Continua para o próximo documento se a extração falhar
+                                continue;
+                            }
+                            
+                            if (!is_string($extractedText) || trim($extractedText) === '') {
+                                continue;
+                            }
+                            
+                            $extractedText = trim($extractedText);
+                            
+                            // Limpa o texto
+                            $extractedText = str_replace(["\r\n", "\r"], "\n", $extractedText);
+                            $extractedText = preg_replace('/\n{3,}/', "\n\n", $extractedText); // Reduz múltiplas quebras de linha
+                            
+                            // Verifica limite de caracteres
+                            $textLength = mb_strlen($extractedText, 'UTF-8');
+                            $remaining = $maxTotalChars - $currentChars;
+                            
+                            if ($remaining <= 0) {
+                                break; // Sem mais espaço para documentos
+                            }
+                            
+                            if ($textLength > $remaining) {
+                                $extractedText = mb_substr($extractedText, 0, $remaining, 'UTF-8') . "\n\n[...documento truncado por limite de contexto...]";
+                                $textLength = $remaining;
+                            }
+                            
+                            $personalityReferenceTexts[] = "=== DOCUMENTO DE REFERÊNCIA: {$docName} ===\n{$extractedText}";
+                            $currentChars += $textLength;
+                            
+                            if ($currentChars >= $maxTotalChars) {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             // === INJEÇÃO DO CONTEÚDO DOS ARQUIVOS NA ÚLTIMA MENSAGEM DO USUÁRIO ===
             $projectContextForEngine = null;
-            if (!empty($conversation->project_id) && !empty($projectFileTexts) && is_array($projectFileTexts) && !empty($projectFileTexts)) {
+            
+            // Prioridade 1: Documentos de referência da personalidade (sempre aplicados quando existem)
+            if (!empty($personalityReferenceTexts) && is_array($personalityReferenceTexts)) {
+                $referenceContentBlock = implode("\n\n", $personalityReferenceTexts);
+                
+                $injectedContent = "ATENÇÃO: Você tem acesso aos seguintes documentos de referência da sua personalidade.\n"
+                    . "REGRA IMPORTANTE: Use essas informações como base de conhecimento para suas respostas quando relevante.\n"
+                    . "Combine o conhecimento dos documentos com sua expertise na área para dar respostas completas e precisas.\n"
+                    . "Se a pergunta do usuário se relacionar com o conteúdo dos documentos, cite as informações relevantes.\n\n"
+                    . $referenceContentBlock
+                    . "\n\nPERGUNTA DO USUÁRIO:\n"
+                    . $message;
+                
+                // Substitui a última mensagem do usuário no histórico
+                $lastIdx = null;
+                for ($hi = count($historyForEngine) - 1; $hi >= 0; $hi--) {
+                    if (($historyForEngine[$hi]['role'] ?? '') === 'user') {
+                        $lastIdx = $hi;
+                        break;
+                    }
+                }
+                if ($lastIdx !== null) {
+                    $historyForEngine[$lastIdx]['content'] = $injectedContent;
+                }
+            }
+            // Prioridade 2: Arquivos do projeto (se não houver documentos de referência da personalidade)
+            elseif (!empty($conversation->project_id) && !empty($projectFileTexts) && is_array($projectFileTexts) && !empty($projectFileTexts)) {
                 $fileContentBlock = implode("\n\n", $projectFileTexts);
                 $memoriesBlock = '';
                 if (!empty($memoryLines)) {
