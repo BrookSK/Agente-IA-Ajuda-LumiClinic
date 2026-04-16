@@ -215,6 +215,24 @@ $knownModels = [
             </div>
         </div>
 
+        <div style="padding:14px 16px; border-radius:12px; border:1px solid #4caf50; background:linear-gradient(135deg, #0a180a 0%, #112811 100%);">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+                <span style="font-size:18px;">🤖</span>
+                <h3 style="margin:0; font-size:16px; font-weight:650; color:#f5f5f5;">Configurações de Personalidades</h3>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <div style="flex:1 1 220px; min-width:200px;">
+                        <label style="display:flex; align-items:center; gap:6px; font-size: 12px; color: #b0b0b0;">
+                            <input type="checkbox" name="show_default_personality_option" value="1" <?= (Setting::get('show_default_personality_option', '1') === '1') ? 'checked' : '' ?> style="margin:0;">
+                            Mostrar opção "Padrão do <?= htmlspecialchars($brandMascotName ?? 'Tuquinha') ?>"
+                        </label>
+                        <small style="color:#777; font-size:11px;">Se desmarcado, remove a opção padrão da tela de seleção de personalidades.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div style="padding:14px 16px; border-radius:12px; border:1px solid #3949ab; background:linear-gradient(135deg, #0a0a18 0%, #111128 100%);">
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                 <span style="font-size:18px;">🎨</span>

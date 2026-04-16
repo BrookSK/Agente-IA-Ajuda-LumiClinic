@@ -6,7 +6,6 @@ use App\Core\Controller;
 use App\Models\Personality;
 use App\Models\Plan;
 use App\Models\Setting;
-use App\Models\Setting;
 
 class AdminPersonalityController extends Controller
 {

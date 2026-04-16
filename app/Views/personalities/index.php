@@ -1,6 +1,9 @@
 <?php
 /** @var array $personalities */
 /** @var int|null $conversationId */
+
+use App\Models\Setting;
+
 $conversationId = isset($conversationId) ? (int)$conversationId : 0;
 ?>
 <style>
@@ -170,7 +173,11 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
             <div id="persona-carousel" style="
                 display:flex;
             ">
-                <?php if ($conversationId <= 0): ?>
+                <?php 
+                // Only show default option for new conversations AND if enabled in settings
+                $showDefaultOption = ($conversationId <= 0) && (Setting::get('show_default_personality_option', '1') === '1');
+                ?>
+                <?php if ($showDefaultOption): ?>
                     <!-- Only show default option for new conversations, not when selecting personality for existing conversation -->
                     <a href="/chat?new=1" class="persona-card" style="
                         cursor:pointer;

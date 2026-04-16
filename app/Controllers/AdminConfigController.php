@@ -259,6 +259,9 @@ class AdminConfigController extends Controller
         $brandUserAgent = trim((string)($_POST['brand_user_agent'] ?? ''));
         $brandCommunityName = trim((string)($_POST['brand_community_name'] ?? ''));
         
+        // Configurações de personalidades
+        $showDefaultPersonalityOption = !empty($_POST['show_default_personality_option']) ? '1' : '0';
+        
         // Processamento do logo
         $brandLogoUrl = trim((string)($_POST['brand_logo_url'] ?? ''));
         
@@ -409,6 +412,7 @@ class AdminConfigController extends Controller
             'brand_user_agent' => $brandUserAgent,
             'brand_community_name' => $brandCommunityName,
             'brand_logo_url' => $brandLogoUrl,
+            'show_default_personality_option' => $showDefaultPersonalityOption,
             'theme_color_primary' => $themeColorPrimary,
             'theme_color_secondary' => $themeColorSecondary,
             'theme_color_accent' => $themeColorAccent,
