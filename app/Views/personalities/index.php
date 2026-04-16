@@ -175,8 +175,8 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
             ">
                 <?php foreach ($personalities as $persona): ?>
                     <?php
-                        // Only show active personalities
-                        if (empty($persona['active'])) continue;
+                        // Temporarily show all personalities to debug
+                        // if (empty($persona['active'])) continue;
                         
                         $id = (int)($persona['id'] ?? 0);
                         $name = trim((string)($persona['name'] ?? ''));
@@ -184,6 +184,7 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
                         $imagePath = trim((string)($persona['image_path'] ?? ''));
                         $isDefault = !empty($persona['is_default']);
                         $isComingSoon = !empty($persona['coming_soon']);
+                        $isActive = !empty($persona['active']);
                         $defaultPersonaImage = '/public/perso_padrao.png';
                         $prompt = trim((string)($persona['prompt'] ?? ''));
                         $desc = '';
@@ -223,16 +224,20 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
                         <form action="/chat/persona" method="post" style="margin:0;">
                             <input type="hidden" name="conversation_id" value="<?= (int)$conversationId ?>">
                             <input type="hidden" name="persona_id" value="<?= $id ?>">
-                            <button type="submit" class="persona-card" <?= $isComingSoon ? 'disabled' : '' ?> style="
+                            <button type="submit" class="persona-card" <?= ($isComingSoon || !$isActive) ? 'disabled' : '' ?> style="
                                 width:100%;
                                 padding:0;
                                 text-align:left;
-                                cursor:<?= $isComingSoon ? 'not-allowed' : 'pointer' ?>;
+                                cursor:<?= ($isComingSoon || !$isActive) ? 'not-allowed' : 'pointer' ?>;
+                                opacity:<?= !$isActive ? '0.6' : '1' ?>;
+                                border:<?= !$isActive ? '2px solid #ff6f60' : '' ?>;
                             ">
                     <?php else: ?>
-                        <a href="<?= $isComingSoon ? 'javascript:void(0)' : ('/chat?new=1&amp;persona_id=' . $id) ?>" class="persona-card" style="
-                            cursor:<?= $isComingSoon ? 'not-allowed' : 'pointer' ?>;
-                            pointer-events:<?= $isComingSoon ? 'none' : 'auto' ?>;
+                        <a href="<?= ($isComingSoon || !$isActive) ? 'javascript:void(0)' : ('/chat?new=1&amp;persona_id=' . $id) ?>" class="persona-card" style="
+                            cursor:<?= ($isComingSoon || !$isActive) ? 'not-allowed' : 'pointer' ?>;
+                            pointer-events:<?= ($isComingSoon || !$isActive) ? 'none' : 'auto' ?>;
+                            opacity:<?= !$isActive ? '0.6' : '1' ?>;
+                            border:<?= !$isActive ? '2px solid #ff6f60' : '' ?>;
                         ">
                     <?php endif; ?>
                         <div class="persona-card-image">
@@ -244,6 +249,11 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
                                     <?= htmlspecialchars($name) ?>
                                 </div>
                                 <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
+                                <?php if (!$isActive): ?>
+                                    <span style="font-size:9px; text-transform:uppercase; letter-spacing:0.14em; border-radius:999px; padding:2px 7px; background:#331111; color:#ff6666; border:1px solid #ff6f60;">INATIVA</span>
+                                <?php else: ?>
+                                    <span style="font-size:9px; text-transform:uppercase; letter-spacing:0.14em; border-radius:999px; padding:2px 7px; background:#113311; color:#66ff66; border:1px solid #4caf50;">ATIVA</span>
+                                <?php endif; ?>
                                 <?php if ($isComingSoon): ?>
                                     <span style="font-size:9px; text-transform:uppercase; letter-spacing:0.14em; border-radius:999px; padding:2px 7px; background:#201216; color:#ffcc80; border:1px solid #ff6f60;">Em breve</span>
                                 <?php endif; ?>
@@ -263,7 +273,13 @@ $conversationId = isset($conversationId) ? (int)$conversationId : 0;
                                 </div>
                             <?php else: ?>
                                 <div class="persona-card-muted">
-                                    <?= $isComingSoon ? 'Preview disponível. Em breve você poderá usar essa personalidade.' : 'Clique para começar um chat com essa personalidade.' ?>
+                                    <?php if (!$isActive): ?>
+                                        ⚠️ Esta personalidade está INATIVA. Ative em /admin/personalidades para usar.
+                                    <?php elseif ($isComingSoon): ?>
+                                        Preview disponível. Em breve você poderá usar essa personalidade.
+                                    <?php else: ?>
+                                        Clique para começar um chat com essa personalidade.
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
                         </div>

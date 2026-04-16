@@ -31,7 +31,8 @@ class Personality
     public static function allVisibleForUsers(): array
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->query('SELECT * FROM personalities WHERE active = 1 ORDER BY is_default DESC, name ASC');
+        // Temporarily show ALL personalities to debug the issue
+        $stmt = $pdo->query('SELECT * FROM personalities ORDER BY is_default DESC, name ASC');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
