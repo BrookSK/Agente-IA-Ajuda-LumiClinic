@@ -4,8 +4,21 @@
 
 use App\Models\CoursePartner;
 use App\Models\Branding;
+use App\Models\Setting;
+use App\Helpers\ThemeHelper;
 
 $pageTitle = $pageTitle ?? Branding::platformName();
+
+// Carregar cores do tema das configurações
+$themeColorPrimary = ThemeHelper::getColor('primary');
+$themeColorSecondary = ThemeHelper::getColor('secondary');
+$themeColorAccent = ThemeHelper::getColor('accent');
+$themeColorBackground = ThemeHelper::getColor('background');
+
+// Função helper para gerar gradiente com as cores do tema
+function getThemeGradient(): string {
+    return ThemeHelper::getGradient();
+}
 
 $menuIconMap = [];
 try {
@@ -106,16 +119,16 @@ if (!empty($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#e53935">
+    <meta name="theme-color" content="<?= htmlspecialchars($themeColorPrimary, ENT_QUOTES, 'UTF-8') ?>">
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <link rel="icon" type="image/png" href="/public/favicon.png">
     <link rel="manifest" href="/public/manifest.php">
     <style>
         :root {
-            --bg-main: #050509;
+            --bg-main: <?= htmlspecialchars($themeColorBackground, ENT_QUOTES, 'UTF-8') ?>;
             --bg-secondary: #111118;
-            --accent: #e53935;
-            --accent-soft: #ff6f60;
+            --accent: <?= htmlspecialchars($themeColorPrimary, ENT_QUOTES, 'UTF-8') ?>;
+            --accent-soft: <?= htmlspecialchars($themeColorSecondary, ENT_QUOTES, 'UTF-8') ?>;
             --text-primary: #f5f5f5;
             --text-secondary: #b0b0b0;
             --border-subtle: #272727;
@@ -134,8 +147,8 @@ if (!empty($_SESSION['user_id'])) {
         body[data-theme="light"] {
             --bg-main: #fdf7f7;
             --bg-secondary: #ffffff;
-            --accent: #e53935;
-            --accent-soft: #ff8a65;
+            --accent: <?= htmlspecialchars($themeColorPrimary, ENT_QUOTES, 'UTF-8') ?>;
+            --accent-soft: <?= htmlspecialchars($themeColorSecondary, ENT_QUOTES, 'UTF-8') ?>;
             --text-primary: #1f2933;
             --text-secondary: #4b5563;
             --border-subtle: #d1d5db;
@@ -344,7 +357,7 @@ if (!empty($_SESSION['user_id'])) {
             background: transparent;
         }
         .sidebar-button.primary {
-            background: linear-gradient(135deg, #e53935, #ff6f60);
+            background: <?= getThemeGradient() ?>;
             border-color: transparent;
             color: #050509;
             font-weight: 600;
@@ -355,7 +368,7 @@ if (!empty($_SESSION['user_id'])) {
             color: #111827;
         }
         body[data-theme="light"] .sidebar-button.primary {
-            background: linear-gradient(135deg, #e53935, #ff6f60);
+            background: <?= getThemeGradient() ?>;
             border-color: transparent;
             color: #050509;
         }

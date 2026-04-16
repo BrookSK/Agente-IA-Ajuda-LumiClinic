@@ -405,6 +405,11 @@ class AdminConfigController extends Controller
             ]);
         }
 
+        // Limpar cache das cores do tema
+        if (class_exists('App\\Helpers\\ThemeHelper')) {
+            \App\Helpers\ThemeHelper::clearCache();
+        }
+
         // Salva configuração Asaas (linha única)
         $pdo->exec("INSERT INTO asaas_configs (id, environment, sandbox_api_key, production_api_key)
             VALUES (1, 'sandbox', '', '')
