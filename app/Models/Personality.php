@@ -31,14 +31,8 @@ class Personality
     public static function allVisibleForUsers(): array
     {
         $pdo = Database::getConnection();
-        // Debug: Let's see what's in the database
-        $stmt = $pdo->query('SELECT id, name, active, is_default, coming_soon FROM personalities ORDER BY is_default DESC, name ASC');
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Log what we found
-        error_log("Personalities query result: " . json_encode($result));
-        
-        return $result;
+        $stmt = $pdo->query('SELECT * FROM personalities WHERE active = 1 ORDER BY is_default DESC, name ASC');
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function allVisibleForUsersByPlan(int $planId): array

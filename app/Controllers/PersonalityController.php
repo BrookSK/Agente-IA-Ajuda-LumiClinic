@@ -68,19 +68,16 @@ class PersonalityController extends Controller
         }
 
         $planId = isset($currentPlan['id']) ? (int)$currentPlan['id'] : 0;
-        
-        // Force getting all personalities for debugging
-        $personalities = Personality::all(); // Use the 'all' method instead
-        
-        // Debug logging
-        error_log("PersonalityController: Found " . count($personalities ?: []) . " personalities using all() method");
-        
-        // Don't redirect, always show the view for debugging
-        // if (!$personalities) {
-        //     error_log("PersonalityController: No personalities found, redirecting to chat");
-        //     header('Location: /chat?new=1');
-        //     exit;
-        // }
+        if (!empty($_SESSION['is_admin']) || $planId <= 0) {
+            $personalities = Personality::allVisibleForUsers();
+        } else {
+            $personalities = Personality::allVisibleForUsersByPlan($planId);
+        }
+
+        if (!$personalities) {
+            header('Location: /chat?new=1');
+            exit;
+        }
 
         $this->view('personalities/index', [
             'pageTitle' => 'Escolha a personalidade do ' . \App\Models\Branding::mascotName(),
