@@ -5,19 +5,36 @@
 use App\Models\CoursePartner;
 use App\Models\Branding;
 use App\Models\Setting;
-use App\Helpers\ThemeHelper;
 
 $pageTitle = $pageTitle ?? Branding::platformName();
 
-// Carregar cores do tema das configurações
-$themeColorPrimary = ThemeHelper::getColor('primary');
-$themeColorSecondary = ThemeHelper::getColor('secondary');
-$themeColorAccent = ThemeHelper::getColor('accent');
-$themeColorBackground = ThemeHelper::getColor('background');
+// Carregar cores do tema das configurações (com fallback seguro)
+try {
+    if (class_exists('App\\Helpers\\ThemeHelper')) {
+        require_once __DIR__ . '/../Helpers/ThemeHelper.php';
+        $themeColorPrimary = \App\Helpers\ThemeHelper::getColor('primary');
+        $themeColorSecondary = \App\Helpers\ThemeHelper::getColor('secondary');
+        $themeColorAccent = \App\Helpers\ThemeHelper::getColor('accent');
+        $themeColorBackground = \App\Helpers\ThemeHelper::getColor('background');
+    } else {
+        // Fallback para valores padrão se ThemeHelper não estiver disponível
+        $themeColorPrimary = '#e53935';
+        $themeColorSecondary = '#ff6f60';
+        $themeColorAccent = '#2ecc71';
+        $themeColorBackground = '#050509';
+    }
+} catch (Exception $e) {
+    // Fallback em caso de erro
+    $themeColorPrimary = '#e53935';
+    $themeColorSecondary = '#ff6f60';
+    $themeColorAccent = '#2ecc71';
+    $themeColorBackground = '#050509';
+}
 
 // Função helper para gerar gradiente com as cores do tema
 function getThemeGradient(): string {
-    return ThemeHelper::getGradient();
+    global $themeColorPrimary, $themeColorSecondary;
+    return "linear-gradient(135deg, {$themeColorPrimary}, {$themeColorSecondary})";
 }
 
 $menuIconMap = [];

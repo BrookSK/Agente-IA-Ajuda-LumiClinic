@@ -14,12 +14,22 @@ class ThemeHelper
     private static function loadColors(): void
     {
         if (self::$colors === null) {
-            self::$colors = [
-                'primary' => Setting::get('theme_color_primary', '#e53935'),
-                'secondary' => Setting::get('theme_color_secondary', '#ff6f60'),
-                'accent' => Setting::get('theme_color_accent', '#2ecc71'),
-                'background' => Setting::get('theme_color_background', '#050509'),
-            ];
+            try {
+                self::$colors = [
+                    'primary' => Setting::get('theme_color_primary', '#e53935'),
+                    'secondary' => Setting::get('theme_color_secondary', '#ff6f60'),
+                    'accent' => Setting::get('theme_color_accent', '#2ecc71'),
+                    'background' => Setting::get('theme_color_background', '#050509'),
+                ];
+            } catch (\Exception $e) {
+                // Fallback para valores padrão em caso de erro
+                self::$colors = [
+                    'primary' => '#e53935',
+                    'secondary' => '#ff6f60',
+                    'accent' => '#2ecc71',
+                    'background' => '#050509',
+                ];
+            }
         }
     }
 
@@ -38,7 +48,7 @@ class ThemeHelper
     public static function getGradient(): string
     {
         self::loadColors();
-        return "linear-gradient(135deg, {self::$colors['primary']}, {self::$colors['secondary']})";
+        return "linear-gradient(135deg, " . self::$colors['primary'] . ", " . self::$colors['secondary'] . ")";
     }
 
     /**
