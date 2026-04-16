@@ -150,7 +150,7 @@ $currentProfile = (string)($community['image_path'] ?? '');
 
             <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:4px;">
                 <a href="/comunidades/ver?slug=<?= urlencode($communitySlug) ?>" style="font-size:12px; color:var(--text-secondary); text-decoration:none; padding:5px 10px; border-radius:999px; border:1px solid var(--border-subtle); background:var(--surface-subtle);">Cancelar</a>
-                <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; cursor:pointer;">Salvar alterações</button>
+                <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; cursor:pointer;">Salvar alterações</button>
             </div>
         </form>
     </section>

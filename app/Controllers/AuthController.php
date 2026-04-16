@@ -718,7 +718,7 @@ HTML;
       <p style="font-size:14px; margin:0 0 10px 0;">Digite o código abaixo na tela de confirmação:</p>
 
       <div style="text-align:center; margin:12px 0 16px 0;">
-        <div style="display:inline-block; padding:10px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:700; font-size:18px; letter-spacing:0.35em;">
+        <div style="display:inline-block; padding:10px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:700; font-size:18px; letter-spacing:0.35em;">
           {$safeCode}
         </div>
       </div>

@@ -45,7 +45,7 @@ $slug = (string)($community['slug'] ?? '');
                 <input type="text" name="name" placeholder="Nome para personalizar o convite" style="margin-top:2px; width:100%; padding:6px 8px; border-radius:8px; border:1px solid var(--border-subtle); background:var(--input-bg); color:var(--text-primary); font-size:13px;">
             </label>
             <div style="display:flex; gap:8px; margin-top:4px;">
-                <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; cursor:pointer;">Enviar convite</button>
+                <button type="submit" style="border:none; border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; cursor:pointer;">Enviar convite</button>
                 <a href="/comunidades/ver?slug=<?= urlencode($slug) ?>" style="font-size:12px; color:var(--text-secondary); text-decoration:none; align-self:center;">Cancelar</a>
             </div>
         </form>

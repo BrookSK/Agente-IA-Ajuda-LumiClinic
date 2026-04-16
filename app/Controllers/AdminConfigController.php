@@ -166,6 +166,7 @@ class AdminConfigController extends Controller
             'brandCompanyName' => $brandingAll['brand_company_name'],
             'brandUserAgent' => $brandingAll['brand_user_agent'],
             'brandCommunityName' => $brandingAll['brand_community_name'],
+            'brandLogoUrl' => $brandingAll['brand_logo_url'] ?? '',
             'themeColorPrimary' => $themeColorPrimary,
             'themeColorSecondary' => $themeColorSecondary,
             'themeColorAccent' => $themeColorAccent,
@@ -255,6 +256,33 @@ class AdminConfigController extends Controller
         $brandCompanyName = trim((string)($_POST['brand_company_name'] ?? ''));
         $brandUserAgent = trim((string)($_POST['brand_user_agent'] ?? ''));
         $brandCommunityName = trim((string)($_POST['brand_community_name'] ?? ''));
+        
+        // Processamento do logo
+        $brandLogoUrl = trim((string)($_POST['brand_logo_url'] ?? ''));
+        
+        // Upload de logo se fornecido
+        if (isset($_FILES['brand_logo_upload']) && !empty($_FILES['brand_logo_upload']['tmp_name'])) {
+            $logoTmp = (string)($_FILES['brand_logo_upload']['tmp_name'] ?? '');
+            $logoOriginalName = (string)($_FILES['brand_logo_upload']['name'] ?? '');
+            $logoMime = (string)($_FILES['brand_logo_upload']['type'] ?? '');
+            
+            if ($logoTmp !== '' && $logoOriginalName !== '') {
+                $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml', 'image/webp'];
+                if (in_array($logoMime, $allowedMimes, true)) {
+                    try {
+                        $mediaEndpoint = Setting::get('media_endpoint', '');
+                        if ($mediaEndpoint !== '') {
+                            $uploadResult = $this->uploadToMediaEndpoint($logoTmp, $logoOriginalName, $logoMime, $mediaEndpoint);
+                            if ($uploadResult && !empty($uploadResult['url'])) {
+                                $brandLogoUrl = $uploadResult['url'];
+                            }
+                        }
+                    } catch (\Throwable $e) {
+                        // Se falhar o upload, mantém a URL atual
+                    }
+                }
+            }
+        }
 
         // Configurações de tema/cores
         $themeColorPrimary = trim((string)($_POST['theme_color_primary_text'] ?? $_POST['theme_color_primary'] ?? '#e53935'));
@@ -380,6 +408,7 @@ class AdminConfigController extends Controller
             'brand_company_name' => $brandCompanyName,
             'brand_user_agent' => $brandUserAgent,
             'brand_community_name' => $brandCommunityName,
+            'brand_logo_url' => $brandLogoUrl,
             'theme_color_primary' => $themeColorPrimary,
             'theme_color_secondary' => $themeColorSecondary,
             'theme_color_accent' => $themeColorAccent,

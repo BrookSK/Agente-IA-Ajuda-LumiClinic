@@ -102,9 +102,9 @@ class Branding
         $mascot = htmlspecialchars(self::mascotName(), ENT_QUOTES, 'UTF-8');
 
         if ($safeLogo !== '') {
-            $avatar = '<div style="width:32px; height:32px; border-radius:50%; overflow:hidden; background:#050509; box-shadow:0 0 18px rgba(229,57,53,0.8);"><img src="' . $safeLogo . '" alt="' . $mascot . '" style="width:100%; height:100%; display:block; object-fit:cover;"></div>';
+            $avatar = '<div style="width:32px; height:32px; border-radius:50%; overflow:hidden; background:<?= \App\Helpers\ThemeHelper::getBackground() ?>; box-shadow:0 0 18px <?= \App\Helpers\ThemeHelper::getPrimary() ?>80;"><img src="' . $safeLogo . '" alt="' . $mascot . '" style="width:100%; height:100%; display:block; object-fit:cover;"></div>';
         } else {
-            $avatar = '<div style="width:32px; height:32px; line-height:32px; border-radius:50%; background:radial-gradient(circle at 30% 20%, #fff 0, #ff8a65 25%, #e53935 65%, #050509 100%); text-align:center; font-weight:700; font-size:16px; color:#050509;">' . $initial . '</div>';
+            $avatar = '<div style="width:32px; height:32px; line-height:32px; border-radius:50%; background:<?= \App\Helpers\ThemeHelper::getGradient() ?>; text-align:center; font-weight:700; font-size:16px; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;">' . $initial . '</div>';
         }
 
         return '<div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">'

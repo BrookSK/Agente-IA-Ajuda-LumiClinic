@@ -267,8 +267,8 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                             <?php if (!empty($firstCompletedLessonId)): ?>
                                 <a href="/cursos/aulas/ver?lesson_id=<?= (int)$firstCompletedLessonId ?>" style="
                                     display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
-                                    border-radius:999px; border:1px solid #ff6f60;
-                                    background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                    border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
+                                    background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                     font-size:13px; font-weight:600; text-decoration:none;">
                                     Rever aulas concluídas
                                 </a>
@@ -284,8 +284,8 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                                 <?php if ($isPaid && $priceCents > 0 && $allowPublicPurchase && !$planAllowsCourses): ?>
                                     <a href="/cursos/comprar?course_id=<?= (int)($course['id'] ?? 0) ?>" style="
                                         display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
-                                        border-radius:999px; border:1px solid #ff6f60;
-                                        background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                        border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
+                                        background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                         font-size:13px; font-weight:600; text-decoration:none;">
                                         Comprar curso avulso
                                     </a>
@@ -294,7 +294,7 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                                         <input type="hidden" name="course_id" value="<?= (int)($course['id'] ?? 0) ?>">
                                         <button type="submit" style="
                                             border:none; border-radius:999px; padding:8px 16px;
-                                            background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                            background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                             font-weight:600; font-size:13px; cursor:pointer;">
                                             Quero fazer este curso
                                         </button>
@@ -385,7 +385,7 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                                                         <a href="/cursos/modulos/prova?course_id=<?= (int)$course['id'] ?>&module_id=<?= (int)($module['id'] ?? 0) ?>" style="
                                                             display:inline-flex; align-items:center; gap:4px;
                                                             border-radius:999px; padding:5px 10px;
-                                                            background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                                            background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                                             font-weight:600; font-size:11px; text-decoration:none;">
                                                             Fazer prova do módulo
                                                         </a>
@@ -453,8 +453,8 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                                                     <?php if ($video !== '' && $lessonId > 0 && !empty($canAccessContent)): ?>
                                                         <a href="/cursos/aulas/ver?lesson_id=<?= $lessonId ?>" style="
                                                             display:inline-flex; align-items:center; gap:6px; padding:4px 10px;
-                                                            border-radius:999px; border:1px solid #ff6f60;
-                                                            background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                                            border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
+                                                            background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                                             font-size:11px; font-weight:600; text-decoration:none;">
                                                             <span style="font-size:12px;">▶</span>
                                                             <span><?= htmlspecialchars($actionLabel) ?></span>
@@ -516,8 +516,8 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                                             <?php if ($video !== '' && $lessonId > 0 && !empty($canAccessContent)): ?>
                                                 <a href="/cursos/aulas/ver?lesson_id=<?= $lessonId ?>" style="
                                                     display:inline-flex; align-items:center; gap:6px; padding:4px 10px;
-                                                    border-radius:999px; border:1px solid #ff6f60;
-                                                    background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                                    border-radius:999px; border:1px solid <?= \App\Helpers\ThemeHelper::getSecondary() ?>;
+                                                    background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                                     font-size:11px; font-weight:600; text-decoration:none;">
                                                     <span style="font-size:12px;">▶</span>
                                                     <span><?= htmlspecialchars($actionLabel) ?></span>
@@ -583,7 +583,7 @@ if (!empty($user) && !empty($canAccessContent) && !empty($lessons)) {
                                             <input type="hidden" name="live_id" value="<?= $liveId ?>">
                                             <button type="submit" style="
                                                 border:none; border-radius:999px; padding:5px 12px;
-                                                background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509;
+                                                background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>;
                                                 font-weight:600; font-size:11px; cursor:pointer;">
                                                 Quero participar da live
                                             </button>

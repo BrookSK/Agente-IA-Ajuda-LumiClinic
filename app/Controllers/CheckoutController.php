@@ -460,7 +460,7 @@ class CheckoutController extends Controller
       <p style="font-size:13px; margin:8px 0 0 0;">É só entrar no {$brandMascot} e aproveitar. Se tiver qualquer dúvida, fale com a gente pelo suporte.</p>
 
       <div style="text-align:center; margin:14px 0 0 0;">
-        <a href="{$safeAppUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-weight:600; font-size:13px; text-decoration:none;">Abrir o {$brandMascot}</a>
+        <a href="{$safeAppUrl}" style="display:inline-block; padding:9px 18px; border-radius:999px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight:600; font-size:13px; text-decoration:none;">Abrir o {$brandMascot}</a>
       </div>
     </div>
   </div>

@@ -21,7 +21,7 @@
                 <h1 style="font-size:18px; margin-bottom:2px; color:var(--text-primary);">Comunidades do <?= htmlspecialchars(\App\Models\Branding::mascotName()) ?></h1>
                 <span style="font-size:12px; color:var(--text-secondary);">Escolha onde quer se conectar</span>
             </div>
-            <a href="/comunidades/nova" style="border-radius:999px; padding:6px 12px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap;">Criar nova comunidade</a>
+            <a href="/comunidades/nova" style="border-radius:999px; padding:6px 12px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:600; text-decoration:none; white-space:nowrap;">Criar nova comunidade</a>
         </div>
 
         <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
@@ -49,7 +49,7 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>
-                <button type="submit" style="border:none; border-radius:999px; padding:6px 10px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:12px; font-weight:650; cursor:pointer;">Buscar</button>
+                <button type="submit" style="border:none; border-radius:999px; padding:6px 10px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:12px; font-weight:650; cursor:pointer;">Buscar</button>
             </form>
         </div>
 
@@ -97,7 +97,7 @@
                                 <?php if ($isMember): ?>
                                     <button type="submit" style="border:none; border-radius:999px; padding:4px 8px; background:var(--surface-card); border:1px solid var(--border-subtle); color:var(--text-primary); font-size:11px; cursor:pointer;">Sair</button>
                                 <?php else: ?>
-                                    <button type="submit" style="border:none; border-radius:999px; padding:4px 8px; background:linear-gradient(135deg,#e53935,#ff6f60); color:#050509; font-size:11px; font-weight:600; cursor:pointer;">Participar</button>
+                                    <button type="submit" style="border:none; border-radius:999px; padding:4px 8px; background:<?= \App\Helpers\ThemeHelper::getButtonGradient() ?>; color:<?= \App\Helpers\ThemeHelper::getBackground() ?>; font-size:11px; font-weight:600; cursor:pointer;">Participar</button>
                                 <?php endif; ?>
                             </form>
                         </div>

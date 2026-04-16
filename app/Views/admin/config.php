@@ -106,6 +106,39 @@ $knownModels = [
                 </div>
             </div>
             <div style="display:flex; flex-direction:column; gap:10px;">
+                
+                <!-- Campo de upload de logo -->
+                <div style="margin-bottom:12px; padding:12px; border-radius:10px; border:1px solid #272727; background:#050509;">
+                    <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                        <span style="font-size:16px;">🖼️</span>
+                        <strong style="font-size:13px; color:#f5f5f5;">Logo da marca</strong>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div>
+                            <label style="font-size: 12px; color: #b0b0b0;">URL do logo (opcional)</label>
+                            <input name="brand_logo_url" value="<?= htmlspecialchars($brandLogoUrl ?? '') ?>" style="
+                                width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #272727;
+                                background: #050509; color: #f5f5f5; font-size: 13px;
+                            " placeholder="https://exemplo.com/logo.png">
+                            <small style="color:#777; font-size:11px;">Cole a URL direta do seu logo ou use o upload abaixo.</small>
+                        </div>
+                        <div>
+                            <label style="font-size: 12px; color: #b0b0b0; cursor:pointer; display:inline-flex; align-items:center; gap:6px; padding:8px 12px; border-radius:8px; border:1px solid #272727; background:#111118;">
+                                <span>📁</span>
+                                <span>Fazer upload do logo</span>
+                                <input type="file" name="brand_logo_upload" accept="image/*" style="display:none;">
+                            </label>
+                            <small style="color:#777; font-size:11px; display:block; margin-top:4px;">Formatos aceitos: PNG, JPG, SVG. Recomendado: 200x60px ou similar.</small>
+                        </div>
+                        <?php if (!empty($brandLogoUrl)): ?>
+                            <div style="margin-top:8px; padding:8px; border-radius:8px; border:1px solid #272727; background:#0a0a10;">
+                                <div style="font-size:11px; color:#777; margin-bottom:4px;">Pré-visualização atual:</div>
+                                <img src="<?= htmlspecialchars($brandLogoUrl, ENT_QUOTES, 'UTF-8') ?>" alt="Logo atual" style="max-height:40px; max-width:160px; object-fit:contain; display:block;">
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                
                 <div style="display:flex; gap:10px; flex-wrap:wrap;">
                     <div style="flex:1 1 220px; min-width:200px;">
                         <label style="font-size: 12px; color: #b0b0b0;">Nome da plataforma</label>
