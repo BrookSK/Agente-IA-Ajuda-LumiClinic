@@ -30,7 +30,6 @@
 /** @var string $googleRefreshToken */
 /** @var string $googleCalendarId */
 /** @var string $mediaEndpoint */
-/** @var string $mediaVideoEndpoint */
 /** @var string $textExtractionEndpoint */
 /** @var string $tuquinhaAboutVideoUrl */
 /** @var string $nanoBananaProApiKey */
@@ -66,6 +65,7 @@
 /** @var string $themeButtonBorder */
 /** @var string $themeHeadlineColor */
 /** @var string $themeFontFamily */
+/** @var string $mediaVideoEndpoint */
 /** @var string $perplexitySearchUrls */
 
 $knownModels = [
@@ -217,24 +217,6 @@ $knownModels = [
             </div>
         </div>
 
-        <div style="padding:14px 16px; border-radius:12px; border:1px solid #4caf50; background:linear-gradient(135deg, #0a180a 0%, #112811 100%);">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
-                <span style="font-size:18px;">🤖</span>
-                <h3 style="margin:0; font-size:16px; font-weight:650; color:#f5f5f5;">Configurações de Personalidades</h3>
-            </div>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <div style="flex:1 1 220px; min-width:200px;">
-                        <label style="display:flex; align-items:center; gap:6px; font-size: 12px; color: #b0b0b0;">
-                            <input type="checkbox" name="show_default_personality_option" value="1" <?= (Setting::get('show_default_personality_option', '1') === '1') ? 'checked' : '' ?> style="margin:0;">
-                            Mostrar opção "Padrão do <?= htmlspecialchars($brandMascotName ?? 'Tuquinha') ?>"
-                        </label>
-                        <small style="color:#777; font-size:11px;">Se desmarcado, remove a opção padrão da tela de seleção de personalidades.</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div style="padding:14px 16px; border-radius:12px; border:1px solid #3949ab; background:linear-gradient(135deg, #0a0a18 0%, #111128 100%);">
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
                 <span style="font-size:18px;">🎨</span>
@@ -255,7 +237,7 @@ $knownModels = [
                             <input name="theme_color_primary_text" value="<?= htmlspecialchars($themeColorPrimary ?? '#2196F3') ?>" style="
                                 flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #272727;
                                 background: #050509; color: #f5f5f5; font-size: 12px;
-                            " placeholder="#2196F3">
+                            " placeholder="#e53935">
                         </div>
                         <small style="color:#777; font-size:11px;">Cor principal da marca (gradientes, destaques)</small>
                     </div>
@@ -269,7 +251,7 @@ $knownModels = [
                             <input name="theme_color_secondary_text" value="<?= htmlspecialchars($themeColorSecondary ?? '#FF9800') ?>" style="
                                 flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #272727;
                                 background: #050509; color: #f5f5f5; font-size: 12px;
-                            " placeholder="#FF9800">
+                            " placeholder="#ff6f60">
                         </div>
                         <small style="color:#777; font-size:11px;">Segunda cor da marca (gradientes, complementos)</small>
                     </div>
@@ -392,7 +374,7 @@ $knownModels = [
                             <input name="theme_button_background_text" value="<?= htmlspecialchars($themeButtonBackground ?? '#2196F3') ?>" style="
                                 flex: 1; padding: 6px 8px; border-radius: 6px; border: 1px solid #272727;
                                 background: #050509; color: #f5f5f5; font-size: 12px;
-                            " placeholder="#2196F3">
+                            " placeholder="#e53935">
                         </div>
                         <small style="color:#777; font-size:11px;">Cor principal do botão (ou primeira cor do gradiente)</small>
                     </div>
@@ -425,37 +407,6 @@ $knownModels = [
                             " placeholder="transparent">
                         </div>
                         <small style="color:#777; font-size:11px;">Cor da borda dos botões (use "transparent" para sem borda)</small>
-                    </div>
-                </div>
-                
-                <hr style="border:none; border-top:1px solid #272727; margin: 8px 0;">
-                
-                <div style="margin-top:8px;">
-                    <strong style="font-size:13px; color:#f5f5f5;">Tipografia</strong>
-                </div>
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <div style="flex:1 1 400px; min-width:300px;">
-                        <label style="font-size: 12px; color: #b0b0b0;">Família de fonte</label>
-                        <select name="theme_font_family" style="
-                            width: 100%; padding: 8px 10px; border-radius: 8px; border: 1px solid #272727;
-                            background: #050509; color: #f5f5f5; font-size: 13px;
-                        ">
-                            <option value="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" <?= ($themeFontFamily ?? '') === 'system-ui, -apple-system, BlinkMacSystemFont, \'Segoe UI\', sans-serif' ? 'selected' : '' ?>>Sistema (Padrão)</option>
-                            <option value="'Inter', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Inter\', system-ui, sans-serif' ? 'selected' : '' ?>>Inter</option>
-                            <option value="'Roboto', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Roboto\', system-ui, sans-serif' ? 'selected' : '' ?>>Roboto</option>
-                            <option value="'Open Sans', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Open Sans\', system-ui, sans-serif' ? 'selected' : '' ?>>Open Sans</option>
-                            <option value="'Poppins', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Poppins\', system-ui, sans-serif' ? 'selected' : '' ?>>Poppins</option>
-                            <option value="'Montserrat', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Montserrat\', system-ui, sans-serif' ? 'selected' : '' ?>>Montserrat</option>
-                            <option value="'Nunito', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Nunito\', system-ui, sans-serif' ? 'selected' : '' ?>>Nunito</option>
-                            <option value="'Source Sans Pro', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Source Sans Pro\', system-ui, sans-serif' ? 'selected' : '' ?>>Source Sans Pro</option>
-                            <option value="'Lato', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Lato\', system-ui, sans-serif' ? 'selected' : '' ?>>Lato</option>
-                            <option value="'Raleway', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Raleway\', system-ui, sans-serif' ? 'selected' : '' ?>>Raleway</option>
-                            <option value="'Fira Sans', system-ui, sans-serif" <?= ($themeFontFamily ?? '') === '\'Fira Sans\', system-ui, sans-serif' ? 'selected' : '' ?>>Fira Sans</option>
-                            <option value="Georgia, 'Times New Roman', serif" <?= ($themeFontFamily ?? '') === 'Georgia, \'Times New Roman\', serif' ? 'selected' : '' ?>>Georgia (Serif)</option>
-                            <option value="'Playfair Display', Georgia, serif" <?= ($themeFontFamily ?? '') === '\'Playfair Display\', Georgia, serif' ? 'selected' : '' ?>>Playfair Display (Serif)</option>
-                            <option value="'JetBrains Mono', 'Fira Code', monospace" <?= ($themeFontFamily ?? '') === '\'JetBrains Mono\', \'Fira Code\', monospace' ? 'selected' : '' ?>>JetBrains Mono (Monospace)</option>
-                        </select>
-                        <small style="color:#777; font-size:11px;">Escolha a fonte principal do sistema. Fontes do Google Fonts são carregadas automaticamente.</small>
                     </div>
                 </div>
             </div>
@@ -953,7 +904,7 @@ https://www.mundodomarketing.com.br"><?= htmlspecialchars($perplexitySearchUrls 
             <button type="submit" style="
                 border: none; border-radius: 999px; padding: 9px 18px;
                 background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
-                color: <?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight: 600; font-size: 14px; cursor: pointer;
+                color: <?= \App\Helpers\ThemeHelper::getButtonText() ?>; font-weight: 600; font-size: 14px; cursor: pointer;
             ">
                 Salvar configurações
             </button>
@@ -973,7 +924,7 @@ https://www.mundodomarketing.com.br"><?= htmlspecialchars($perplexitySearchUrls 
             <button type="submit" style="
                 border: none; border-radius: 999px; padding: 8px 14px;
                 background: <?= \App\Helpers\ThemeHelper::getButtonGradient() ?>;
-                color: <?= \App\Helpers\ThemeHelper::getBackground() ?>; font-weight: 600; font-size: 13px; cursor: pointer;
+                color: <?= \App\Helpers\ThemeHelper::getButtonText() ?>; font-weight: 600; font-size: 13px; cursor: pointer;
             ">
                 Enviar e-mail de teste
             </button>
