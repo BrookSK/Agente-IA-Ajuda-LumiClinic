@@ -184,8 +184,10 @@ class Community
                 forum_type = :forum_type,
                 allow_poll_closing = :allow_poll_closing,
                 image_path = :image_path,
-                cover_image_path = :cover_image_path
+                cover_image_path = :cover_image_path,
+                updated_at = NOW()
             WHERE id = :id');
+        
         $stmt->execute([
             'id' => $id,
             'name' => $data['name'] ?? '',
