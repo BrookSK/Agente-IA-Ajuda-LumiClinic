@@ -74,6 +74,14 @@ class PersonalityController extends Controller
             $personalities = Personality::allVisibleForUsersByPlan($planId);
         }
 
+        // Debug: Check what we're getting
+        error_log("Personalities found: " . count($personalities ?: []));
+        if ($personalities) {
+            foreach ($personalities as $p) {
+                error_log("Personality: {$p['name']} - Active: " . ($p['active'] ? 'YES' : 'NO'));
+            }
+        }
+
         if (!$personalities) {
             header('Location: /chat?new=1');
             exit;
